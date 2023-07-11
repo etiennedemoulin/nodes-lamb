@@ -2,9 +2,15 @@
   name: 'nodes-lamb',
   author: '',
   clients: {
-    player: {
+    'web-player': {
       target: 'browser',
       default: true,
+    },
+    controller: {
+      target: 'browser',
+    },
+    'node-player': {
+      target: 'node',
     },
   },
 }

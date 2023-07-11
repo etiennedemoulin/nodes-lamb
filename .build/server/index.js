@@ -1,6 +1,5 @@
 import '@soundworks/helpers/polyfills.js';
 import { Server } from '@soundworks/core/server.js';
-
 import { loadConfig } from '../utils/load-config.js';
 import '../utils/catch-unhandled-errors.js';
 import { globalsSchema } from './schemas/globals.js';
@@ -13,7 +12,6 @@ import pluginPlatformInit from '@soundworks/plugin-platform-init/server.js';
 // - Wizard & Tools:        `npx soundworks`
 
 const config = loadConfig(process.env.ENV, import.meta.url);
-
 console.log(`
 --------------------------------------------------------
 - launching "${config.app.name}" in "${process.env.ENV || 'default'}" environment
@@ -27,23 +25,19 @@ console.log(`
 const server = new Server(config);
 // configure the server for usage within this application template
 server.useDefaultApplicationTemplate();
-
 server.pluginManager.register('platform-init', pluginPlatformInit);
-
 server.stateManager.registerSchema('globals', globalsSchema);
 server.stateManager.registerSchema('player', playerSchema);
-
 const globals = await server.stateManager.create('globals');
-
 server.stateManager.registerUpdateHook('player', (updates, currentValues, context) => {
   if (updates.filterSlider) {
-    const filterFreq = 1 + (updates.filterSlider * currentValues.sawFreq * 7);
+    const filterFreq = 1 + updates.filterSlider * currentValues.sawFreq * 7;
     const numHarm = Math.floor(filterFreq / currentValues.sawFreq);
     return {
       ...updates,
       filterFreq: filterFreq,
-      numHarm: numHarm,
-    }
+      numHarm: numHarm
+    };
   } else {
     return {
       ...updates
@@ -63,4 +57,4 @@ server.stateManager.registerUpdateHook('player', (updates, currentValues, contex
 await server.start();
 
 // and do your own stuff!
-
+//# sourceMappingURL=./index.js.map

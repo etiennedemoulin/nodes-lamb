@@ -1,4 +1,6 @@
-# `nodes-lamb`
+# `lamb`
+
+Nodes, from Catherine Lamb, distributed w/ soundworks
 
 Thanks for using soundworks!
 
