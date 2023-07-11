@@ -1,0 +1,10 @@
+{
+  name: 'nodes-lamb',
+  author: '',
+  clients: {
+    player: {
+      target: 'browser',
+      default: true,
+    },
+  },
+}

@@ -1,0 +1,8 @@
+{
+  "default": {
+    "description": "Empty soundworks application (default)"
+  },
+  "minimal": {
+    "description": "Minimal soundworks application (for tests, etc.)"
+  }
+}
