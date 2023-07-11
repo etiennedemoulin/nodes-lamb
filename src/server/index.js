@@ -3,6 +3,9 @@ import { Server } from '@soundworks/core/server.js';
 
 import { loadConfig } from '../utils/load-config.js';
 import '../utils/catch-unhandled-errors.js';
+import { globalsSchema } from './schemas/globals.js';
+import { playerSchema } from './schemas/player.js';
+import pluginPlatformInit from '@soundworks/plugin-platform-init/server.js';
 
 // - General documentation: https://soundworks.dev/
 // - API documentation:     https://soundworks.dev/api
@@ -24,6 +27,13 @@ console.log(`
 const server = new Server(config);
 // configure the server for usage within this application template
 server.useDefaultApplicationTemplate();
+
+server.pluginManager.register('platform-init', pluginPlatformInit);
+
+server.stateManager.registerSchema('globals', globalsSchema);
+server.stateManager.registerSchema('player', playerSchema);
+
+const globals = await server.stateManager.create('globals');
 
 /**
  * Register plugins and schemas
