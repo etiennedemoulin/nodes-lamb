@@ -34999,7 +34999,7 @@ var Engine = /*#__PURE__*/function () {
     this.filter.type = "lowpass";
     this.saw.connect(this.filter);
     this.filter.connect(this.env);
-    this.env.connect(this.audioContext.destination);
+    // this.env.connect(this.audioContext.destination);
     this.saw.start(now);
     this.render();
   }
@@ -49384,7 +49384,7 @@ function main(_x) {
 // e.g. `http://127.0.0.1:8000?emulate=10` to run 10 clients side-by-side
 function _main() {
   _main = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee($container) {
-    var client, $layout, globals, player, engine;
+    var client, player, $layout, merger, chArray;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -49431,27 +49431,33 @@ function _main() {
           _context.next = 5;
           return client.start();
         case 5:
+          _context.next = 7;
+          return client.stateManager.create('player', {
+            id: client.id
+          });
+        case 7:
+          player = _context.sent;
           // The `$layout` is provided as a convenience and is not required by soundworks,
           // its full source code is located in the `./views/layout.js` file, so feel free
           // to edit it to match your needs or even to delete it.
           $layout = (0,_layout_js__WEBPACK_IMPORTED_MODULE_5__["default"])(client, $container);
-          _context.next = 8;
-          return client.stateManager.attach('globals');
-        case 8:
-          globals = _context.sent;
-          _context.next = 11;
-          return client.stateManager.create('player', {
-            id: client.id
+          audioContext.destination.channelCount = 16;
+          _context.next = 12;
+          return audioContext.resume();
+        case 12:
+          merger = audioContext.createChannelMerger(16); // 8 in, 1 out
+          chArray = [0, 1, 2, 3, 6, 7, 9, 10];
+          chArray.forEach(function (i) {
+            var engine = new _components_engine_js__WEBPACK_IMPORTED_MODULE_11__["default"](audioContext, player);
+            engine.env.connect(merger, 0, i);
+            player.onUpdate(function () {
+              $layout.requestUpdate();
+              engine.render();
+            });
           });
-        case 11:
-          player = _context.sent;
-          engine = new _components_engine_js__WEBPACK_IMPORTED_MODULE_11__["default"](audioContext, player);
-          player.onUpdate(function () {
-            $layout.requestUpdate();
-            engine.render();
-          });
+          merger.connect(audioContext.destination);
           $layout.addComponent((0,lit__WEBPACK_IMPORTED_MODULE_4__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["<sw-player .player=", "></sc-player>"])), player));
-        case 15:
+        case 17:
         case "end":
           return _context.stop();
       }

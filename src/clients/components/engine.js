@@ -14,7 +14,7 @@ export default class Engine {
     this.filter.type = "lowpass";
     this.saw.connect(this.filter);
     this.filter.connect(this.env);
-    this.env.connect(this.audioContext.destination);
+    // this.env.connect(this.audioContext.destination);
     this.saw.start(now);
     this.render();
   }

@@ -68,30 +68,22 @@ async function main($container) {
   /**
    * Launch application
    */
-
   await client.start();
-  const player = await client.stateManager.create('player', {
-    id: client.id
-  });
 
   // The `$layout` is provided as a convenience and is not required by soundworks,
   // its full source code is located in the `./views/layout.js` file, so feel free
   // to edit it to match your needs or even to delete it.
   const $layout = createLayout(client, $container);
-  audioContext.destination.channelCount = 16;
-  await audioContext.resume();
-  const merger = audioContext.createChannelMerger(16); // 8 in, 1 out
-
-  const chArray = [0, 1, 2, 3, 6, 7, 9, 10];
-  chArray.forEach(i => {
-    const engine = new Engine(audioContext, player);
-    engine.env.connect(merger, 0, i);
-    player.onUpdate(() => {
-      $layout.requestUpdate();
-      engine.render();
-    });
+  const globals = await client.stateManager.attach('globals');
+  const player = await client.stateManager.create('player', {
+    id: client.id
   });
-  merger.connect(audioContext.destination);
+  const engine = new Engine(audioContext, player);
+  engine.env.connect(audioContext.destination);
+  player.onUpdate(() => {
+    $layout.requestUpdate();
+    engine.render();
+  });
   $layout.addComponent(html`<sw-player .player=${player}></sc-player>`);
 }
 
@@ -101,4 +93,4 @@ async function main($container) {
 launcher.execute(main, {
   numClients: parseInt(new URLSearchParams(window.location.search).get('emulate')) || 1
 });
-//# sourceMappingURL=./index.js.map
+//# sourceMappingURL=./index-ok.js.map

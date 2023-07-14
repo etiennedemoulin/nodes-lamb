@@ -43,13 +43,24 @@ async function bootstrap() {
   // create application layout (which mimics the client-side API)
   const $layout = createLayout(client);
   const audioContext = new AudioContext();
-  const engine = new Engine(audioContext, player);
-  // ...and do your own stuff!
+  audioContext.destination.channelCount = 32;
+  await audioContext.resume();
+  const merger = audioContext.createChannelMerger(10); // 8 in, 1 out
 
-  player.onUpdate(() => {
-    $layout.requestUpdate();
-    engine.render();
-  });
+  for (let i = 0; i < 10; i++) {
+    const engine = new Engine(audioContext, player);
+    engine.env.connect(merger, 0, i);
+    player.onUpdate(() => {
+      $layout.requestUpdate();
+      engine.render();
+    });
+  }
+  merger.connect(audioContext.destination);
+
+  // engine.env.connect(merger, 0, 9); // out (in source) , inputs (in dest)
+  // // source.connect(dest);
+  // console.log(audioContext.destination);
+  // merger.connect(audioContext.destination);
 }
 
 // The launcher allows to fork multiple clients in the same terminal window
