@@ -36,31 +36,41 @@ async function bootstrap() {
    * Launch application
    */
   await client.start();
-  const player = await client.stateManager.create('player', {
-    id: client.id
-  });
-
-  // create application layout (which mimics the client-side API)
-  const $layout = createLayout(client);
+  const players = await client.stateManager.getCollection('player');
   const audioContext = new AudioContext();
-  audioContext.destination.channelCount = 32;
+  audioContext.destination.channelCount = 11;
+  audioContext.destination.channelCountMode = "explicit";
+  audioContext.destination.channelInterpretation = "discrete";
   await audioContext.resume();
-  const merger = audioContext.createChannelMerger(10); // 8 in, 1 out
-
-  for (let i = 0; i < 10; i++) {
-    const engine = new Engine(audioContext, player);
-    engine.env.connect(merger, 0, i);
-    player.onUpdate(() => {
-      $layout.requestUpdate();
-      engine.render();
-    });
-  }
+  const merger = audioContext.createChannelMerger(11); // 11 in, 1 out
   merger.connect(audioContext.destination);
-
-  // engine.env.connect(merger, 0, 9); // out (in source) , inputs (in dest)
-  // // source.connect(dest);
-  // console.log(audioContext.destination);
-  // merger.connect(audioContext.destination);
+  const chArray = [0, 1, 2, 3, 9, 10, 6, 7]; // slots
+  const engines = Array(8).fill(null);
+  players.onAttach(player => {
+    // push engine in first free slot
+    for (let i = 0; i < engines.length - 1; i++) {
+      if (engines[i] === null) {
+        // console.log(`creating engine ${player.get('id')} on slot ${chArray[i]}`)
+        const engine = new Engine(audioContext, player, false);
+        engines[i] = engine;
+        engine.env.connect(merger, 0, chArray[i]);
+        player.onUpdate(() => {
+          $layout.requestUpdate();
+          engine.render();
+        });
+        break;
+      }
+    }
+  });
+  players.onDetach(player => {
+    for (let i = 0; i < engines.length - 1; i++) {
+      if (engines[i] && player.get('id') === engines[i].getEngineId()) {
+        // console.log(`removing engine ${player.get('id')}`)
+        engines[i].env.disconnect();
+        engines[i] = null;
+      }
+    }
+  });
 }
 
 // The launcher allows to fork multiple clients in the same terminal window

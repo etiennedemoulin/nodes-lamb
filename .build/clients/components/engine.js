@@ -1,7 +1,8 @@
 export default class Engine {
-  constructor(audioContext, player) {
+  constructor(audioContext, player, volumeFlag) {
     this.audioContext = audioContext;
     this.player = player;
+    this.volumeFlag = volumeFlag;
     const now = this.audioContext.currentTime;
     this.saw = this.audioContext.createOscillator();
     this.env = this.audioContext.createGain();
@@ -18,9 +19,16 @@ export default class Engine {
   }
   render() {
     const now = this.audioContext.currentTime;
-    this.env.gain.linearRampToValueAtTime(this.player.get('volume'), now + 0.1);
+    if (this.volumeFlag) {
+      this.env.gain.linearRampToValueAtTime(this.player.get('volume'), now + 0.1);
+    } else {
+      this.env.gain.linearRampToValueAtTime(0.7, now + 0.1);
+    }
     this.saw.frequency.value = Number(this.player.get('sawFreq'));
     this.filter.frequency.linearRampToValueAtTime(this.player.get('filterFreq'), now + 0.1);
+  }
+  getEngineId() {
+    return this.player.get('id');
   }
 }
 //# sourceMappingURL=./engine.js.map
