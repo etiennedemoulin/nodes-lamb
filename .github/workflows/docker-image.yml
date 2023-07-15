@@ -6,17 +6,21 @@ on:
       - "main"
 
 env:
-  REGISTRY_IMAGE: etiennedemoulin/nodes-lamb
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
     strategy:
       fail-fast: false
       matrix:
         platform:
           - linux/amd64
-          - linux/arm/v6
           - linux/arm/v7
           - linux/arm64
     steps:
@@ -24,11 +28,16 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
       -
-        name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v4
+        name: Install cosign
+        uses: sigstore/cosign-installer@f3c664df7af409cb4873aa5068053ba9d61a57b6 #v2.6.0
         with:
-          images: ${{ env.REGISTRY_IMAGE }}
+          cosign-release: 'v1.11.0'
+      -
+        name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -36,11 +45,12 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       -
-        name: Login to Docker Hub
-        uses: docker/login-action@v2
+        name: Log into registry ${{ env.REGISTRY }}
+        uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build and push by digest
         id: build
