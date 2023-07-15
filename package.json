@@ -25,6 +25,7 @@
     "@soundworks/plugin-platform-init": "^1.0.0-alpha.5",
     "json5": "^2.2.2",
     "lit": "^2.2.2",
+    "lodash": "^4.17.21",
     "node-web-audio-api": "^0.10.0"
   },
   "devDependencies": {

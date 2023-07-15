@@ -35,32 +35,6 @@ async function main($container) {
   client.pluginManager.register('platform-init', pluginPlatformInit, {
     audioContext
   });
-
-  /**
-   * Register some soundworks plugins, you will need to install the plugins
-   * before hand (run `npx soundworks` for help)
-   */
-  // client.pluginManager.register('my-plugin', plugin);
-
-  /**
-   * Register the soundworks client into the launcher
-   *
-   * The launcher will do a bunch of stuff for you:
-   * - Display default initialization screens. If you want to change the provided
-   * initialization screens, you can import all the helpers directly in your
-   * application by doing `npx soundworks --eject-helpers`. You can also
-   * customise some global syles variables (background-color, text color etc.)
-   * in `src/clients/components/css/app.scss`.
-   * You can also change the default language of the intialization screen by
-   * setting, the `launcher.language` property, e.g.:
-   * `launcher.language = 'fr'`
-   * - By default the launcher automatically reloads the client when the socket
-   * closes or when the page is hidden. Such behavior can be quite important in
-   * performance situation where you don't want some phone getting stuck making
-   * noise without having any way left to stop it... Also be aware that a page
-   * in a background tab will have all its timers (setTimeout, etc.) put in very
-   * low priority, messing any scheduled events.
-   */
   launcher.register(client, {
     initScreensContainer: $container
   });
@@ -69,17 +43,14 @@ async function main($container) {
    * Launch application
    */
   await client.start();
-
-  // The `$layout` is provided as a convenience and is not required by soundworks,
-  // its full source code is located in the `./views/layout.js` file, so feel free
-  // to edit it to match your needs or even to delete it.
   const $layout = createLayout(client, $container);
-  const globals = await client.stateManager.attach('globals');
+
+  // const globals = await client.stateManager.attach('globals');
   const player = await client.stateManager.create('player', {
     id: client.id
   });
   const engine = new Engine(audioContext, player, true);
-  engine.env.connect(audioContext.destination);
+  engine.connect(audioContext.destination);
   player.onUpdate(() => {
     $layout.requestUpdate();
     engine.render();

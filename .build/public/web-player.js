@@ -32918,6 +32918,692 @@ module.exports = merge;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/_Symbol.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/_Symbol.js ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/** Built-in value references. */
+var _Symbol = root.Symbol;
+module.exports = _Symbol;
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseGetTag.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseGetTag.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
+  getRawTag = __webpack_require__(/*! ./_getRawTag */ "./node_modules/lodash/_getRawTag.js"),
+  objectToString = __webpack_require__(/*! ./_objectToString */ "./node_modules/lodash/_objectToString.js");
+
+/** `Object#toString` result references. */
+var nullTag = '[object Null]',
+  undefinedTag = '[object Undefined]';
+
+/** Built-in value references. */
+var symToStringTag = _Symbol ? _Symbol.toStringTag : undefined;
+
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+function baseGetTag(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
+}
+module.exports = baseGetTag;
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseTrim.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_baseTrim.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var trimmedEndIndex = __webpack_require__(/*! ./_trimmedEndIndex */ "./node_modules/lodash/_trimmedEndIndex.js");
+
+/** Used to match leading whitespace. */
+var reTrimStart = /^\s+/;
+
+/**
+ * The base implementation of `_.trim`.
+ *
+ * @private
+ * @param {string} string The string to trim.
+ * @returns {string} Returns the trimmed string.
+ */
+function baseTrim(string) {
+  return string ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '') : string;
+}
+module.exports = baseTrim;
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_freeGlobal.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_freeGlobal.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = (typeof __webpack_require__.g === "undefined" ? "undefined" : _typeof(__webpack_require__.g)) == 'object' && __webpack_require__.g && __webpack_require__.g.Object === Object && __webpack_require__.g;
+module.exports = freeGlobal;
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getRawTag.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_getRawTag.js ***!
+  \*******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/** Built-in value references. */
+var symToStringTag = _Symbol ? _Symbol.toStringTag : undefined;
+
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+function getRawTag(value) {
+  var isOwn = hasOwnProperty.call(value, symToStringTag),
+    tag = value[symToStringTag];
+  try {
+    value[symToStringTag] = undefined;
+    var unmasked = true;
+  } catch (e) {}
+  var result = nativeObjectToString.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag] = tag;
+    } else {
+      delete value[symToStringTag];
+    }
+  }
+  return result;
+}
+module.exports = getRawTag;
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_objectToString.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_objectToString.js ***!
+  \************************************************/
+/***/ ((module) => {
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+module.exports = objectToString;
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_root.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/_root.js ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ "./node_modules/lodash/_freeGlobal.js");
+
+/** Detect free variable `self`. */
+var freeSelf = (typeof self === "undefined" ? "undefined" : _typeof(self)) == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+module.exports = root;
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_trimmedEndIndex.js":
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_trimmedEndIndex.js ***!
+  \*************************************************/
+/***/ ((module) => {
+
+/** Used to match a single whitespace character. */
+var reWhitespace = /\s/;
+
+/**
+ * Used by `_.trim` and `_.trimEnd` to get the index of the last non-whitespace
+ * character of `string`.
+ *
+ * @private
+ * @param {string} string The string to inspect.
+ * @returns {number} Returns the index of the last non-whitespace character.
+ */
+function trimmedEndIndex(string) {
+  var index = string.length;
+  while (index-- && reWhitespace.test(string.charAt(index))) {}
+  return index;
+}
+module.exports = trimmedEndIndex;
+
+/***/ }),
+
+/***/ "./node_modules/lodash/debounce.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/debounce.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js"),
+  now = __webpack_require__(/*! ./now */ "./node_modules/lodash/now.js"),
+  toNumber = __webpack_require__(/*! ./toNumber */ "./node_modules/lodash/toNumber.js");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max,
+  nativeMin = Math.min;
+
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */
+function debounce(func, wait, options) {
+  var lastArgs,
+    lastThis,
+    maxWait,
+    result,
+    timerId,
+    lastCallTime,
+    lastInvokeTime = 0,
+    leading = false,
+    maxing = false,
+    trailing = true;
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  wait = toNumber(wait) || 0;
+  if (isObject(options)) {
+    leading = !!options.leading;
+    maxing = 'maxWait' in options;
+    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+  function invokeFunc(time) {
+    var args = lastArgs,
+      thisArg = lastThis;
+    lastArgs = lastThis = undefined;
+    lastInvokeTime = time;
+    result = func.apply(thisArg, args);
+    return result;
+  }
+  function leadingEdge(time) {
+    // Reset any `maxWait` timer.
+    lastInvokeTime = time;
+    // Start the timer for the trailing edge.
+    timerId = setTimeout(timerExpired, wait);
+    // Invoke the leading edge.
+    return leading ? invokeFunc(time) : result;
+  }
+  function remainingWait(time) {
+    var timeSinceLastCall = time - lastCallTime,
+      timeSinceLastInvoke = time - lastInvokeTime,
+      timeWaiting = wait - timeSinceLastCall;
+    return maxing ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke) : timeWaiting;
+  }
+  function shouldInvoke(time) {
+    var timeSinceLastCall = time - lastCallTime,
+      timeSinceLastInvoke = time - lastInvokeTime;
+
+    // Either this is the first call, activity has stopped and we're at the
+    // trailing edge, the system time has gone backwards and we're treating
+    // it as the trailing edge, or we've hit the `maxWait` limit.
+    return lastCallTime === undefined || timeSinceLastCall >= wait || timeSinceLastCall < 0 || maxing && timeSinceLastInvoke >= maxWait;
+  }
+  function timerExpired() {
+    var time = now();
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+    // Restart the timer.
+    timerId = setTimeout(timerExpired, remainingWait(time));
+  }
+  function trailingEdge(time) {
+    timerId = undefined;
+
+    // Only invoke if we have `lastArgs` which means `func` has been
+    // debounced at least once.
+    if (trailing && lastArgs) {
+      return invokeFunc(time);
+    }
+    lastArgs = lastThis = undefined;
+    return result;
+  }
+  function cancel() {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+    }
+    lastInvokeTime = 0;
+    lastArgs = lastCallTime = lastThis = timerId = undefined;
+  }
+  function flush() {
+    return timerId === undefined ? result : trailingEdge(now());
+  }
+  function debounced() {
+    var time = now(),
+      isInvoking = shouldInvoke(time);
+    lastArgs = arguments;
+    lastThis = this;
+    lastCallTime = time;
+    if (isInvoking) {
+      if (timerId === undefined) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxing) {
+        // Handle invocations in a tight loop.
+        clearTimeout(timerId);
+        timerId = setTimeout(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId === undefined) {
+      timerId = setTimeout(timerExpired, wait);
+    }
+    return result;
+  }
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+}
+module.exports = debounce;
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isObject.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isObject.js ***!
+  \*****************************************/
+/***/ ((module) => {
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = _typeof(value);
+  return value != null && (type == 'object' || type == 'function');
+}
+module.exports = isObject;
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isObjectLike.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/isObjectLike.js ***!
+  \*********************************************/
+/***/ ((module) => {
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return value != null && _typeof(value) == 'object';
+}
+module.exports = isObjectLike;
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isSymbol.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isSymbol.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "./node_modules/lodash/_baseGetTag.js"),
+  isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js");
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return _typeof(value) == 'symbol' || isObjectLike(value) && baseGetTag(value) == symbolTag;
+}
+module.exports = isSymbol;
+
+/***/ }),
+
+/***/ "./node_modules/lodash/now.js":
+/*!************************************!*\
+  !*** ./node_modules/lodash/now.js ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
+
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */
+var now = function now() {
+  return root.Date.now();
+};
+module.exports = now;
+
+/***/ }),
+
+/***/ "./node_modules/lodash/throttle.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/throttle.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var debounce = __webpack_require__(/*! ./debounce */ "./node_modules/lodash/debounce.js"),
+  isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a throttled function that only invokes `func` at most once per
+ * every `wait` milliseconds. The throttled function comes with a `cancel`
+ * method to cancel delayed `func` invocations and a `flush` method to
+ * immediately invoke them. Provide `options` to indicate whether `func`
+ * should be invoked on the leading and/or trailing edge of the `wait`
+ * timeout. The `func` is invoked with the last arguments provided to the
+ * throttled function. Subsequent calls to the throttled function return the
+ * result of the last `func` invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the throttled function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.throttle` and `_.debounce`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to throttle.
+ * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=true]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new throttled function.
+ * @example
+ *
+ * // Avoid excessively updating the position while scrolling.
+ * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
+ *
+ * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.
+ * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
+ * jQuery(element).on('click', throttled);
+ *
+ * // Cancel the trailing throttled invocation.
+ * jQuery(window).on('popstate', throttled.cancel);
+ */
+function throttle(func, wait, options) {
+  var leading = true,
+    trailing = true;
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  if (isObject(options)) {
+    leading = 'leading' in options ? !!options.leading : leading;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+  return debounce(func, wait, {
+    'leading': leading,
+    'maxWait': wait,
+    'trailing': trailing
+  });
+}
+module.exports = throttle;
+
+/***/ }),
+
+/***/ "./node_modules/lodash/toNumber.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/toNumber.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var baseTrim = __webpack_require__(/*! ./_baseTrim */ "./node_modules/lodash/_baseTrim.js"),
+  isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js"),
+  isSymbol = __webpack_require__(/*! ./isSymbol */ "./node_modules/lodash/isSymbol.js");
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
+  }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? other + '' : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = baseTrim(value);
+  var isBinary = reIsBinary.test(value);
+  return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
+}
+module.exports = toNumber;
+
+/***/ }),
+
 /***/ "./node_modules/mobile-detect/mobile-detect.js":
 /*!*****************************************************!*\
   !*** ./node_modules/mobile-detect/mobile-detect.js ***!
@@ -34985,7 +35671,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 var Engine = /*#__PURE__*/function () {
-  function Engine(audioContext, player, volumeFlag) {
+  function Engine(audioContext, player) {
+    var volumeFlag = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
     _classCallCheck(this, Engine);
     this.audioContext = audioContext;
     this.player = player;
@@ -34998,28 +35685,56 @@ var Engine = /*#__PURE__*/function () {
     this.saw.type = 'sawtooth';
     this.filter.Q.value = 11;
     this.filter.type = "lowpass";
+    this.filter.frequency.setValueAtTime(10, now + 0.1);
     this.saw.connect(this.filter);
     this.filter.connect(this.env);
-    // this.env.connect(this.audioContext.destination);
     this.saw.start(now);
-    this.render();
   }
   _createClass(Engine, [{
     key: "render",
     value: function render() {
+      // hook from engine !
+      var filterFreq = this.computeFilterValues();
+
+      // sonify
       var now = this.audioContext.currentTime;
-      if (this.volumeFlag) {
+      if (this.volumeFlag === true) {
         this.env.gain.linearRampToValueAtTime(this.player.get('volume'), now + 0.1);
       } else {
-        this.env.gain.linearRampToValueAtTime(0.7, now + 0.1);
+        this.env.gain.linearRampToValueAtTime(0.1, now + 0.1);
       }
       this.saw.frequency.value = Number(this.player.get('sawFreq'));
-      this.filter.frequency.linearRampToValueAtTime(this.player.get('filterFreq'), now + 0.1);
+      this.filter.frequency.linearRampToValueAtTime(filterFreq, now + 0.1);
+    }
+  }, {
+    key: "computeFilterValues",
+    value: function computeFilterValues() {
+      var sliderValue = this.player.get('filterSlider');
+      var sawFreq = this.player.get('sawFreq');
+      var filterFreq = Math.max(sliderValue * sawFreq * 7, 10);
+      var numHarm = Math.floor(filterFreq / sawFreq);
+      this.player.set({
+        filterFreq: filterFreq,
+        numHarm: numHarm
+      }, {
+        source: 'engine'
+      });
+      return filterFreq;
     }
   }, {
     key: "getEngineId",
     value: function getEngineId() {
       return this.player.get('id');
+    }
+  }, {
+    key: "connect",
+    value: function connect(destination, outlet, inlet) {
+      this.env.connect(destination, outlet, inlet);
+    }
+  }, {
+    key: "disconnect",
+    value: function disconnect() {
+      this.env.disconnect();
     }
   }]);
   return Engine;
@@ -35136,18 +35851,17 @@ customElements.define('sw-infos-button', SwInfosButton);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
 /* harmony import */ var lit_directives_live_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lit/directives/live.js */ "./node_modules/lit/directives/live.js");
-/* harmony import */ var _ircam_simple_components_sc_text_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ircam/simple-components/sc-text.js */ "./node_modules/@ircam/simple-components/sc-text.js");
-/* harmony import */ var _ircam_simple_components_sc_slider_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ircam/simple-components/sc-slider.js */ "./node_modules/@ircam/simple-components/sc-slider.js");
-/* harmony import */ var _ircam_simple_components_sc_toggle_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ircam/simple-components/sc-toggle.js */ "./node_modules/@ircam/simple-components/sc-toggle.js");
-/* harmony import */ var _ircam_simple_components_sc_bang_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ircam/simple-components/sc-bang.js */ "./node_modules/@ircam/simple-components/sc-bang.js");
+/* harmony import */ var lodash_throttle_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/throttle.js */ "./node_modules/lodash/throttle.js");
+/* harmony import */ var _ircam_simple_components_sc_text_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ircam/simple-components/sc-text.js */ "./node_modules/@ircam/simple-components/sc-text.js");
+/* harmony import */ var _ircam_simple_components_sc_slider_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ircam/simple-components/sc-slider.js */ "./node_modules/@ircam/simple-components/sc-slider.js");
+/* harmony import */ var _ircam_simple_components_sc_toggle_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ircam/simple-components/sc-toggle.js */ "./node_modules/@ircam/simple-components/sc-toggle.js");
+/* harmony import */ var _ircam_simple_components_sc_bang_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ircam/simple-components/sc-bang.js */ "./node_modules/@ircam/simple-components/sc-bang.js");
+var _templateObject, _templateObject2;
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-var _templateObject;
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get.bind(); } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
 function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
@@ -35157,7 +35871,11 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 // src/players/components/sw-player.js
+
 
 
 
@@ -35178,6 +35896,26 @@ var SwPlayer = /*#__PURE__*/function (_LitElement) {
     // stores the `unsubscribe` callback returned by the `state.onUpdate` methos
     // https://soundworks.dev/soundworks/client.SharedState.html#onUpdate
     _this._unobserve = null;
+    var updateVolume = lodash_throttle_js__WEBPACK_IMPORTED_MODULE_2__(function (volume) {
+      this.player.set({
+        volume: volume
+      }, {
+        source: 'web'
+      });
+    }, 100, {
+      'trailing': true
+    });
+    var updateFilterSlider = lodash_throttle_js__WEBPACK_IMPORTED_MODULE_2__(function (filterSlider) {
+      this.player.set({
+        filterSlider: filterSlider
+      }, {
+        source: 'web'
+      });
+    }, 100, {
+      'trailing': true
+    });
+    _this.updateVolume = updateVolume;
+    _this.updateFilterSlider = updateFilterSlider;
     return _this;
   }
   _createClass(SwPlayer, [{
@@ -35202,25 +35940,22 @@ var SwPlayer = /*#__PURE__*/function (_LitElement) {
     value: function render() {
       var _this3 = this;
       // create controls for the player state
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <h2>Player [id: ", "]</h2>\n      <div style=\"padding-bottom: 4px;\">\n        <sc-text value=\"Filter Frequency\" readonly></sc-text>\n        <sc-slider\n          width=\"400\"\n          min=\"0\"\n          max=\"1\"\n          value=", "\n          @input=", "\n        ></sc-slider>\n        <sc-number\n          .value=\"", "\"\n        ></sc-number>\n        <sc-number\n          .value=\"", "\"\n        ></sc-number>\n      </div>\n      <div style=\"padding-bottom: 4px;\">\n        <sc-text value=\"Master Volume\" readonly></sc-text>\n        <sc-slider\n          width=\"400\"\n          min=\"0\"\n          max=\"1\"\n          value=", "\n          @input=", "\n        ></sc-slider>\n      </div>\n      <div style=\"padding-bottom: 4px;\">\n        <sc-select\n          value=\"", "\"\n          .options=", "\n          @change=", "\n        ></sc-select>\n      </div>\n\n    "])), this.player.get('id'), this.player.get('filterSlider'), function (e) {
-        return _this3.player.set({
-          filterSlider: e.detail.value
-        });
-      }, this.player.get('filterFreq'), this.player.get('numHarm'), this.player.get('volume'), function (e) {
-        return _this3.player.set({
-          volume: e.detail.value
-        });
-      }, this.player.get('sawFreq'), this.player.get('selectFreq'), function (e) {
+      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <header>\n        <p>", "</p>\n        <sc-select\n          value=\"", "\"\n          .options=", "\n          @change=", "\n        ></sc-select>\n      </header>\n      <div>\n        <div class=\"filter\">\n          <sc-number\n            .value=\"", "\"\n          ></sc-number>\n          <sc-number\n            .value=\"", "\"\n          ></sc-number>\n          <sc-slider\n            relative\n            orientation=\"vertical\"\n            min=\"", "\"\n            max=\"", "\"\n            value=", "\n            @input=", "\n          ></sc-slider>\n          <p>Volume</p>\n        </div>\n        <div class=\"volume\">\n          <sc-slider\n            relative\n            orientation=\"vertical\"\n            min=\"", "\"\n            max=\"", "\"\n            value=", "\n            @input=", "\n          ></sc-slider>\n          <p>Filter</p>\n        </div>\n      </div>\n    "])), this.player.get('id'), this.player.get('sawFreq'), this.player.get('selectFreq'), function (e) {
         return _this3.player.set({
           sawFreq: Number(e.target.value)
         }, {
           source: 'web'
         });
+      }, this.player.get('filterFreq'), this.player.get('numHarm'), this.player.getSchema().volume.min, this.player.getSchema().volume.max, this.player.get('volume'), function (e) {
+        return _this3.updateVolume(e.target.value);
+      }, this.player.getSchema().filterSlider.min, this.player.getSchema().filterSlider.max, this.player.get('filterSlider'), function (e) {
+        return _this3.updateFilterSlider(e.target.value);
       });
     }
   }]);
   return SwPlayer;
 }(lit__WEBPACK_IMPORTED_MODULE_0__.LitElement); // register the component into the custom elements registry
+_defineProperty(SwPlayer, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    :host {\n      display: block;\n      min-height: calc(100vh - 70px);\n    }\n\n    header {\n      display: block;\n      height: 70px;\n      line-height: 70px;\n      background-color: var(--sw-medium-background-color);\n      display: flex;\n      flex-direction: row;\n      justify-content: space-between;\n      align-items: stretch;\n      border-bottom: 1px solid var(--sw-lighter-background-color);\n    }\n\n    p {\n      font-size: 30px;\n      margin: 15px;\n      height: 30px;\n      line-height: 30px;\n      text-indent: 8px;\n      background-color: #454545;\n    }\n\n    sc-select {\n      font-size: 30px;\n      height: 70px;\n      background-color: #454545;\n    }\n\n    :host > div {\n      display: flex;\n      background-color: #121212;\n      justify-content: space-between;\n      flex-direction: row;\n      min-height: calc(100vh - 70px);\n    }\n\n    sc-text {\n      font-size: 30px;\n      margin-top: 10px;\n      width: 100%;\n    }\n\n    sc-number {\n      margin-top: 10px;\n      font-size: 30px;\n      width: 100%;\n      height: 60px;\n    }\n\n    sc-slider {\n      margin-top: 10px;\n      width: 100%;\n    }\n\n    .filter {\n      width: 49%;\n    }\n\n    .filter > sc-slider {\n      height: calc(100vh - 300px);\n    }\n\n    .volume > sc-slider {\n      height: calc(100vh - 160px);\n    }\n\n    .volume {\n      width: 49%;\n    }\n\n  "]))));
 customElements.define('sw-player', SwPlayer);
 
 /***/ }),
@@ -35240,7 +35975,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_sw_infos_button_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/sw-infos-button.js */ "./.build/clients/components/sw-infos-button.js");
 /* harmony import */ var _components_sw_credits_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/sw-credits.js */ "./.build/clients/components/sw-credits.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-var _templateObject, _templateObject2, _templateObject3;
+var _templateObject, _templateObject2;
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
@@ -35314,9 +36049,9 @@ var SimpleLayout = /*#__PURE__*/function (_LitElement) {
   }, {
     key: "render",
     value: function render() {
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <div>\n        ", "\n\n        <!-- credits -->\n        ", "\n        <sw-infos-button @click=\"", "\"></sw-infos-button>\n      </div>\n    "])), Array.from(this._components).map(function (comp) {
+      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <div>\n        ", "\n      </div>\n    "])), Array.from(this._components).map(function (comp) {
         return comp.render ? comp.render() : comp;
-      }), this._showCredits ? (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["<sw-credits .client=\"", "\"></sw-credits>"])), this.client) : lit__WEBPACK_IMPORTED_MODULE_0__.nothing, this.toggleCredits);
+      }));
     }
   }]);
   return SimpleLayout;
@@ -35324,7 +36059,7 @@ var SimpleLayout = /*#__PURE__*/function (_LitElement) {
 customElements.define('simple-layout', SimpleLayout);
 function createLayout(client, $container) {
   var layoutId = "".concat(client.role, "-").concat(client.id);
-  (0,lit__WEBPACK_IMPORTED_MODULE_0__.render)((0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    <simple-layout\n      .client=\"", "\"\n      id=\"", "\"\n    ></simple-layout>\n  "])), client, layoutId), $container);
+  (0,lit__WEBPACK_IMPORTED_MODULE_0__.render)((0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    <simple-layout\n      .client=\"", "\"\n      id=\"", "\"\n    ></simple-layout>\n  "])), client, layoutId), $container);
   var $layout = document.querySelector("#".concat(layoutId));
   return $layout;
 }
@@ -49394,7 +50129,7 @@ function main(_x) {
 // e.g. `http://127.0.0.1:8000?emulate=10` to run 10 clients side-by-side
 function _main() {
   _main = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee($container) {
-    var client, $layout, globals, player, engine;
+    var client, $layout, player, engine;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -49405,32 +50140,6 @@ function _main() {
           client.pluginManager.register('platform-init', _soundworks_plugin_platform_init_client_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
             audioContext: audioContext
           });
-
-          /**
-           * Register some soundworks plugins, you will need to install the plugins
-           * before hand (run `npx soundworks` for help)
-           */
-          // client.pluginManager.register('my-plugin', plugin);
-
-          /**
-           * Register the soundworks client into the launcher
-           *
-           * The launcher will do a bunch of stuff for you:
-           * - Display default initialization screens. If you want to change the provided
-           * initialization screens, you can import all the helpers directly in your
-           * application by doing `npx soundworks --eject-helpers`. You can also
-           * customise some global syles variables (background-color, text color etc.)
-           * in `src/clients/components/css/app.scss`.
-           * You can also change the default language of the intialization screen by
-           * setting, the `launcher.language` property, e.g.:
-           * `launcher.language = 'fr'`
-           * - By default the launcher automatically reloads the client when the socket
-           * closes or when the page is hidden. Such behavior can be quite important in
-           * performance situation where you don't want some phone getting stuck making
-           * noise without having any way left to stop it... Also be aware that a page
-           * in a background tab will have all its timers (setTimeout, etc.) put in very
-           * low priority, messing any scheduled events.
-           */
           _soundworks_helpers_launcher_js__WEBPACK_IMPORTED_MODULE_2__["default"].register(client, {
             initScreensContainer: $container
           });
@@ -49441,28 +50150,21 @@ function _main() {
           _context.next = 5;
           return client.start();
         case 5:
-          // The `$layout` is provided as a convenience and is not required by soundworks,
-          // its full source code is located in the `./views/layout.js` file, so feel free
-          // to edit it to match your needs or even to delete it.
-          $layout = (0,_layout_js__WEBPACK_IMPORTED_MODULE_5__["default"])(client, $container);
+          $layout = (0,_layout_js__WEBPACK_IMPORTED_MODULE_5__["default"])(client, $container); // const globals = await client.stateManager.attach('globals');
           _context.next = 8;
-          return client.stateManager.attach('globals');
-        case 8:
-          globals = _context.sent;
-          _context.next = 11;
           return client.stateManager.create('player', {
             id: client.id
           });
-        case 11:
+        case 8:
           player = _context.sent;
           engine = new _components_engine_js__WEBPACK_IMPORTED_MODULE_11__["default"](audioContext, player, true);
-          engine.env.connect(audioContext.destination);
+          engine.connect(audioContext.destination);
           player.onUpdate(function () {
             $layout.requestUpdate();
             engine.render();
           });
           $layout.addComponent((0,lit__WEBPACK_IMPORTED_MODULE_4__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["<sw-player .player=", "></sc-player>"])), player));
-        case 16:
+        case 13:
         case "end":
           return _context.stop();
       }

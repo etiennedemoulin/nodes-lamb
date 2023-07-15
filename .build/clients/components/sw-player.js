@@ -1,6 +1,7 @@
 // src/players/components/sw-player.js
 import { LitElement, html, css } from 'lit';
 import { live } from 'lit/directives/live.js';
+import throttle from 'lodash/throttle.js';
 
 // import needed GUI components
 import '@ircam/simple-components/sc-text.js';
@@ -8,6 +9,82 @@ import '@ircam/simple-components/sc-slider.js';
 import '@ircam/simple-components/sc-toggle.js';
 import '@ircam/simple-components/sc-bang.js';
 class SwPlayer extends LitElement {
+  static styles = css`
+    :host {
+      display: block;
+      min-height: calc(100vh - 70px);
+    }
+
+    header {
+      display: block;
+      height: 70px;
+      line-height: 70px;
+      background-color: var(--sw-medium-background-color);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: stretch;
+      border-bottom: 1px solid var(--sw-lighter-background-color);
+    }
+
+    p {
+      font-size: 30px;
+      margin: 15px;
+      height: 30px;
+      line-height: 30px;
+      text-indent: 8px;
+      background-color: #454545;
+    }
+
+    sc-select {
+      font-size: 30px;
+      height: 70px;
+      background-color: #454545;
+    }
+
+    :host > div {
+      display: flex;
+      background-color: #121212;
+      justify-content: space-between;
+      flex-direction: row;
+      min-height: calc(100vh - 70px);
+    }
+
+    sc-text {
+      font-size: 30px;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    sc-number {
+      margin-top: 10px;
+      font-size: 30px;
+      width: 100%;
+      height: 60px;
+    }
+
+    sc-slider {
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    .filter {
+      width: 49%;
+    }
+
+    .filter > sc-slider {
+      height: calc(100vh - 300px);
+    }
+
+    .volume > sc-slider {
+      height: calc(100vh - 160px);
+    }
+
+    .volume {
+      width: 49%;
+    }
+
+  `;
   constructor() {
     super();
     // stores the `player` state
@@ -15,6 +92,26 @@ class SwPlayer extends LitElement {
     // stores the `unsubscribe` callback returned by the `state.onUpdate` methos
     // https://soundworks.dev/soundworks/client.SharedState.html#onUpdate
     this._unobserve = null;
+    const updateVolume = throttle(function (volume) {
+      this.player.set({
+        volume: volume
+      }, {
+        source: 'web'
+      });
+    }, 100, {
+      'trailing': true
+    });
+    const updateFilterSlider = throttle(function (filterSlider) {
+      this.player.set({
+        filterSlider: filterSlider
+      }, {
+        source: 'web'
+      });
+    }, 100, {
+      'trailing': true
+    });
+    this.updateVolume = updateVolume;
+    this.updateFilterSlider = updateFilterSlider;
   }
   connectedCallback() {
     super.connectedCallback();
@@ -29,38 +126,8 @@ class SwPlayer extends LitElement {
   render() {
     // create controls for the player state
     return html`
-      <h2>Player [id: ${this.player.get('id')}]</h2>
-      <div style="padding-bottom: 4px;">
-        <sc-text value="Filter Frequency" readonly></sc-text>
-        <sc-slider
-          width="400"
-          min="0"
-          max="1"
-          value=${this.player.get('filterSlider')}
-          @input=${e => this.player.set({
-      filterSlider: e.detail.value
-    })}
-        ></sc-slider>
-        <sc-number
-          .value="${this.player.get('filterFreq')}"
-        ></sc-number>
-        <sc-number
-          .value="${this.player.get('numHarm')}"
-        ></sc-number>
-      </div>
-      <div style="padding-bottom: 4px;">
-        <sc-text value="Master Volume" readonly></sc-text>
-        <sc-slider
-          width="400"
-          min="0"
-          max="1"
-          value=${this.player.get('volume')}
-          @input=${e => this.player.set({
-      volume: e.detail.value
-    })}
-        ></sc-slider>
-      </div>
-      <div style="padding-bottom: 4px;">
+      <header>
+        <p>${this.player.get('id')}</p>
         <sc-select
           value="${this.player.get('sawFreq')}"
           .options=${this.player.get('selectFreq')}
@@ -70,8 +137,37 @@ class SwPlayer extends LitElement {
       source: 'web'
     })}
         ></sc-select>
+      </header>
+      <div>
+        <div class="filter">
+          <sc-number
+            .value="${this.player.get('filterFreq')}"
+          ></sc-number>
+          <sc-number
+            .value="${this.player.get('numHarm')}"
+          ></sc-number>
+          <sc-slider
+            relative
+            orientation="vertical"
+            min="${this.player.getSchema().volume.min}"
+            max="${this.player.getSchema().volume.max}"
+            value=${this.player.get('volume')}
+            @input=${e => this.updateVolume(e.target.value)}
+          ></sc-slider>
+          <p>Volume</p>
+        </div>
+        <div class="volume">
+          <sc-slider
+            relative
+            orientation="vertical"
+            min="${this.player.getSchema().filterSlider.min}"
+            max="${this.player.getSchema().filterSlider.max}"
+            value=${this.player.get('filterSlider')}
+            @input=${e => this.updateFilterSlider(e.target.value)}
+          ></sc-slider>
+          <p>Filter</p>
+        </div>
       </div>
-
     `;
   }
 }

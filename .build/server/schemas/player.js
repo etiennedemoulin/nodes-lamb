@@ -6,7 +6,7 @@ export const playerSchema = {
   },
   sawFreq: {
     type: 'float',
-    default: 100,
+    default: 30,
     min: 0,
     max: 1000
   },
@@ -18,7 +18,7 @@ export const playerSchema = {
   },
   filterFreq: {
     type: 'float',
-    default: 0
+    default: 10
   },
   numHarm: {
     type: 'integer',
@@ -26,9 +26,9 @@ export const playerSchema = {
   },
   volume: {
     type: 'float',
-    default: 0,
+    default: 1,
     min: 0,
-    max: 1
+    max: 0.5
   },
   selectFreq: {
     type: 'any',

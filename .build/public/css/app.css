@@ -37,7 +37,7 @@ simple-layout {
   min-height: 100vh;
 }
 simple-layout > div {
-  padding: 20px;
+  min-height: 100vh;
 }
 simple-layout sw-infos-button {
   position: absolute;

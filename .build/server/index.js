@@ -2,7 +2,7 @@ import '@soundworks/helpers/polyfills.js';
 import { Server } from '@soundworks/core/server.js';
 import { loadConfig } from '../utils/load-config.js';
 import '../utils/catch-unhandled-errors.js';
-import { globalsSchema } from './schemas/globals.js';
+// import { globalsSchema } from './schemas/globals.js';
 import { playerSchema } from './schemas/player.js';
 import pluginPlatformInit from '@soundworks/plugin-platform-init/server.js';
 
@@ -26,24 +26,11 @@ const server = new Server(config);
 // configure the server for usage within this application template
 server.useDefaultApplicationTemplate();
 server.pluginManager.register('platform-init', pluginPlatformInit);
-server.stateManager.registerSchema('globals', globalsSchema);
+
+// server.stateManager.registerSchema('globals', globalsSchema);
 server.stateManager.registerSchema('player', playerSchema);
-const globals = await server.stateManager.create('globals');
-server.stateManager.registerUpdateHook('player', (updates, currentValues, context) => {
-  if (updates.filterSlider) {
-    const filterFreq = 1 + updates.filterSlider * currentValues.sawFreq * 7;
-    const numHarm = Math.floor(filterFreq / currentValues.sawFreq);
-    return {
-      ...updates,
-      filterFreq: filterFreq,
-      numHarm: numHarm
-    };
-  } else {
-    return {
-      ...updates
-    };
-  }
-});
+
+// const globals = await server.stateManager.create('globals');
 
 /**
  * Register plugins and schemas

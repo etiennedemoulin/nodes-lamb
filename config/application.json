@@ -12,8 +12,5 @@
     'node-player': {
       target: 'node',
     },
-    'mc-web-player': {
-      target: 'browser',
-    },
   },
 }

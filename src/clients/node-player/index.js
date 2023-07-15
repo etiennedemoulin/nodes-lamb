@@ -15,54 +15,41 @@ import Engine from '../components/engine.js';
 // - Wizard & Tools:        `npx soundworks`
 
 async function bootstrap() {
-  /**
-   * Load configuration from config files and create the soundworks client
-   */
   const config = loadConfig(process.env.ENV, import.meta.url);
   const client = new Client(config);
 
-  /**
-   * Register some soundworks plugins, you will need to install the plugins
-   * before hand (run `npx soundworks` for help)
-   */
-  // client.pluginManager.register('my-plugin', plugin);
-
-  /**
-   * Register the soundworks client into the launcher
-   *
-   * Automatically restarts the process when the socket closes or when an
-   * uncaught error occurs in the program.
-   */
   launcher.register(client);
 
   /**
    * Launch application
    */
   await client.start();
+
   const players = await client.stateManager.getCollection('player');
 
   const audioContext = new AudioContext();
-  audioContext.destination.channelCount = 11;
-  audioContext.destination.channelCountMode = "explicit";
-  audioContext.destination.channelInterpretation = "discrete";
+  const numChannels = 16;
+
+  audioContext.destination.channelCount = numChannels;
+  audioContext.destination.channelInterpretation = 'discrete';
+
   await audioContext.resume();
 
-  const merger = audioContext.createChannelMerger(11); // 11 in, 1 out
+  const merger = audioContext.createChannelMerger(numChannels);
+
+  merger.channelInterpretation = 'discrete';
   merger.connect(audioContext.destination);
 
-  const chArray = [0, 1, 2, 3, 9, 10, 6, 7]; // slots
-  const engines = Array(8).fill(null);
+  const engines = Array(numChannels).fill(null);
 
   players.onAttach((player) => {
     // push engine in first free slot
-    for (let i = 0; i < (engines.length - 1); i++) {
+    for (let i = 0; i < engines.length; i++) {
       if (engines[i] === null) {
-        // console.log(`creating engine ${player.get('id')} on slot ${chArray[i]}`)
         const engine = new Engine(audioContext, player, false);
         engines[i] = engine;
-        engine.env.connect(merger, 0, chArray[i]);
+        engine.connect(merger, 0, i);
         player.onUpdate(() => {
-          $layout.requestUpdate();
           engine.render();
         })
         break;
@@ -71,12 +58,12 @@ async function bootstrap() {
   });
 
   players.onDetach((player) => {
-    for (let i = 0; i < (engines.length - 1); i++) {
+    for (let i = 0; i < engines.length; i++) {
       if (engines[i]
         && player.get('id') === engines[i].getEngineId())
       {
         // console.log(`removing engine ${player.get('id')}`)
-        engines[i].env.disconnect();
+        engines[i].disconnect();
         engines[i] = null;
       }
     }
