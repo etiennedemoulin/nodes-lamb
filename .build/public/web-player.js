@@ -36092,10 +36092,6 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-/*
-all element should extend this class to handle global things such as
-userSelect, ids, etc.
-*/
 
 // dynamically insert global stylesheet w/ sc-components variables
 
@@ -36105,6 +36101,11 @@ userSelect, ids, etc.
 
 var id = 0;
 var userSelectNoneOnBodyRegister = new Set();
+
+/**
+ * all element should extend this class to handle global things such as
+ * userSelect, ids, etc.
+ */
 var ScElement = /*#__PURE__*/function (_LitElement) {
   _inherits(ScElement, _LitElement);
   var _super = _createSuper(ScElement);
@@ -36126,6 +36127,7 @@ var ScElement = /*#__PURE__*/function (_LitElement) {
       if (userSelectNoneOnBodyRegister.size === 0) {
         document.body.style.userSelect = 'none';
         document.body.style.webkitUserSelect = 'none';
+        document.body.style.webkitTouchCallout = 'none';
       }
       userSelectNoneOnBodyRegister.add(this._scId);
     }
@@ -36136,6 +36138,7 @@ var ScElement = /*#__PURE__*/function (_LitElement) {
       if (userSelectNoneOnBodyRegister.size === 0) {
         document.body.style.userSelect = 'auto';
         document.body.style.webkitUserSelect = 'auto';
+        document.body.style.webkitTouchCallout = 'auto';
       }
     }
   }]);
@@ -36206,6 +36209,7 @@ var ScNumber = /*#__PURE__*/function (_ScElement) {
     _this._updateValue00001 = _this._updateValueFromPointer(0.0001);
     _this._updateValue000001 = _this._updateValueFromPointer(0.00001);
     _this._updateValue0000001 = _this._updateValueFromPointer(0.000001);
+    _this._hasVirtualKeyboard = false;
     _this._numKeyPressed = 0;
     _this._onKeyDown = _this._onKeyDown.bind(_assertThisInitialized(_this));
     return _this;
@@ -36259,7 +36263,7 @@ var ScNumber = /*#__PURE__*/function (_ScElement) {
       var isEdited = {
         edited: this._numKeyPressed !== 0
       };
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <div\n        tabindex=\"-1\"\n        class=\"container\"\n        @focus=\"", "\"\n        @blur=\"", "\"\n        @touchstart=\"", "\"\n        @touchend=\"", "\"\n        @contextmenu=\"", "\"\n      >\n        <div class=\"info ", "\"></div>\n\n        <div class=\"content\">\n          <span class=\"z\">\n            ", "\n            <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n          </span>\n          ", "\n        </div>\n      </div>\n    "])), this._onFocus, this._onBlur, this._triggerFocus, this._openKeyboard, this._preventContextMenu, (0,lit_directives_class_map_js__WEBPACK_IMPORTED_MODULE_1__.classMap)(isEdited), parts[0], this._updateValue1, !this.integer ? (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n              <span class=\"z\">\n                .\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>"])), parts[1][0] || emptySpace, this._updateValue01, parts[1][1] || emptySpace, this._updateValue001, parts[1][2] || emptySpace, this._updateValue0001, parts[1][3] || emptySpace, this._updateValue00001, parts[1][4] || emptySpace, this._updateValue000001, parts[1][5] || emptySpace, this._updateValue0000001) : lit__WEBPACK_IMPORTED_MODULE_0__.nothing);
+      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <div\n        tabindex=\"-1\"\n        class=\"container\"\n        @focus=\"", "\"\n        @blur=\"", "\"\n        @touchstart=\"", "\"\n        @touchend=\"", "\"\n        @contextmenu=\"", "\"\n      >\n        <div class=\"info ", "\"></div>\n\n        <div class=\"content\">\n          <span class=\"z\">\n            ", "\n            <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n          </span>\n          ", "\n        </div>\n      </div>\n    "])), this._onFocus, this._onBlur, this._triggerFocus, this._openVirtualKeyboard, this._preventContextMenu, (0,lit_directives_class_map_js__WEBPACK_IMPORTED_MODULE_1__.classMap)(isEdited), parts[0], this._updateValue1, !this.integer ? (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n              <span class=\"z\">\n                .\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>"])), parts[1][0] || emptySpace, this._updateValue01, parts[1][1] || emptySpace, this._updateValue001, parts[1][2] || emptySpace, this._updateValue0001, parts[1][3] || emptySpace, this._updateValue00001, parts[1][4] || emptySpace, this._updateValue000001, parts[1][5] || emptySpace, this._updateValue0000001) : lit__WEBPACK_IMPORTED_MODULE_0__.nothing);
     }
   }, {
     key: "connectedCallback",
@@ -36277,32 +36281,52 @@ var ScNumber = /*#__PURE__*/function (_ScElement) {
       e.preventDefault();
       e.stopPropagation();
     }
+
+    // this only works on touchend
   }, {
-    key: "_openKeyboard",
-    value: function _openKeyboard(e) {
+    key: "_openVirtualKeyboard",
+    value: function _openVirtualKeyboard(e) {
       var _this2 = this;
+      e.preventDefault(); // go to end of page
+      e.stopPropagation();
+      if (this._hasVirtualKeyboard) {
+        return;
+      }
+
+      // lock speed surface events
+      this._hasVirtualKeyboard = true;
       var $number = document.createElement('input');
       $number.type = 'number';
       this.shadowRoot.appendChild($number);
       $number.focus();
       $number.click();
       $number.addEventListener('input', function (e) {
-        console.log('input', $number.value);
+        e.preventDefault();
+        e.stopPropagation();
         // when "." or "," is pressed e.target.value is empty in chrome
         // @todo - check firefox and safari
         if (e.target.value) {
           _this2.value = parseFloat(e.target.value);
+          _this2._emitInput();
         }
       });
       $number.addEventListener('change', function (e) {
         e.preventDefault(); // go to end of page
         e.stopPropagation();
-        console.log('change', $number.value);
+
         // when "." or "," is pressed e.target.value is empty in chrome
         // @todo - check firefox and safari
         if (e.target.value) {
           _this2.value = parseFloat(e.target.value);
         }
+
+        // this prevents the focus to go to the next focusable element
+        _this2.focus();
+        // clean the box
+        $number.remove();
+        _this2._hasVirtualKeyboard = false;
+        _this2._emitInput();
+        _this2._emitChange();
       });
     }
 
@@ -36368,6 +36392,11 @@ var ScNumber = /*#__PURE__*/function (_ScElement) {
       return function (e) {
         e.stopPropagation();
         if (_this3.disabled) {
+          return;
+        }
+
+        // bypass speed surface when virtual keyboard is opened
+        if (_this3._hasVirtualKeyboard) {
           return;
         }
 
@@ -36486,7 +36515,7 @@ _defineProperty(ScNumber, "properties", {
     reflect: true
   }
 });
-_defineProperty(ScNumber, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    :host {\n      vertical-align: top;\n      display: inline-block;\n      width: 100px;\n      height: 30px;\n      box-sizing: border-box;\n      font-family: var(--sc-font-family);\n      font-size: var(--sc-font-size);\n      color: #ffffff;\n      position: relative;\n    }\n\n    :host([disabled]) {\n      opacity: 0.7;\n    }\n\n    :host([hidden]) {\n      display: none\n    }\n\n    :host(:focus), :host(:focus-visible) {\n      outline: none;\n      box-shadow: 0 0 2px var(--sc-color-primary-5);\n    }\n\n    .container {\n      overflow-y: hidden;\n      position: relative;\n      box-sizing: border-box;\n      width: 100%;\n      height: 100%;\n      background-color: var(--sc-color-primary-2);\n      border: 1px solid var(--sc-color-primary-3);\n      user-select: none;\n    }\n\n    .container:focus {\n      outline: none;\n    }\n\n    .info {\n      width: 15px;\n      height: 100%;\n      display: inline-block;\n      background-color: var(--sc-color-primary-3);\n      box-sizing: border-box;\n    }\n\n    .container:focus .info {\n      outline: 2px solid var(--sc-color-secondary-2);\n    }\n\n    .info.edited {\n      background-color: var(--sc-color-primary-4);\n    }\n\n    .content {\n      display: flex;\n      flex-wrap: wrap;\n      box-sizing: border-box;\n      position: absolute;\n      top: 0;\n      left: 15px;\n      padding-left: 12px;\n      height: 100%;\n      width: calc(100% - 15px);\n    }\n\n    .z {\n      display: inline-block;\n      vertical-align: top;\n      text-align: center;\n      position: relative;\n/*      width: 7px;*/\n      height: 100%;\n      display: inline-flex;\n      align-items: center;\n    }\n\n    /* contains the integer part which can be larger than one character */\n    .z:first-child {\n      width: auto;\n      min-width: 7px;\n    }\n\n    /* full width if integer */\n    :host([integer]) .z {\n      width: 100%;\n      text-align: left;\n    }\n\n    .z sc-speed-surface {\n      position: absolute;\n      top: 0;\n      left: 0;\n      z-index: 1;\n      width: 100%;\n      height: 100%;\n    }\n\n    /*input[type=\"number\"] {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 0;\n      height: 0;\n      padding: 0;\n      border: none;\n    }\n\n    input[type=\"number\"]:focus {\n      outline: none;\n    }*/\n  "]))));
+_defineProperty(ScNumber, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    :host {\n      vertical-align: top;\n      display: inline-block;\n      width: 100px;\n      height: 30px;\n      box-sizing: border-box;\n      font-family: var(--sc-font-family);\n      font-size: var(--sc-font-size);\n      color: #ffffff;\n      position: relative;\n    }\n\n    :host([disabled]) {\n      opacity: 0.7;\n    }\n\n    :host([hidden]) {\n      display: none\n    }\n\n    :host(:focus), :host(:focus-visible) {\n      outline: none;\n      box-shadow: 0 0 2px var(--sc-color-primary-5);\n    }\n\n    .container {\n      overflow-y: hidden;\n      position: relative;\n      box-sizing: border-box;\n      width: 100%;\n      height: 100%;\n      background-color: var(--sc-color-primary-2);\n      border: 1px solid var(--sc-color-primary-3);\n      user-select: none;\n    }\n\n    .container:focus {\n      outline: none;\n    }\n\n    .info {\n      width: 15px;\n      height: 100%;\n      display: inline-block;\n      background-color: var(--sc-color-primary-3);\n      box-sizing: border-box;\n    }\n\n    .container:focus .info {\n      outline: 2px solid var(--sc-color-secondary-2);\n    }\n\n    .info.edited {\n      background-color: var(--sc-color-primary-4);\n    }\n\n    .content {\n      display: flex;\n      flex-wrap: wrap;\n      box-sizing: border-box;\n      position: absolute;\n      top: 0;\n      left: 15px;\n      padding-left: 12px;\n      height: 100%;\n      width: calc(100% - 15px);\n    }\n\n    .z {\n      display: inline-block;\n      vertical-align: top;\n      text-align: center;\n      position: relative;\n/*      width: 7px;*/\n      height: 100%;\n      display: inline-flex;\n      align-items: center;\n    }\n\n    /* contains the integer part which can be larger than one character */\n    .z:first-child {\n      width: auto;\n      min-width: 7px;\n    }\n\n    /* full width if integer */\n    :host([integer]) .z {\n      width: 100%;\n      text-align: left;\n    }\n\n    .z sc-speed-surface {\n      position: absolute;\n      top: 0;\n      left: 0;\n      z-index: 1;\n      width: 100%;\n      height: 100%;\n    }\n\n    input[type=\"number\"] {\n      position: absolute;\n      top: 1px;\n      left: 1px;\n      width: 1px;\n      height: 1px;\n      padding: 0;\n      border: none;\n      background-color: var(--sc-color-primary-3);\n    }\n\n    input[type=\"number\"]:focus {\n      outline: none;\n    }\n  "]))));
 if (customElements.get('sc-number') === undefined) {
   customElements.define('sc-number', ScNumber);
 }
@@ -36814,7 +36843,6 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 
 
-var groupId = 0;
 var itemId = 0;
 var ScSelect = /*#__PURE__*/function (_ScElement) {
   _inherits(ScSelect, _ScElement);
@@ -36826,7 +36854,6 @@ var ScSelect = /*#__PURE__*/function (_ScElement) {
     _this.options = [];
     _this.value = null;
     _this.disabled = false;
-    _this.name = "sc-select-".concat(groupId++);
     _this.placeholder = '';
     return _this;
   }
@@ -36846,12 +36873,12 @@ var ScSelect = /*#__PURE__*/function (_ScElement) {
       if (this.disabled) {
         return;
       }
-      this.value = e.target.value;
+      var index = this.placeholder ? e.target.selectedIndex - 1 : e.target.selectedIndex;
+      this.value = this.options[index];
       var changeEvent = new CustomEvent('change', {
         bubbles: true,
         composed: true,
         detail: {
-          name: this.name,
           value: this.value
         }
       });
@@ -36865,10 +36892,6 @@ _defineProperty(ScSelect, "properties", {
     type: Object
   },
   value: {
-    type: String,
-    reflect: true
-  },
-  name: {
     type: String,
     reflect: true
   },
@@ -36902,11 +36925,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
 /* harmony import */ var _ScElement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScElement.js */ "./node_modules/@ircam/sc-components/ScElement.js");
-/* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles.js */ "./node_modules/@ircam/sc-components/styles.js");
-/* harmony import */ var _utils_getScale_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/getScale.js */ "./node_modules/@ircam/sc-components/utils/getScale.js");
-/* harmony import */ var _utils_getClipper_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/getClipper.js */ "./node_modules/@ircam/sc-components/utils/getClipper.js");
-/* harmony import */ var _sc_position_surface_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./sc-position-surface.js */ "./node_modules/@ircam/sc-components/sc-position-surface.js");
-/* harmony import */ var _sc_number_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./sc-number.js */ "./node_modules/@ircam/sc-components/sc-number.js");
+/* harmony import */ var _utils_getScale_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/getScale.js */ "./node_modules/@ircam/sc-components/utils/getScale.js");
+/* harmony import */ var _utils_getClipper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/getClipper.js */ "./node_modules/@ircam/sc-components/utils/getClipper.js");
+/* harmony import */ var _sc_position_surface_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./sc-position-surface.js */ "./node_modules/@ircam/sc-components/sc-position-surface.js");
+/* harmony import */ var _sc_number_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./sc-number.js */ "./node_modules/@ircam/sc-components/sc-number.js");
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -36925,7 +36947,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-
 
 
 
@@ -37035,8 +37056,8 @@ var ScSlider = /*#__PURE__*/function (_ScElement) {
       }
 
       // define transfert functions and scales
-      this._scale = (0,_utils_getScale_js__WEBPACK_IMPORTED_MODULE_3__["default"])([this._min, this._max], [0, 1000]); // 0 1000 is the svg viewport
-      this._clipper = (0,_utils_getClipper_js__WEBPACK_IMPORTED_MODULE_4__["default"])(this._min, this._max, this._step);
+      this._scale = (0,_utils_getScale_js__WEBPACK_IMPORTED_MODULE_2__["default"])([this._min, this._max], [0, 1000]); // 0 1000 is the svg viewport
+      this._clipper = (0,_utils_getClipper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(this._min, this._max, this._step);
       // clean current value
       this.value = this._clipper(this.value);
     }
@@ -37173,7 +37194,7 @@ _defineProperty(ScSlider, "properties", {
     reflect: true
   }
 });
-_defineProperty(ScSlider, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    :host {\n      display: inline-block;\n      box-sizing: border-box;\n      width: 200px;\n      height: 30px;\n      vertical-align: top;\n\n      --sc-slider-background-color: var(--sc-color-primary-2);\n      --sc-slider-foreground-color: var(--sc-color-primary-5);\n    }\n\n    :host([disabled]) {\n      opacity: 0.7;\n    }\n\n    :host([hidden]) {\n      display: none\n    }\n\n    :host(:focus), :host(:focus-visible) {\n      outline: none;\n      box-shadow: 0 0 2px var(--sc-color-primary-5);\n    }\n\n    div {\n      box-sizing: border-box;\n      width: 100%;\n      height: 100%;\n      position: relative;\n      display: inline-block;\n      border: 1px solid var(--sc-color-primary-3);\n    }\n\n    :host([number-box][orientation=\"horizontal\"]) div {\n      width: calc(100% - 86px);\n    }\n\n    :host([number-box][orientation=\"vertical\"]) div {\n      height: calc(100% - 36px);\n    }\n\n    svg {\n      box-sizing: border-box;\n      width: 100%;\n      height: 100%;\n    }\n\n    rect.background {\n      fill: var(--sc-slider-background-color);\n    }\n\n    rect.foreground {\n      fill: var(--sc-slider-foreground-color);\n    }\n\n    sc-position-surface {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      z-index: 1;\n    }\n\n    sc-number {\n      display: inline-block;\n      width: 80px;\n    }\n\n    :host([number-box][orientation=\"vertical\"]) sc-number {\n      display: block;\n    }\n  "]))));
+_defineProperty(ScSlider, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    :host {\n      display: inline-block;\n      box-sizing: border-box;\n      width: 200px;\n      height: 30px;\n      vertical-align: top;\n      border: 1px solid var(--sc-color-primary-3);\n\n      --sc-slider-background-color: var(--sc-color-primary-2);\n      --sc-slider-foreground-color: var(--sc-color-primary-5);\n    }\n\n    :host([disabled]) {\n      opacity: 0.7;\n    }\n\n    :host([hidden]) {\n      display: none\n    }\n\n    :host(:focus), :host(:focus-visible) {\n      outline: none;\n      box-shadow: 0 0 2px var(--sc-color-primary-5);\n    }\n\n    div {\n      box-sizing: border-box;\n      width: 100%;\n      height: 100%;\n      position: relative;\n      display: inline-block;\n    }\n\n    :host([number-box][orientation=\"horizontal\"]) div {\n      width: calc(100% - 86px);\n    }\n\n    :host([number-box][orientation=\"vertical\"]) div {\n      height: calc(100% - 36px);\n    }\n\n    svg {\n      box-sizing: border-box;\n      width: 100%;\n      height: 100%;\n    }\n\n    rect.background {\n      fill: var(--sc-slider-background-color);\n    }\n\n    rect.foreground {\n      fill: var(--sc-slider-foreground-color);\n    }\n\n    sc-position-surface {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      z-index: 1;\n    }\n\n    sc-number {\n      display: inline-block;\n      width: 80px;\n    }\n\n    :host([number-box][orientation=\"vertical\"]) sc-number {\n      display: block;\n    }\n  "]))));
 if (customElements.get('sc-slider') === undefined) {
   customElements.define('sc-slider', ScSlider);
 }
@@ -37470,7 +37491,7 @@ var ScToggle = /*#__PURE__*/function (_ScElement) {
     key: "render",
     value: function render() {
       var padding = 25;
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <svg\n        class=\"", "\"\n        viewbox=\"0 0 100 100\"\n        @mousedown=\"", "\"\n        @touchstart=\"", "\"\n        @contextmenu=\"", "\"\n      >\n        <line x1=\"", "\" y1=\"", "\" x2=\"", "\" y2=\"", "\" />\n        <line x1=\"", "\" y1=\"", "\" x2=\"", "\" y2=\"", "\" />\n      </svg>\n    "])), this.active ? 'active' : '', this._updateValue, {
+      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <svg\n        class=\"", "\"\n        viewbox=\"0 0 100 100\"\n        @mousedown=\"", "\"\n        @touchend=\"", "\"\n        @contextmenu=\"", "\"\n      >\n        <line x1=\"", "\" y1=\"", "\" x2=\"", "\" y2=\"", "\" />\n        <line x1=\"", "\" y1=\"", "\" x2=\"", "\" y2=\"", "\" />\n      </svg>\n    "])), this.active ? 'active' : '', this._updateValue, {
         handleEvent: this._updateValue,
         passive: false
       }, this._preventContextMenu, padding, padding, 100 - padding, 100 - padding, padding, 100 - padding, 100 - padding, padding);
@@ -37483,6 +37504,8 @@ var ScToggle = /*#__PURE__*/function (_ScElement) {
         this.setAttribute('tabindex', 0);
       }
     }
+
+    // we use touchend on mobile as it is more stable and does not spoil the responsiveness
   }, {
     key: "_updateValue",
     value: function _updateValue(e) {
@@ -37523,7 +37546,7 @@ _defineProperty(ScToggle, "properties", {
     reflect: true
   }
 });
-_defineProperty(ScToggle, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    :host {\n      display: inline-block;\n      width: 30px;\n      height: 30px;\n      vertical-align: top;\n      box-sizing: border-box;\n      background-color: var(--sc-color-primary-2);\n      font-size: 0;\n      line-height: 0;\n    }\n\n    :host([disabled]) {\n      opacity: 0.7;\n    }\n\n    :host([hidden]) {\n      display: none\n    }\n\n    :host(:focus), :host(:focus-visible) {\n      outline: none;\n      box-shadow: 0 0 2px var(--sc-color-primary-5);\n    }\n\n    svg {\n      width: 100%;\n      height: 100%;\n      box-sizing: border-box;\n      border: 1px solid var(--sc-color-primary-3);\n    }\n\n    svg line {\n      stroke-width: 10px;\n      stroke: var(--sc-color-primary-4);\n    }\n\n    svg.active line {\n      stroke: #ffffff;\n    }\n  "]))));
+_defineProperty(ScToggle, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    :host {\n      display: inline-block;\n      width: 30px;\n      height: 30px;\n      vertical-align: top;\n      box-sizing: border-box;\n      background-color: var(--sc-color-primary-2);\n      border: 1px solid var(--sc-color-primary-3);\n      font-size: 0;\n      line-height: 0;\n    }\n\n    :host([disabled]) {\n      opacity: 0.7;\n    }\n\n    :host([hidden]) {\n      display: none\n    }\n\n    :host(:focus), :host(:focus-visible) {\n      outline: none;\n      box-shadow: 0 0 2px var(--sc-color-primary-5);\n    }\n\n    svg {\n      width: 100%;\n      height: 100%;\n      box-sizing: border-box;\n    }\n\n    svg line {\n      stroke-width: 10px;\n      stroke: var(--sc-color-primary-4);\n    }\n\n    svg.active line {\n      stroke: #ffffff;\n    }\n  "]))));
 if (customElements.get('sc-toggle') === undefined) {
   customElements.define('sc-toggle', ScToggle);
 }
@@ -37542,31 +37565,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   arrow: () => (/* binding */ arrow),
 /* harmony export */   arrowDown: () => (/* binding */ arrowDown),
-/* harmony export */   arrowRight: () => (/* binding */ arrowRight),
-/* harmony export */   fontFamily: () => (/* binding */ fontFamily),
-/* harmony export */   fontSize: () => (/* binding */ fontSize),
-/* harmony export */   theme: () => (/* binding */ theme)
+/* harmony export */   arrowRight: () => (/* binding */ arrowRight)
 /* harmony export */ });
 /* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
+var _templateObject, _templateObject2, _templateObject3;
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
 // @todo - review that... not clean
-var fontFamily = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject || (_templateObject = _taggedTemplateLiteral(["Consolas, monaco, monospace"])));
-var fontSize = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["11px"])));
-var theme = {};
-theme['--color-primary-0'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["#121212ff"])));
-theme['--color-primary-1'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["#272822ff"])));
-theme['--color-primary-2'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["#3d3e39ff"])));
-theme['--color-primary-3'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["#6a6a69ff"])));
-theme['--color-primary-4'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["#dededeff"])));
-theme['--color-secondary-1'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["#f0db4fff"])));
-theme['--color-secondary-2'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["#1c78c0ff"])));
-theme['--color-secondary-3'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["#d9534fff"])));
-theme['--color-secondary-4'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["#5ec451ff"])));
-theme['--color-secondary-5'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["#cd7afaff"])));
-theme['--color-secondary-6'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["#f4b43eff"])));
+// export const fontFamily = css`Consolas, monaco, monospace`;
+// export const fontSize = css`11px`;
+
+// export const theme = {};
+// theme['--color-primary-0'] = css`#121212ff`;
+// theme['--color-primary-1'] = css`#272822ff`;
+// theme['--color-primary-2'] = css`#3d3e39ff`;
+// theme['--color-primary-3'] = css`#6a6a69ff`;
+// theme['--color-primary-4'] = css`#dededeff`;
+// theme['--color-secondary-1'] = css`#f0db4fff`;
+// theme['--color-secondary-2'] = css`#1c78c0ff`;
+// theme['--color-secondary-3'] = css`#d9534fff`;
+// theme['--color-secondary-4'] = css`#5ec451ff`;
+// theme['--color-secondary-5'] = css`#cd7afaff`;
+// theme['--color-secondary-6'] = css`#f4b43eff`;
+
 var cssVars = "\n:root {\n  --sc-font-family: Consolas, monaco, monospace;\n  --sc-font-size: 11px;\n  --sc-color-primary-1: #121212ff;\n  --sc-color-primary-2: #272822ff;\n  --sc-color-primary-3: #3d3e39ff;\n  --sc-color-primary-4: #6a6a69ff;\n  --sc-color-primary-5: #dededeff;\n  --sc-color-secondary-1: #f4b43eff; /* orange / yellow */\n  --sc-color-secondary-2: #1c78c0ff; /* blue */\n  --sc-color-secondary-3: #d9534fff; /* red */\n  --sc-color-secondary-4: #5ec451ff; /* green */\n  --sc-color-secondary-5: #cd7afaff; /* lila */\n}\n";
 
 // adapted from https://davidwalsh.name/add-rules-stylesheets
@@ -37623,9 +37645,9 @@ $style.sheet.insertRule(cssVars);
 //   line-height: 36px;
 // `;
 
-var arrow = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAHdElNRQfkCAUKBTL+mGjUAAAAeUlEQVRIx+3OMQ6AIBBE0a93sMLEk1h4Y7Ww9mRiRUIM6jJUGob6/QXqfrCGkbbAHw0bE14+v8PAjBffwgDgWCS+4sJXlETElcSF5yYSPCdxw62JB25JvPC3hIE/JYz8LpHBU4lMfk0IPE6IPCRWepUDdHQlvO4jOwFwgu1NCrBo/wAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMC0wOC0wNVQxMDowNTo0OSswMDowMBWQx3oAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjAtMDgtMDVUMTA6MDU6NDkrMDA6MDBkzX/GAAAAIHRFWHRzb2Z0d2FyZQBodHRwczovL2ltYWdlbWFnaWNrLm9yZ7zPHZ0AAAAYdEVYdFRodW1iOjpEb2N1bWVudDo6UGFnZXMAMaf/uy8AAAAYdEVYdFRodW1iOjpJbWFnZTo6SGVpZ2h0ADUxMo+NU4EAAAAXdEVYdFRodW1iOjpJbWFnZTo6V2lkdGgANTEyHHwD3AAAABl0RVh0VGh1bWI6Ok1pbWV0eXBlAGltYWdlL3BuZz+yVk4AAAAXdEVYdFRodW1iOjpNVGltZQAxNTk2NjIxOTQ5QVn8gAAAABJ0RVh0VGh1bWI6OlNpemUAMzI2MEJCw0lk+gAAAFR0RVh0VGh1bWI6OlVSSQBmaWxlOi8vLi91cGxvYWRzLzU2L2V4dHg3bGQvMjQ1Ni9pbmRpY2F0b3JfYXJyb3dfdHJpYW5nbGVfaWNvbl8xNDkwMjAucG5n2GvxiAAAAABJRU5ErkJggg=="])));
-var arrowRight = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAA7DgAAOw4AXEryjgAAAAHdElNRQflAxQLDS8ArDZ8AAACgklEQVRo3u3ZT0gUURzA8e+sstgSlmtg9MeCIoKKIIQCu0TZIbxIBdmhKDxZhw7mQYICQRCsU1B4CA8ReJEg+nMpKQjBTT0UERHlYmQGGUWYmOt0aHm9Ic2ZN7/9LYRvbnvY+fDmz/e9XVgaRR4l837qkSbFdPFYh3nGEGdYUZzTVzCIj88Mt9lNQh9QTRY/f3yglVXFBPjM8oC9uvMQBPj4THCJ1fqAKcaYyxNyPKaOUl3AKAe5wXczD5N0sk4TkKWaJI2MmHmYI0MDSU0AwEau8dXMwzeuskkXAEkaGCRnEM85zjJNAMBauvhsCFP0sE0XACUc4qk1D685zXJNAEAV7UwYwjS97MLTBECCfTxk1iCynJWO1r8BAJW08d4QxKO1OAA89nCHmcJEKwwAoJxzvCtEtMICwGMnvfyQjlZ4AECKJl4ZQo4n8aMVDQCwlR7JaEUHQJlktFwAIBgtV4BYtNwBIBKteACBaMUFQMxoSQB+R+tRIFqNugCANG18MYQM6fmchR0/8aOfS+oS1HLfugRjnNIEVHGBj9ZN2EeN3k1YygH6rcfwDc2aj+Ea2gMvoltsj/oVcV7F9QyYJPm84KTmq3gDlwMx6mazwww6Aso4wrCV42GOauZ4C92BBckV1ruePDogxQleWkuyAer1lmQeO7hpLUo/0aG5KC2nmbfWsryf/XrL8gQ19Fkbk3Euam5MKmkJbM3uUau3Nfs7Mq2slDv5YoBYkYkLiB2ZeACByLgDhCLjChCLjAsgKRmZqIBR6rguGZmogOCP1QKRiQr4cwhFxg0gGBkXgGhkwo40mXxk7spGJvw4xhAjnNf4285b4NMKPCatfd3S+H/HLwusPWkzmFSAAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTAzLTIwVDExOjEzOjQ3KzAwOjAwRxN4GAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0wMy0yMFQxMToxMzo0NyswMDowMDZOwKQAAAAgdEVYdHNvZnR3YXJlAGh0dHBzOi8vaW1hZ2VtYWdpY2sub3JnvM8dnQAAABh0RVh0VGh1bWI6OkRvY3VtZW50OjpQYWdlcwAxp/+7LwAAABh0RVh0VGh1bWI6OkltYWdlOjpIZWlnaHQANTEyj41TgQAAABd0RVh0VGh1bWI6OkltYWdlOjpXaWR0aAA1MTIcfAPcAAAAGXRFWHRUaHVtYjo6TWltZXR5cGUAaW1hZ2UvcG5nP7JWTgAAABd0RVh0VGh1bWI6Ok1UaW1lADE2MTYyMzg4MjfA6B9qAAAAEnRFWHRUaHVtYjo6U2l6ZQA1MTU5QkJP1GlWAAAAUHRFWHRUaHVtYjo6VVJJAGZpbGU6Ly8uL3VwbG9hZHMvNTYvaEpIZnVxcC8yOTAyL2Fycm93X3JpZ2h0X3RyaWFuZ2xlX2ljb25fMTgzMTIxLnBuZ8GglZQAAAAASUVORK5CYII="])));
-var arrowDown = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAQAAAD/5HvMAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAA7DgAAOw4AXEryjgAAAAHdElNRQflAxQLDR8mdQbQAAADoklEQVRo3u2ZXUgUURiGn201VynNG7Ur0dSgH00iSFDsP0GiwCyKCougkAgMiiChrvq7EI2guijox6IfiqILIZKQKAgvKoxIyrK8MCrFzDJ12y46fjtqujszZ3a9mHdvZme/7z3vfN+Zs++cARcuXLhwMbnhGfFtKt4oaPAz8D9BsaxnE0kEIl6SHq5xi8HRP6ygm0CUPt2UDsuYIoKymRHh2gQxg+Kxgt7yPWqCemkaPoyRk03cYKc6HuIFvaMmvF4EmE6ejH6dB2MF/eYEi5kHgIernHb0jvOzhwXquIWT/P5/2FZ+qWn2hrkOyoE5vFEj/WLb+GEJXJSZfxmfY3J8XJJxLpIwUWgubSrwJzscE7SZn2qUNnJDBVfSr4JfM9sROTm0qBH6qQwdPo2bUs6zDrTNx1nhv8m0cFLyaVcJPyjTLqiMH4q9nfxwk/YzpJKaSdcqJ51mxTzEgfDTkrkvZT1lWKvsIoY64b1PspnUIjpV4jdKtAkq4Zti7aTIXKqHg/hV8lNmapEzkyeK0c9B839MKTRKeY9p+BvxcpQ/iu8xqVYolvBFEXxllW1BK/kqbKutXtMxadtDa9ckSOWhtMtGvdN4rGj+UG3DjnioNrQrzc6VraVHEXVQYJmlgA7F0sM6O3IgllqZ2g3mVg5BMg3CUUusPUGQyXNFNmjlZgX2MqAYnpNpVw5AOb2K8BMLTWcv5KPK7mWDDjkQxzkp+R0STeUmcltyzxGnRxBkioMZYLepzN3SrhZm6ZIDUCEer5W8sLNyaRX/uV2nHIg3uO0rE7tgQ84VyblEvF5BMJ93iryPLWFlbKFPZbxjvm45ALsM8yErZHSW5XkXNhK5IS04H8Jt+zgvsXdN3pkmkM97WVPKJ4wMrl0fWOSUHIAqaVszGeNGZYhzHqDKSTmQyD1pRd04btvonO85165hFIvb7gpuM41AKV3inItNsluAh0MTuu00nooVO+Tolo4ghUdi206OapuXIyL3kU2XaQJLDW57+Yhflhuc87JIyQEvx8WSNpJiqF2j1O54ZLeY0wzPWNVyNji7nmh6ljOBNXIvdVAIQKE45y7WRFoOeKkxPKcnkWTYD6iJyhsBMgxuex9VDOp1zlawUQxGlzSwj43RkgNxnBnzmuCCg5ulYSBbXM+/zytyoikHoELaFqCPimjLAR/1Iqhev3O2guFni9bQe86hoWO9+MxLfLRwmGfRrk0QMRq3Rl24cOHCxaTGX01uEpsie0MVAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTAzLTIwVDExOjEzOjMxKzAwOjAwLgZEOwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0wMy0yMFQxMToxMzozMSswMDowMF9b/IcAAAAgdEVYdHNvZnR3YXJlAGh0dHBzOi8vaW1hZ2VtYWdpY2sub3JnvM8dnQAAABh0RVh0VGh1bWI6OkRvY3VtZW50OjpQYWdlcwAxp/+7LwAAABh0RVh0VGh1bWI6OkltYWdlOjpIZWlnaHQANTEyj41TgQAAABd0RVh0VGh1bWI6OkltYWdlOjpXaWR0aAA1MTIcfAPcAAAAGXRFWHRUaHVtYjo6TWltZXR5cGUAaW1hZ2UvcG5nP7JWTgAAABd0RVh0VGh1bWI6Ok1UaW1lADE2MTYyMzg4MTECpumcAAAAEnRFWHRUaHVtYjo6U2l6ZQA4MDQ0QkJ+TqcOAAAAT3RFWHRUaHVtYjo6VVJJAGZpbGU6Ly8uL3VwbG9hZHMvNTYvaEpIZnVxcC8yOTAyL2Fycm93X2Rvd25fdHJpYW5nbGVfaWNvbl8xODMwOTUucG5n/JrixgAAAABJRU5ErkJggg=="])));
+var arrow = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject || (_templateObject = _taggedTemplateLiteral(["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAHdElNRQfkCAUKBTL+mGjUAAAAeUlEQVRIx+3OMQ6AIBBE0a93sMLEk1h4Y7Ww9mRiRUIM6jJUGob6/QXqfrCGkbbAHw0bE14+v8PAjBffwgDgWCS+4sJXlETElcSF5yYSPCdxw62JB25JvPC3hIE/JYz8LpHBU4lMfk0IPE6IPCRWepUDdHQlvO4jOwFwgu1NCrBo/wAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMC0wOC0wNVQxMDowNTo0OSswMDowMBWQx3oAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjAtMDgtMDVUMTA6MDU6NDkrMDA6MDBkzX/GAAAAIHRFWHRzb2Z0d2FyZQBodHRwczovL2ltYWdlbWFnaWNrLm9yZ7zPHZ0AAAAYdEVYdFRodW1iOjpEb2N1bWVudDo6UGFnZXMAMaf/uy8AAAAYdEVYdFRodW1iOjpJbWFnZTo6SGVpZ2h0ADUxMo+NU4EAAAAXdEVYdFRodW1iOjpJbWFnZTo6V2lkdGgANTEyHHwD3AAAABl0RVh0VGh1bWI6Ok1pbWV0eXBlAGltYWdlL3BuZz+yVk4AAAAXdEVYdFRodW1iOjpNVGltZQAxNTk2NjIxOTQ5QVn8gAAAABJ0RVh0VGh1bWI6OlNpemUAMzI2MEJCw0lk+gAAAFR0RVh0VGh1bWI6OlVSSQBmaWxlOi8vLi91cGxvYWRzLzU2L2V4dHg3bGQvMjQ1Ni9pbmRpY2F0b3JfYXJyb3dfdHJpYW5nbGVfaWNvbl8xNDkwMjAucG5n2GvxiAAAAABJRU5ErkJggg=="])));
+var arrowRight = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAA7DgAAOw4AXEryjgAAAAHdElNRQflAxQLDS8ArDZ8AAACgklEQVRo3u3ZT0gUURzA8e+sstgSlmtg9MeCIoKKIIQCu0TZIbxIBdmhKDxZhw7mQYICQRCsU1B4CA8ReJEg+nMpKQjBTT0UERHlYmQGGUWYmOt0aHm9Ic2ZN7/9LYRvbnvY+fDmz/e9XVgaRR4l837qkSbFdPFYh3nGEGdYUZzTVzCIj88Mt9lNQh9QTRY/f3yglVXFBPjM8oC9uvMQBPj4THCJ1fqAKcaYyxNyPKaOUl3AKAe5wXczD5N0sk4TkKWaJI2MmHmYI0MDSU0AwEau8dXMwzeuskkXAEkaGCRnEM85zjJNAMBauvhsCFP0sE0XACUc4qk1D685zXJNAEAV7UwYwjS97MLTBECCfTxk1iCynJWO1r8BAJW08d4QxKO1OAA89nCHmcJEKwwAoJxzvCtEtMICwGMnvfyQjlZ4AECKJl4ZQo4n8aMVDQCwlR7JaEUHQJlktFwAIBgtV4BYtNwBIBKteACBaMUFQMxoSQB+R+tRIFqNugCANG18MYQM6fmchR0/8aOfS+oS1HLfugRjnNIEVHGBj9ZN2EeN3k1YygH6rcfwDc2aj+Ea2gMvoltsj/oVcV7F9QyYJPm84KTmq3gDlwMx6mazwww6Aso4wrCV42GOauZ4C92BBckV1ruePDogxQleWkuyAer1lmQeO7hpLUo/0aG5KC2nmbfWsryf/XrL8gQ19Fkbk3Euam5MKmkJbM3uUau3Nfs7Mq2slDv5YoBYkYkLiB2ZeACByLgDhCLjChCLjAsgKRmZqIBR6rguGZmogOCP1QKRiQr4cwhFxg0gGBkXgGhkwo40mXxk7spGJvw4xhAjnNf4285b4NMKPCatfd3S+H/HLwusPWkzmFSAAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTAzLTIwVDExOjEzOjQ3KzAwOjAwRxN4GAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0wMy0yMFQxMToxMzo0NyswMDowMDZOwKQAAAAgdEVYdHNvZnR3YXJlAGh0dHBzOi8vaW1hZ2VtYWdpY2sub3JnvM8dnQAAABh0RVh0VGh1bWI6OkRvY3VtZW50OjpQYWdlcwAxp/+7LwAAABh0RVh0VGh1bWI6OkltYWdlOjpIZWlnaHQANTEyj41TgQAAABd0RVh0VGh1bWI6OkltYWdlOjpXaWR0aAA1MTIcfAPcAAAAGXRFWHRUaHVtYjo6TWltZXR5cGUAaW1hZ2UvcG5nP7JWTgAAABd0RVh0VGh1bWI6Ok1UaW1lADE2MTYyMzg4MjfA6B9qAAAAEnRFWHRUaHVtYjo6U2l6ZQA1MTU5QkJP1GlWAAAAUHRFWHRUaHVtYjo6VVJJAGZpbGU6Ly8uL3VwbG9hZHMvNTYvaEpIZnVxcC8yOTAyL2Fycm93X3JpZ2h0X3RyaWFuZ2xlX2ljb25fMTgzMTIxLnBuZ8GglZQAAAAASUVORK5CYII="])));
+var arrowDown = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["data:image/png;base64,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"])));
 
 /***/ }),
 
