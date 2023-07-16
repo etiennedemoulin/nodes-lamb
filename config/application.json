@@ -9,5 +9,8 @@
     controller: {
       target: 'browser',
     },
+    'node-player': {
+      target: 'node',
+    },
   },
 }
