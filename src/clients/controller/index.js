@@ -31,7 +31,7 @@ async function main($container) {
 
   const $layout = createLayout(client, $container);
 
-  const globals = await client.stateManager.attach('globals');
+  // const globals = await client.stateManager.attach('globals');
   const players = await client.stateManager.getCollection('player');
 
   // placeholder of the remote controlled player state instance

@@ -46356,7 +46356,7 @@ function main(_x) {
 }
 function _main() {
   _main = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee($container) {
-    var client, $layout, globals, players, remoteControlledPlayer;
+    var client, $layout, players, remoteControlledPlayer;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -46368,14 +46368,10 @@ function _main() {
           _context.next = 4;
           return client.start();
         case 4:
-          $layout = (0,_layout_js__WEBPACK_IMPORTED_MODULE_3__["default"])(client, $container);
+          $layout = (0,_layout_js__WEBPACK_IMPORTED_MODULE_3__["default"])(client, $container); // const globals = await client.stateManager.attach('globals');
           _context.next = 7;
-          return client.stateManager.attach('globals');
-        case 7:
-          globals = _context.sent;
-          _context.next = 10;
           return client.stateManager.getCollection('player');
-        case 10:
+        case 7:
           players = _context.sent;
           // placeholder of the remote controlled player state instance
           remoteControlledPlayer = null; // collection
@@ -46408,7 +46404,7 @@ function _main() {
           // setTimeout(() => {
           //   console.log($layout.querySelector('h1'));
           // }, 100);
-        case 15:
+        case 12:
         case "end":
           return _context.stop();
       }
