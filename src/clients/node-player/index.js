@@ -15,7 +15,7 @@ import Engine from '../components/engine.js';
 // - Wizard & Tools:        `npx soundworks`
 
 async function bootstrap() {
-  const config = loadConfig(process.env.ENV, import.meta.url);
+  const config = loadConfig('remote', import.meta.url);
   const client = new Client(config);
 
   launcher.register(client);
