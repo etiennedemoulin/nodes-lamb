@@ -2,9 +2,8 @@ name: ci
 
 on:
   push:
-    branches: [ "main" ]
     # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+    tags: [ 'latest' ]
 
 
 env:
