@@ -1,6 +1,6 @@
 {
-  name: 'nodes-lamb',
-  author: '',
+  name: 'Nodes, various',
+  author: 'Catherine Lamb',
   clients: {
     'web-player': {
       target: 'browser',

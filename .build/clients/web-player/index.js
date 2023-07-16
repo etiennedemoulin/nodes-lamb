@@ -42,7 +42,10 @@ async function main($container) {
   /**
    * Launch application
    */
+  // console.log(`> before start - audioContext is "${audioContext.state}"`);
   await client.start();
+  // console.log(`> after start - audioContext is "${audioContext.state}"`);
+
   const $layout = createLayout(client, $container);
 
   // const globals = await client.stateManager.attach('globals');

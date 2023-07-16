@@ -34948,7 +34948,12 @@ var SwPlayer = /*#__PURE__*/function (_LitElement) {
       'trailing': true
     });
     var updateFilterSlider = lodash_throttle_js__WEBPACK_IMPORTED_MODULE_2__(function (filterSlider) {
+      var sawFreq = this.player.get('sawFreq');
+      var filterFreq = Math.floor(Math.max(filterSlider * sawFreq * 7, 10));
+      var numHarm = Math.floor(filterFreq / sawFreq);
       this.player.set({
+        filterFreq: filterFreq,
+        numHarm: numHarm,
         filterSlider: filterSlider
       }, {
         source: 'web'
@@ -34982,13 +34987,13 @@ var SwPlayer = /*#__PURE__*/function (_LitElement) {
     value: function render() {
       var _this3 = this;
       // create controls for the player state
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <header>\n        <p>", "</p>\n        <sc-select\n          value=\"", "\"\n          .options=", "\n          @change=", "\n        ></sc-select>\n      </header>\n      <div>\n        <div class=\"filter\">\n          <sc-number\n            .value=\"", "\"\n          ></sc-number>\n          <sc-number\n            .value=\"", "\"\n          ></sc-number>\n          <sc-slider\n            relative\n            orientation=\"vertical\"\n            min=\"", "\"\n            max=\"", "\"\n            value=", "\n            @input=", "\n          ></sc-slider>\n          <p>Volume</p>\n        </div>\n        <div class=\"volume\">\n          <sc-slider\n            relative\n            orientation=\"vertical\"\n            min=\"", "\"\n            max=\"", "\"\n            value=", "\n            @input=", "\n          ></sc-slider>\n          <p>Filter</p>\n        </div>\n      </div>\n    "])), this.player.get('id'), this.player.get('sawFreq'), this.player.get('selectFreq'), function (e) {
+      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <header>\n        <div>\n          <p>", "</p>\n          <p>", "Hz|", "'</p>\n        </div>\n        <sc-select\n          value=\"", "\"\n          .options=", "\n          @change=", "\n        ></sc-select>\n      </header>\n      <div>\n        <div class=\"filter\">\n          <sc-slider\n            relative\n            orientation=\"vertical\"\n            min=\"", "\"\n            max=\"", "\"\n            value=", "\n            @input=", "\n          ></sc-slider>\n          <p>Volume</p>\n        </div>\n        <div class=\"volume\">\n          <sc-slider\n            relative\n            orientation=\"vertical\"\n            min=\"", "\"\n            max=\"", "\"\n            value=", "\n            @input=", "\n          ></sc-slider>\n          <p>Filter</p>\n        </div>\n      </div>\n    "])), this.player.get('id'), this.player.get('filterFreq'), this.player.get('numHarm'), this.player.get('sawFreq'), this.player.get('selectFreq'), function (e) {
         return _this3.player.set({
           sawFreq: Number(e.target.value)
         }, {
           source: 'web'
         });
-      }, this.player.get('filterFreq'), this.player.get('numHarm'), this.player.getSchema().volume.min, this.player.getSchema().volume.max, this.player.get('volume'), function (e) {
+      }, this.player.getSchema().volume.min, this.player.getSchema().volume.max, this.player.get('volume'), function (e) {
         return _this3.updateVolume(e.target.value);
       }, this.player.getSchema().filterSlider.min, this.player.getSchema().filterSlider.max, this.player.get('filterSlider'), function (e) {
         return _this3.updateFilterSlider(e.target.value);
@@ -34997,7 +35002,7 @@ var SwPlayer = /*#__PURE__*/function (_LitElement) {
   }]);
   return SwPlayer;
 }(lit__WEBPACK_IMPORTED_MODULE_0__.LitElement); // register the component into the custom elements registry
-_defineProperty(SwPlayer, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    :host {\n      display: block;\n      min-height: calc(100vh - 70px);\n    }\n\n    header {\n      display: block;\n      height: 70px;\n      line-height: 70px;\n      background-color: var(--sw-medium-background-color);\n      display: flex;\n      flex-direction: row;\n      justify-content: space-between;\n      align-items: stretch;\n      border-bottom: 1px solid var(--sw-lighter-background-color);\n    }\n\n    p {\n      font-size: 30px;\n      margin: 15px;\n      height: 30px;\n      line-height: 30px;\n      text-indent: 8px;\n      background-color: #454545;\n    }\n\n    sc-select {\n      font-size: 30px;\n      height: 70px;\n      background-color: #454545;\n    }\n\n    :host > div {\n      display: flex;\n      background-color: #121212;\n      justify-content: space-between;\n      flex-direction: row;\n      min-height: calc(100vh - 70px);\n    }\n\n    sc-text {\n      font-size: 30px;\n      margin-top: 10px;\n      width: 100%;\n    }\n\n    sc-number {\n      margin-top: 10px;\n      font-size: 30px;\n      width: 100%;\n      height: 60px;\n    }\n\n    sc-slider {\n      margin-top: 10px;\n      width: 100%;\n    }\n\n    .filter {\n      width: 49%;\n    }\n\n    .filter > sc-slider {\n      height: calc(100vh - 300px);\n    }\n\n    .volume > sc-slider {\n      height: calc(100vh - 160px);\n    }\n\n    .volume {\n      width: 49%;\n    }\n\n  "]))));
+_defineProperty(SwPlayer, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    :host {\n      display: block;\n      min-height: calc(100vh - 70px);\n    }\n\n    header {\n      display: block;\n      height: 70px;\n      line-height: 70px;\n      background-color: var(--sw-medium-background-color);\n      display: flex;\n      flex-direction: row;\n      justify-content: space-between;\n      align-items: stretch;\n      border-bottom: 1px solid var(--sw-lighter-background-color);\n    }\n\n    p {\n      font-size: 30px;\n      margin: 4px;\n      height: 30px;\n      line-height: 30px;\n      text-indent: 0px;\n      background-color: #454545;\n    }\n\n    .filter > p {\n      margin: 15px;\n      line-height: 30px;\n      text-indent: 8px;\n    }\n\n    .volume > p {\n      margin: 15px;\n      line-height: 30px;\n      text-indent: 8px;\n    }\n\n    sc-select {\n      font-size: 30px;\n      height: 62px;\n      margin: 4px;\n      width: 120px;\n      background-color: #454545;\n    }\n\n    :host > div {\n      display: flex;\n      background-color: #121212;\n      justify-content: space-between;\n      flex-direction: row;\n      min-height: calc(100vh - 70px);\n    }\n\n    sc-text {\n      font-size: 30px;\n      margin-top: 10px;\n      width: 100%;\n    }\n\n    sc-number {\n      margin-top: 10px;\n      font-size: 30px;\n      width: 100%;\n      height: 60px;\n    }\n\n    sc-slider {\n      margin-top: 10px;\n      width: 100%;\n      height: calc(100vh - 160px);\n    }\n\n    .filter {\n      width: 49%;\n    }\n\n    .volume {\n      width: 49%;\n    }\n\n  "]))));
 customElements.define('sw-player', SwPlayer);
 
 /***/ }),

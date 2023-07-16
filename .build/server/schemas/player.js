@@ -28,7 +28,7 @@ export const playerSchema = {
     type: 'float',
     default: 1,
     min: 0,
-    max: 0.5
+    max: 0.251189
   },
   selectFreq: {
     type: 'any',

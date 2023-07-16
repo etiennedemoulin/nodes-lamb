@@ -29,16 +29,30 @@ class SwPlayer extends LitElement {
 
     p {
       font-size: 30px;
-      margin: 15px;
+      margin: 4px;
       height: 30px;
       line-height: 30px;
-      text-indent: 8px;
+      text-indent: 0px;
       background-color: #454545;
+    }
+
+    .filter > p {
+      margin: 15px;
+      line-height: 30px;
+      text-indent: 8px;
+    }
+
+    .volume > p {
+      margin: 15px;
+      line-height: 30px;
+      text-indent: 8px;
     }
 
     sc-select {
       font-size: 30px;
-      height: 70px;
+      height: 62px;
+      margin: 4px;
+      width: 120px;
       background-color: #454545;
     }
 
@@ -66,18 +80,11 @@ class SwPlayer extends LitElement {
     sc-slider {
       margin-top: 10px;
       width: 100%;
+      height: calc(100vh - 160px);
     }
 
     .filter {
       width: 49%;
-    }
-
-    .filter > sc-slider {
-      height: calc(100vh - 300px);
-    }
-
-    .volume > sc-slider {
-      height: calc(100vh - 160px);
     }
 
     .volume {
@@ -102,7 +109,12 @@ class SwPlayer extends LitElement {
       'trailing': true
     });
     const updateFilterSlider = throttle(function (filterSlider) {
+      const sawFreq = this.player.get('sawFreq');
+      const filterFreq = Math.floor(Math.max(filterSlider * sawFreq * 7, 10));
+      const numHarm = Math.floor(filterFreq / sawFreq);
       this.player.set({
+        filterFreq: filterFreq,
+        numHarm: numHarm,
         filterSlider: filterSlider
       }, {
         source: 'web'
@@ -127,7 +139,10 @@ class SwPlayer extends LitElement {
     // create controls for the player state
     return html`
       <header>
-        <p>${this.player.get('id')}</p>
+        <div>
+          <p>${this.player.get('id')}</p>
+          <p>${this.player.get('filterFreq')}Hz|${this.player.get('numHarm')}'</p>
+        </div>
         <sc-select
           value="${this.player.get('sawFreq')}"
           .options=${this.player.get('selectFreq')}
@@ -140,12 +155,6 @@ class SwPlayer extends LitElement {
       </header>
       <div>
         <div class="filter">
-          <sc-number
-            .value="${this.player.get('filterFreq')}"
-          ></sc-number>
-          <sc-number
-            .value="${this.player.get('numHarm')}"
-          ></sc-number>
           <sc-slider
             relative
             orientation="vertical"
