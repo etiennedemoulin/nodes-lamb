@@ -6,6 +6,10 @@ Thanks for using soundworks!
 
 If you are developping an appliction using `soundworks`, let us know by filling a comment there [https://github.com/collective-soundworks/soundworks/discussions/61](https://github.com/collective-soundworks/soundworks/discussions/61)
 
+## TODO
+- remove node-player client build for docker image  
+- [reduce docker image size](https://medium.com/trendyol-tech/how-we-reduce-node-docker-image-size-in-3-steps-ff2762b51d5a)  
+
 ## Links
 
 - [General Documentation / Tutorials](https://soundworks.dev/)

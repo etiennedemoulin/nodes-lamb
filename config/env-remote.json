@@ -1,5 +1,5 @@
 {
-  type: 'development',
+  type: 'production',
   port: 443,
   subpath: '',
   serverAddress: 'lamb.demoul.in',
