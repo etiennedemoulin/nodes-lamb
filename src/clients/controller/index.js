@@ -7,8 +7,8 @@ import createLayout from './layout.js';
 
 import { html, nothing } from 'lit';
 import { keyed } from 'lit/directives/keyed.js';
-import '@ircam/simple-components/sc-button.js';
 import '../components/sw-player.js';
+import '@ircam/sc-components/sc-button.js';
 
 // import { html } from 'lit';
 
@@ -53,6 +53,7 @@ async function main($container) {
           `;
         })}
         <h2>Remote controlled player</h2>
+        <div style="width:260px; height:420px;">
         ${remoteControlledPlayer !== null
           ? keyed(
               remoteControlledPlayer.get('id'),
@@ -60,7 +61,7 @@ async function main($container) {
             )
           : nothing
         }
-      `;
+      </div>`;
     }
   });
 

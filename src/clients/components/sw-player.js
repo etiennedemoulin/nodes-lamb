@@ -4,16 +4,16 @@ import { live } from 'lit/directives/live.js';
 import throttle from 'lodash/throttle.js'
 
 // import needed GUI components
-import '@ircam/simple-components/sc-text.js';
-import '@ircam/simple-components/sc-slider.js';
-import '@ircam/simple-components/sc-toggle.js';
-import '@ircam/simple-components/sc-bang.js';
+import '@ircam/sc-components/sc-slider.js';
+import '@ircam/sc-components/sc-select.js';
 
 class SwPlayer extends LitElement {
   static styles = css`
     :host {
       display: block;
-      min-height: calc(100vh - 70px);
+      // min-height: calc(100vh - 70px);
+      width: inherit;
+      height: inherit;
     }
 
     header {
@@ -62,7 +62,8 @@ class SwPlayer extends LitElement {
       background-color: #121212;
       justify-content: space-between;
       flex-direction: row;
-      min-height: calc(100vh - 70px);
+      height: calc(100% - 71px);
+      // height: inherit;
     }
 
     sc-text {
@@ -81,15 +82,17 @@ class SwPlayer extends LitElement {
     sc-slider {
       margin-top: 10px;
       width: 100%;
-      height: calc(100vh - 160px);
+      height: 100%;
     }
 
     .filter {
       width: 49%;
+      height: inherit;
     }
 
     .volume {
       width: 49%;
+      height: inherit;
     }
 
   `;

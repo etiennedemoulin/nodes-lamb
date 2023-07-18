@@ -4,10 +4,6 @@ import launcher from '@soundworks/helpers/launcher.js';
 import pluginPlatformInit from '@soundworks/plugin-platform-init/client.js';
 import { html } from 'lit';
 import createLayout from './layout.js';
-import '@ircam/sc-components/sc-slider.js';
-import '@ircam/sc-components/sc-number.js';
-import '@ircam/sc-components/sc-toggle.js';
-import '@ircam/sc-components/sc-select.js';
 import '../components/sw-player.js';
 import Engine from '../components/engine.js';
 

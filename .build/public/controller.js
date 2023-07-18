@@ -1,1905 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/@ircam/simple-components/ScElement.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@ircam/simple-components/ScElement.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-/*
-all element should extend this class to handle global things such as
-userSelect, ids, etc.
-*/
-
-
-// extending lit-element examples :
-// https://github.com/Polymer/lit-element/issues/450
-
-var id = 0;
-var userSelectNoneOnBodyRegister = new Set();
-var ScElement = /*#__PURE__*/function (_LitElement) {
-  _inherits(ScElement, _LitElement);
-  var _super = _createSuper(ScElement);
-  function ScElement() {
-    var _this;
-    _classCallCheck(this, ScElement);
-    _this = _super.call(this);
-    _this._scId = "".concat(_this.constructor.name.toLowerCase(), "-").concat(id++);
-    return _this;
-  }
-  _createClass(ScElement, [{
-    key: "_preventContextMenu",
-    value: function _preventContextMenu(e) {
-      e.preventDefault();
-    }
-  }, {
-    key: "_requestUserSelectNoneOnBody",
-    value: function _requestUserSelectNoneOnBody() {
-      if (userSelectNoneOnBodyRegister.size === 0) {
-        document.body.style.userSelect = 'none';
-      }
-      userSelectNoneOnBodyRegister.add(this._scId);
-    }
-  }, {
-    key: "_cancelUserSelectNoneOnBody",
-    value: function _cancelUserSelectNoneOnBody() {
-      userSelectNoneOnBodyRegister["delete"](this._scId);
-      if (userSelectNoneOnBodyRegister.size === 0) {
-        document.body.style.userSelect = 'auto';
-      }
-    }
-  }]);
-  return ScElement;
-}(lit__WEBPACK_IMPORTED_MODULE_0__.LitElement);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScElement);
-
-/***/ }),
-
-/***/ "./node_modules/@ircam/simple-components/sc-bang.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/@ircam/simple-components/sc-bang.js ***!
-  \**********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
-/* harmony import */ var _ScElement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScElement.js */ "./node_modules/@ircam/simple-components/ScElement.js");
-/* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles.js */ "./node_modules/@ircam/simple-components/styles.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-var _templateObject, _templateObject2, _templateObject3;
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-var ScBang = /*#__PURE__*/function (_ScElement) {
-  _inherits(ScBang, _ScElement);
-  var _super = _createSuper(ScBang);
-  function ScBang() {
-    var _this;
-    _classCallCheck(this, ScBang);
-    _this = _super.call(this);
-    _this.width = 30;
-    _this.height = 30;
-    _this._active = false;
-    _this._timeoutId = null;
-    return _this;
-  }
-  _createClass(ScBang, [{
-    key: "width",
-    get: function get() {
-      return this._size;
-    },
-    set: function set(value) {
-      this._size = value;
-      this.requestUpdate();
-    }
-  }, {
-    key: "height",
-    get: function get() {
-      return this._size;
-    },
-    set: function set(value) {
-      this._size = value;
-      this.requestUpdate();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-      var size = this._size - 2;
-      if (this.active) {
-        clearTimeout(this._timeoutId);
-        setTimeout(function () {
-          _this2.active = false;
-        }, 50);
-      }
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <svg\n        style=\"\n          width: ", "px;\n          height: ", "px;\n        \"\n        viewbox=\"0 0 100 100\"\n        @mousedown=\"", "\"\n        @touchstart=\"", "\"\n        @contextmenu=\"", "\"\n      >\n        <circle\n          cx=\"50\"\n          cy=\"50\"\n          r=\"34\"\n          stroke-width=\"8\"\n          stroke=\"", "\"\n          fill=\"", "\"\n        ></circle>\n        ", "\n      </svg>\n    "])), this._size, this._size, this._triggerEvent, this._triggerEvent, this._preventContextMenu, _styles_js__WEBPACK_IMPORTED_MODULE_2__.theme['--color-primary-3'], _styles_js__WEBPACK_IMPORTED_MODULE_2__.theme['--color-primary-1'], this.active ? (0,lit__WEBPACK_IMPORTED_MODULE_0__.svg)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n            <circle\n              cx=\"50\"\n              cy=\"50\"\n              r=\"20\"\n              fill=\"", "\"\n            ></circle>\n          "])), _styles_js__WEBPACK_IMPORTED_MODULE_2__.theme['--color-primary-4']) : lit__WEBPACK_IMPORTED_MODULE_0__.nothing);
-    }
-  }, {
-    key: "_triggerEvent",
-    value: function _triggerEvent(e) {
-      e.preventDefault();
-      var inputEvent = new CustomEvent('input', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: true
-        }
-      });
-      this.active = true;
-      this.dispatchEvent(inputEvent);
-    }
-  }], [{
-    key: "properties",
-    get: function get() {
-      return {
-        width: {
-          type: Number
-        },
-        height: {
-          type: Number
-        },
-        active: {
-          type: Boolean,
-          reflect: true
-        }
-      };
-    }
-  }, {
-    key: "styles",
-    get: function get() {
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      :host {\n        vertical-align: top;\n        display: inline-block;\n        box-sizing: border-box;\n        background-color: ", ";\n        font-size: 0 !important;\n      }\n\n      svg {\n        box-sizing: border-box;\n        border: 1px solid ", ";\n      }\n    "])), _styles_js__WEBPACK_IMPORTED_MODULE_2__.theme['--color-primary-1'], _styles_js__WEBPACK_IMPORTED_MODULE_2__.theme['--color-primary-2']);
-    }
-  }]);
-  return ScBang;
-}(_ScElement_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
-if (customElements.get('sc-bang') === undefined) {
-  customElements.define('sc-bang', ScBang);
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScBang);
-
-/***/ }),
-
-/***/ "./node_modules/@ircam/simple-components/sc-button.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@ircam/simple-components/sc-button.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
-/* harmony import */ var _ScElement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScElement.js */ "./node_modules/@ircam/simple-components/ScElement.js");
-/* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles.js */ "./node_modules/@ircam/simple-components/styles.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-var _templateObject, _templateObject2;
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-var ScButton = /*#__PURE__*/function (_ScElement) {
-  _inherits(ScButton, _ScElement);
-  var _super = _createSuper(ScButton);
-  function ScButton() {
-    var _this;
-    _classCallCheck(this, ScButton);
-    _this = _super.call(this);
-    _this.width = 200;
-    _this.height = 30;
-    _this.text = '';
-    _this.value = null;
-    _this.selected = false;
-    _this._pressed = false;
-    _this.onEvent = _this.onEvent.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  /**
-   * @todo - add `down` and `up` events
-   */
-  _createClass(ScButton, [{
-    key: "midiValue",
-    set: function set(value) {
-      var eventName;
-      if (value === 0) {
-        eventName = 'release';
-      } else {
-        eventName = 'press';
-      }
-
-      // we don't want to trigger a release if no pressed has been recorded
-      if (eventName === 'release' && this._pressed === false) {
-        return;
-      }
-      this._pressed = eventName === 'press';
-      var event = new CustomEvent(eventName, {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: this.value
-        }
-      });
-      this.dispatchEvent(event);
-      if (eventName === 'press') {
-        var inputEvent = new CustomEvent('input', {
-          bubbles: true,
-          composed: true,
-          detail: {
-            value: this.value
-          }
-        });
-        this.dispatchEvent(inputEvent);
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var text = this.text ? this.text : this.value;
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <button\n        style=\"\n          width: ", "px;\n          height: ", "px;\n          line-height: ", "px;\n        \"\n        class=\"", "\"\n        @mousedown=\"", "\"\n        @mouseup=\"", "\"\n\n        @touchstart=\"", "\"\n        @touchend=\"", "\"\n        @contextmenu=\"", "\"\n      >", "</button>\n    "])), this.width, this.height, this.height, this.selected ? 'selected' : '', this.onEvent, this.onEvent, {
-        handleEvent: this.onEvent,
-        passive: false
-      }, this.onEvent, this._preventContextMenu, text);
-    }
-  }, {
-    key: "onEvent",
-    value: function onEvent(e) {
-      e.preventDefault();
-      var eventName;
-      if (e.type === 'touchend' || e.type === 'mouseup') {
-        eventName = 'release';
-      } else {
-        eventName = 'press';
-      }
-
-      // we don't want to trigger a release if no pressed has been recorded
-      if (eventName === 'release' && this._pressed === false) {
-        return;
-      }
-      this._pressed = eventName === 'press';
-      var event = new CustomEvent(eventName, {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: this.value
-        }
-      });
-      this.dispatchEvent(event);
-      if (eventName === 'press') {
-        var inputEvent = new CustomEvent('input', {
-          bubbles: true,
-          composed: true,
-          detail: {
-            value: this.value
-          }
-        });
-        this.dispatchEvent(inputEvent);
-      }
-    }
-  }], [{
-    key: "properties",
-    get: function get() {
-      return {
-        width: {
-          type: Number
-        },
-        height: {
-          type: Number
-        },
-        text: {
-          type: String
-        },
-        value: {
-          type: String
-        },
-        midiValue: {
-          type: Number
-        },
-        selected: {
-          type: Boolean
-        }
-      };
-    }
-  }, {
-    key: "styles",
-    get: function get() {
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      :host {\n        vertical-align: top;\n        display: inline-block;\n        box-sizing: border-box;\n        overflow: hidden;\n      }\n\n      button {\n        box-sizing: border-box;\n        font-family: ", ";\n        font-size: ", ";\n        color: #ffffff;\n        background-color: ", ";\n        border: 1px solid ", ";\n        border-radius:  1px;\n        font-size: 13px;\n        padding: 0;\n        cursor: pointer;\n      }\n\n      button:hover {\n        background-color: ", ";\n      }\n\n      // does not work in Firefox because of e.preventDefault();\n      button:active {\n        background-color: ", ";\n      }\n\n      button.selected {\n        background-color: ", ";\n        border: 1px solid ", ";\n      }\n    "])), _styles_js__WEBPACK_IMPORTED_MODULE_2__.fontFamily, _styles_js__WEBPACK_IMPORTED_MODULE_2__.fontSize, _styles_js__WEBPACK_IMPORTED_MODULE_2__.theme['--color-primary-1'], _styles_js__WEBPACK_IMPORTED_MODULE_2__.theme['--color-primary-2'], _styles_js__WEBPACK_IMPORTED_MODULE_2__.theme['--color-primary-2'], _styles_js__WEBPACK_IMPORTED_MODULE_2__.theme['--color-primary-3'], _styles_js__WEBPACK_IMPORTED_MODULE_2__.theme['--color-secondary-3'], _styles_js__WEBPACK_IMPORTED_MODULE_2__.theme['--color-secondary-3']);
-    }
-  }]);
-  return ScButton;
-}(_ScElement_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
-if (customElements.get('sc-button') === undefined) {
-  customElements.define('sc-button', ScButton);
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScButton);
-
-/***/ }),
-
-/***/ "./node_modules/@ircam/simple-components/sc-number.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@ircam/simple-components/sc-number.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
-/* harmony import */ var lit_directives_class_map_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lit/directives/class-map.js */ "./node_modules/lit/directives/class-map.js");
-/* harmony import */ var number_precision__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! number-precision */ "./node_modules/number-precision/build/index.es.js");
-/* harmony import */ var _ScElement_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ScElement.js */ "./node_modules/@ircam/simple-components/ScElement.js");
-/* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styles.js */ "./node_modules/@ircam/simple-components/styles.js");
-/* harmony import */ var _sc_speed_surface_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./sc-speed-surface.js */ "./node_modules/@ircam/simple-components/sc-speed-surface.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-var _templateObject, _templateObject2, _templateObject3;
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-
-
-var ScNumber = /*#__PURE__*/function (_ScElement) {
-  _inherits(ScNumber, _ScElement);
-  var _super = _createSuper(ScNumber);
-  function ScNumber() {
-    var _this;
-    _classCallCheck(this, ScNumber);
-    _this = _super.call(this);
-    _this.width = 100;
-    _this.height = 30;
-    _this.integer = false;
-    _this._min = -Infinity;
-    _this._max = +Infinity;
-    _this._value = 0;
-    _this._displayValue = '0';
-
-    // init through setters
-    // this.min = -Infinity;
-    // this.max = +Infinity;
-    // this.value = 0;
-
-    _this._valueChanged = false;
-    _this._updateValue1 = _this.updateValueFromPointer(1);
-    _this._updateValue01 = _this.updateValueFromPointer(0.1);
-    _this._updateValue001 = _this.updateValueFromPointer(0.01);
-    _this._updateValue0001 = _this.updateValueFromPointer(0.001);
-    _this._updateValue00001 = _this.updateValueFromPointer(0.0001);
-    _this._updateValue000001 = _this.updateValueFromPointer(0.00001);
-    _this._updateValue0000001 = _this.updateValueFromPointer(0.000001);
-    _this._numKeyPressed = 0;
-    _this.onKeyDown = _this.onKeyDown.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  /**
-   * @note: do not remove spaces between <span> to avoid white space
-   * https://stackoverflow.com/questions/5078239/how-do-i-remove-the-space-between-inline-inline-block-elements
-   */
-  _createClass(ScNumber, [{
-    key: "min",
-    get: function get() {
-      return this._min;
-    },
-    set: function set(value) {
-      this._min = Math.min(value, this._max);
-      if (this._value < this._min) {
-        this.value = this._min;
-        this._emitChange();
-      }
-    }
-  }, {
-    key: "max",
-    get: function get() {
-      return this._max;
-    },
-    set: function set(value) {
-      this._max = Math.max(value, this._min);
-      if (this._value > this._max) {
-        this.value = this._max;
-        this._emitChange();
-      }
-    }
-  }, {
-    key: "value",
-    get: function get() {
-      return this._value;
-    },
-    set: function set(val) {
-      val = Math.min(this._max, Math.max(this._min, val));
-      if (val !== this._value) {
-        this._value = val;
-        this._displayValue = val.toString();
-        this.requestUpdate();
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var parts = this._displayValue.split('.');
-      if (!parts[1]) {
-        parts[1] = [];
-      }
-      var emptySpace = ' ';
-      var characterWidth = 7; // in pixels
-
-      var isEdited = {
-        edited: this._numKeyPressed !== 0
-      };
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <div\n        tabindex=\"-1\"\n        class=\"container\"\n        style=\"\n          width: ", "px;\n          height: ", "px;\n        \"\n        @focus=\"", "\"\n        @blur=\"", "\"\n        @touchstart=\"", "\"\n        @contextmenu=\"", "\"\n      >\n        <div\n          class=\"info ", "\"\n          style=\"height: ", "px;\"\n        ></div>\n\n        <div\n          class=\"content\"\n          style=\"height: ", "px;\"\n        >\n\n          <span class=\"z\"\n            style=\"\n              height: ", "px;\n              line-height: ", "px;\n              width: ", "px;\n            \"\n          >\n            ", "\n            <sc-speed-surface\n              width=\"", "\"\n              height=\"", "\"\n              @input=\"", "\"\n            ></sc-speed-surface>\n          </span>\n          ", "\n        </div>\n      </div>\n    "])), this.width, this.height, this.onFocus, this.onBlur, this.triggerFocus, this._preventContextMenu, (0,lit_directives_class_map_js__WEBPACK_IMPORTED_MODULE_1__.classMap)(isEdited), this.height, this.height, this.height, this.height, characterWidth * parts[0].length, parts[0], characterWidth * Math.max(parts[0].length, 2), this.height, this._updateValue1, !this.integer ? (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n              <span class=\"z\" style=\"height: ", "px; line-height: ", "px\">\n                .\n              </span>\n              <span class=\"z\"\n                style=\"\n                  height: ", "px;\n                  line-height: ", "px;\n                  width: ", "px;\n                \"\n              >\n                ", "\n                <sc-speed-surface\n                  width=\"", "\"\n                  height=\"", "\"\n                  @input=\"", "\"\n                ></sc-speed-surface>\n              </span>\n              <span class=\"z\"\n                style=\"\n                  height: ", "px;\n                  line-height: ", "px;\n                  width: ", "px;\n                \"\n              >\n                ", "\n                <sc-speed-surface\n                  width=\"", "\"\n                  height=\"", "\"\n                  @input=\"", "\"\n                ></sc-speed-surface>\n              </span>\n              <span class=\"z\"\n                style=\"\n                  height: ", "px;\n                  line-height: ", "px;\n                  width: ", "px;\n                \"\n              >\n                ", "\n                <sc-speed-surface\n                  width=\"", "\"\n                  height=\"", "\"\n                  @input=\"", "\"\n                ></sc-speed-surface>\n              </span>\n              <span class=\"z\"\n                style=\"\n                  height: ", "px;\n                  line-height: ", "px;\n                  width: ", "px;\n                \"\n              >\n                ", "\n                <sc-speed-surface\n                  width=\"", "\"\n                  height=\"", "\"\n                  @input=\"", "\"\n                ></sc-speed-surface>\n              </span>\n              <span class=\"z\"\n                style=\"\n                  height: ", "px;\n                  line-height: ", "px;\n                  width: ", "px;\n                \"\n              >\n                ", "\n                <sc-speed-surface\n                  width=\"", "\"\n                  height=\"", "\"\n                  @input=\"", "\"\n                ></sc-speed-surface>\n              </span>\n              <span class=\"z\"\n                style=\"\n                  height: ", "px;\n                  line-height: ", "px;\n                  width: ", "px;\n                \"\n              >\n                ", "\n                <sc-speed-surface\n                  width=\"", "\"\n                  height=\"", "\"\n                  @input=\"", "\"\n                ></sc-speed-surface>\n              </span>"])), this.height, this.height, this.height, this.height, characterWidth, parts[1][0] || emptySpace, characterWidth, this.height, this._updateValue01, this.height, this.height, characterWidth, parts[1][1] || emptySpace, characterWidth, this.height, this._updateValue001, this.height, this.height, characterWidth, parts[1][2] || emptySpace, characterWidth, this.height, this._updateValue0001, this.height, this.height, characterWidth, parts[1][3] || emptySpace, characterWidth, this.height, this._updateValue00001, this.height, this.height, characterWidth, parts[1][4] || emptySpace, characterWidth, this.height, this._updateValue000001, this.height, this.height, characterWidth, parts[1][5] || emptySpace, characterWidth, this.height, this._updateValue0000001) : lit__WEBPACK_IMPORTED_MODULE_0__.nothing);
-    }
-
-    // force focus for touchstart (is prevented by speed-surfaces...)
-  }, {
-    key: "triggerFocus",
-    value: function triggerFocus() {
-      var $container = this.shadowRoot.querySelector('.container');
-      $container.focus();
-    }
-
-    // keyboard interactions
-  }, {
-    key: "onFocus",
-    value: function onFocus() {
-      this._numKeyPressed = 0;
-      window.addEventListener('keydown', this.onKeyDown);
-    }
-  }, {
-    key: "onBlur",
-    value: function onBlur() {
-      this.updateValueFromDisplayValue();
-      window.removeEventListener('keydown', this.onKeyDown);
-    }
-  }, {
-    key: "onKeyDown",
-    value: function onKeyDown(e) {
-      var validSymbols = this.integer ? ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'] : ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '.', ','];
-      if (validSymbols.indexOf(e.key) !== -1) {
-        e.preventDefault();
-        e.stopPropagation();
-        if (this._numKeyPressed === 0) {
-          this._displayValue = '';
-        }
-        var symbol = e.key;
-        if (symbol === ',') {
-          symbol = '.';
-        }
-        this._displayValue += symbol;
-        this._numKeyPressed += 1;
-        this.requestUpdate();
-      }
-
-      // handle backspace
-      if (e.key === 'Backspace' || e.which === 8) {
-        e.preventDefault();
-        e.stopPropagation();
-        // if last character is '.' remove it automatically
-        if (this._displayValue[this._displayValue.length - 1] === '.') {
-          this._displayValue = this._displayValue.substring(0, this._displayValue.length - 1);
-        }
-        this._displayValue = this._displayValue.substring(0, this._displayValue.length - 1);
-        this._numKeyPressed += 1;
-        this.requestUpdate();
-      }
-
-      // Tab has the same effect as it triggers blur
-      if (e.key === 'Enter' || e.which === 13) {
-        e.preventDefault();
-        e.stopPropagation();
-        this.updateValueFromDisplayValue();
-      }
-    }
-  }, {
-    key: "updateValueFromDisplayValue",
-    value: function updateValueFromDisplayValue() {
-      if (this._numKeyPressed > 0) {
-        this._value = this.integer ? parseInt(this._displayValue) : parseFloat(this._displayValue);
-
-        // modify displayValue only if needed
-        if (this._value < this._min || this._value > this._max) {
-          this._value = Math.max(this._min, Math.min(this._max, this._value));
-          this._displayValue = this._value.toString();
-        }
-        this._numKeyPressed = 0;
-        this._emitInput();
-        this._emitChange();
-        this.requestUpdate();
-      }
-    }
-  }, {
-    key: "updateValueFromPointer",
-    value: function updateValueFromPointer(step) {
-      var _this2 = this;
-      return function (e) {
-        e.stopPropagation();
-
-        // do all computation if not mouseup or touchend,
-        // else only propagate the `change event`
-        if (e.detail.pointerId !== null) {
-          // ignore very small movements
-          if (Math.abs(e.detail.dy) < 0.02) {
-            return;
-          }
-          var lastValue = _this2._value;
-          var sign = e.detail.dy < 0 ? -1 : 1;
-          // heuristically adjust sensiblity
-          var scale = 8;
-          var exponent = 1.2;
-          // apply scale and exponent factors
-          var dy = Math.pow(Math.abs(e.detail.dy * scale), exponent);
-          // clamp at 1
-          dy = Math.max(1, dy);
-          // reapply sign
-          dy = dy * sign;
-          _this2._value += step * dy;
-          // crop at step (use precision arythmetics)
-          _this2._value = number_precision__WEBPACK_IMPORTED_MODULE_2__["default"].times(Math.round(_this2._value / step), step);
-          _this2._value = Math.max(_this2._min, Math.min(_this2._max, _this2._value));
-
-          // format display value to show trailing zeros...)
-          var displayValue = _this2._value.toString();
-          var valueParts = displayValue.toString().split('.');
-          var stepDecimals = step.toString().split('.')[1];
-          if (stepDecimals) {
-            if (!valueParts[1]) {
-              valueParts[1] = [];
-            }
-            while (valueParts[1].length < stepDecimals.length) {
-              valueParts[1] += '0';
-            }
-          }
-          _this2._displayValue = valueParts.join('.');
-          if (_this2._value !== lastValue) {
-            _this2._valueChanged = true;
-            _this2._emitInput();
-          }
-        } else {
-          // this triggers a change when we select the box without changing the value
-          if (_this2._valueChanged === true) {
-            _this2._valueChanged = false;
-            _this2._emitChange();
-          }
-        }
-        _this2.requestUpdate();
-      };
-    }
-  }, {
-    key: "_emitInput",
-    value: function _emitInput() {
-      var event = new CustomEvent('input', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: this._value
-        }
-      });
-      this.dispatchEvent(event);
-    }
-  }, {
-    key: "_emitChange",
-    value: function _emitChange() {
-      var event = new CustomEvent('change', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: this._value
-        }
-      });
-      this.dispatchEvent(event);
-    }
-  }], [{
-    key: "properties",
-    get: function get() {
-      return {
-        width: {
-          type: Number
-        },
-        height: {
-          type: Number
-        },
-        min: {
-          type: Number
-        },
-        max: {
-          type: Number
-        },
-        value: {
-          type: Number
-        },
-        integer: {
-          type: Boolean,
-          reflect: true
-        }
-      };
-    }
-  }, {
-    key: "styles",
-    get: function get() {
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      :host {\n        vertical-align: top;\n        display: inline-block;\n      }\n\n      :host > div {\n        overflow-y: hidden;\n        position: relative;\n        box-sizing: border-box;\n        background-color: ", ";\n        border: 1px solid ", ";\n        font-family: ", ";\n        color: #ffffff;\n        user-select: none;\n      }\n\n      .container:focus {\n        outline: none;\n      }\n\n      .info {\n        width: 15px;\n        display: inline-block;\n        background-color: ", ";\n      }\n\n      .container:focus .info {\n        outline: 2px solid ", ";\n      }\n\n      .info.edited {\n        background-color: ", ";\n      }\n\n      .content {\n        display: inline-block;\n        position: absolute;\n        top: 0;\n        left: 15px;\n        padding-left: 4px;\n        font-size: 0;\n      }\n\n      .z {\n        display: inline-block;\n        vertical-align: top;\n        text-align: center;\n        position: relative;\n        font-size: ", ";\n      }\n\n      .z:first-child {\n        margin-left: 3px;\n      }\n\n      .z sc-speed-surface {\n        position: absolute;\n        top: 0;\n        left: 0;\n        z-index: 1;\n      }\n    "])), _styles_js__WEBPACK_IMPORTED_MODULE_4__.theme['--color-primary-1'], _styles_js__WEBPACK_IMPORTED_MODULE_4__.theme['--color-primary-2'], _styles_js__WEBPACK_IMPORTED_MODULE_4__.fontFamily, _styles_js__WEBPACK_IMPORTED_MODULE_4__.theme['--color-primary-2'], _styles_js__WEBPACK_IMPORTED_MODULE_4__.theme['--color-secondary-2'], _styles_js__WEBPACK_IMPORTED_MODULE_4__.theme['--color-primary-3'], _styles_js__WEBPACK_IMPORTED_MODULE_4__.fontSize);
-    }
-  }]);
-  return ScNumber;
-}(_ScElement_js__WEBPACK_IMPORTED_MODULE_3__["default"]);
-if (customElements.get('sc-number') === undefined) {
-  customElements.define('sc-number', ScNumber);
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScNumber);
-
-/***/ }),
-
-/***/ "./node_modules/@ircam/simple-components/sc-position-surface.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@ircam/simple-components/sc-position-surface.js ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
-/* harmony import */ var _ScElement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScElement.js */ "./node_modules/@ircam/simple-components/ScElement.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-var _templateObject, _templateObject2;
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get.bind(); } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-var ScPositionSurface = /*#__PURE__*/function (_ScElement) {
-  _inherits(ScPositionSurface, _ScElement);
-  var _super = _createSuper(ScPositionSurface);
-  function ScPositionSurface() {
-    var _this;
-    _classCallCheck(this, ScPositionSurface);
-    _this = _super.call(this);
-    _this.xRange = [0, 1];
-    _this.yRange = [0, 1];
-    _this.clampPositions = false;
-    _this.activePointers = new Map();
-    _this.pointerIds = []; // we want to keep the order of appearance consistant
-
-    _this.mouseMove = _this.mouseMove.bind(_assertThisInitialized(_this));
-    _this.mouseUp = _this.mouseUp.bind(_assertThisInitialized(_this));
-    _this.touchStart = _this.touchStart.bind(_assertThisInitialized(_this));
-    _this.touchMove = _this.touchMove.bind(_assertThisInitialized(_this));
-    _this.touchEnd = _this.touchEnd.bind(_assertThisInitialized(_this));
-    _this.propagateValues = _this.propagateValues.bind(_assertThisInitialized(_this));
-    _this.rafId = null;
-    return _this;
-  }
-
-  /**
-   * this is ok as the surface is not rendered often
-   */
-  _createClass(ScPositionSurface, [{
-    key: "performUpdate",
-    value: function performUpdate() {
-      var _this2 = this;
-      var xDelta = this.xRange[1] - this.xRange[0];
-      var yDelta = this.yRange[1] - this.yRange[0];
-      this.px2x = function (px) {
-        var val = px / _this2.width * xDelta + _this2.xRange[0];
-        if (_this2.clampPositions) {
-          val = Math.min(_this2.xRange[1], Math.max(_this2.xRange[0], val));
-        }
-        return val;
-      };
-      this.px2y = function (px) {
-        var val = px / _this2.height * yDelta + _this2.yRange[0];
-        if (_this2.clampPositions) {
-          val = Math.min(_this2.yRange[1], Math.max(_this2.yRange[0], val));
-        }
-        return val;
-      };
-      _get(_getPrototypeOf(ScPositionSurface.prototype), "performUpdate", this).call(this);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <div\n        style=\"width: ", "px; height: ", "px;\"\n\n        @mousedown=\"", "\"\n        @touchstart=\"", "\"\n        @contextmenu=\"", "\"\n      ></div>\n    "])), this.width, this.height, this.mouseDown, {
-        handleEvent: this.touchStart,
-        passive: false
-      }, this._preventContextMenu);
-    }
-  }, {
-    key: "mouseDown",
-    value: function mouseDown(e) {
-      window.addEventListener('mousemove', this.mouseMove, {
-        passive: false
-      });
-      window.addEventListener('mouseup', this.mouseUp);
-      this.pointerIds.push('mouse');
-      this.activePointers.set('mouse', e);
-      this._requestUserSelectNoneOnBody();
-      this.requestPropagateValues(e);
-    }
-  }, {
-    key: "mouseMove",
-    value: function mouseMove(e) {
-      this.activePointers.set('mouse', e);
-      this.requestPropagateValues(e);
-    }
-  }, {
-    key: "mouseUp",
-    value: function mouseUp(e) {
-      window.removeEventListener('mousemove', this.mouseMove);
-      window.removeEventListener('mouseup', this.mouseUp);
-      this.pointerIds.splice(this.pointerIds.indexOf('mouse'));
-      this.activePointers["delete"]('mouse');
-      this._cancelUserSelectNoneOnBody();
-
-      // propagate outside the shadow dom boudaries
-      // cf. https://lit-element.polymer-project.org/guide/events#custom-events
-      var event = new CustomEvent('pointerend', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          pointerId: 'mouse'
-        }
-      });
-      this.dispatchEvent(event);
-      this.requestPropagateValues(e);
-    }
-  }, {
-    key: "touchStart",
-    value: function touchStart(e) {
-      e.preventDefault(); // iOS needs that to prevent scrolling
-
-      if (this.pointerIds.length === 0) {
-        window.addEventListener('touchmove', this.touchMove, {
-          passive: false
-        });
-        window.addEventListener('touchend', this.touchEnd);
-        window.addEventListener('touchcancel', this.touchEnd);
-        this._requestUserSelectNoneOnBody();
-      }
-      var _iterator = _createForOfIteratorHelper(e.changedTouches),
-        _step;
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var touch = _step.value;
-          var id = touch.identifier;
-          this.pointerIds.push(id);
-          this.activePointers.set(id, touch);
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-      this.requestPropagateValues(e);
-    }
-  }, {
-    key: "touchMove",
-    value: function touchMove(e) {
-      e.preventDefault(); // prevent scrolling
-      var _iterator2 = _createForOfIteratorHelper(e.changedTouches),
-        _step2;
-      try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          var touch = _step2.value;
-          var id = touch.identifier;
-          // only consider touches that started in the area
-          if (this.pointerIds.indexOf(id) !== -1) {
-            this.activePointers.set(id, touch);
-          }
-        }
-      } catch (err) {
-        _iterator2.e(err);
-      } finally {
-        _iterator2.f();
-      }
-      this.requestPropagateValues(e);
-    }
-  }, {
-    key: "touchEnd",
-    value: function touchEnd(e) {
-      var _iterator3 = _createForOfIteratorHelper(e.changedTouches),
-        _step3;
-      try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-          var touch = _step3.value;
-          var pointerId = touch.identifier;
-          var index = this.pointerIds.indexOf(pointerId);
-          // only consider tracked touches
-          if (index !== -1) {
-            this.pointerIds.splice(index, 1);
-            this.activePointers["delete"](pointerId);
-
-            // propagate outside the shadow dom boudaries
-            // cf. https://lit-element.polymer-project.org/guide/events#custom-events
-            var event = new CustomEvent('pointerend', {
-              bubbles: true,
-              composed: true,
-              detail: {
-                pointerId: pointerId
-              }
-            });
-            this.dispatchEvent(event);
-          }
-        }
-
-        // if that's the last tracked event remove listeners
-      } catch (err) {
-        _iterator3.e(err);
-      } finally {
-        _iterator3.f();
-      }
-      if (this.pointerIds.length === 0) {
-        window.removeEventListener('touchmove', this.touchMove);
-        window.removeEventListener('touchend', this.touchEnd);
-        window.removeEventListener('touchcancel', this.touchEnd);
-        this._cancelUserSelectNoneOnBody(e);
-      }
-      this.requestPropagateValues(e);
-    }
-  }, {
-    key: "requestPropagateValues",
-    value: function requestPropagateValues(e) {
-      var _this3 = this;
-      window.cancelAnimationFrame(this.rafId);
-      this.rafId = window.requestAnimationFrame(function () {
-        return _this3.propagateValues(e);
-      });
-    }
-  }, {
-    key: "propagateValues",
-    value: function propagateValues(e) {
-      var _this4 = this;
-      var rect = this.getBoundingClientRect();
-      var values = this.pointerIds.map(function (pointerId) {
-        var event = _this4.activePointers.get(pointerId);
-        // this seems quite robust
-        // https://stackoverflow.com/questions/55677/how-do-i-get-the-coordinates-of-a-mouse-click-on-a-canvas-element/18053642#18053642
-        var x = event.clientX - rect.left;
-        var scaledX = _this4.px2x(x);
-        var y = event.clientY - rect.top;
-        var scaledY = _this4.px2y(y);
-        return {
-          x: scaledX,
-          y: scaledY,
-          pointerId: pointerId
-        };
-      });
-
-      // propagate outside the shadow dom boudaries
-      // cf. https://lit-element.polymer-project.org/guide/events#custom-events
-      var event = new CustomEvent('input', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: values
-        }
-      });
-      this.dispatchEvent(event);
-    }
-  }], [{
-    key: "properties",
-    get: function get() {
-      return {
-        xRange: {
-          type: Array,
-          attribute: 'x-range'
-        },
-        yRange: {
-          type: Array,
-          attribute: 'y-range'
-        },
-        width: {
-          type: Number
-        },
-        height: {
-          type: Number
-        },
-        clamp: {
-          type: Boolean,
-          attribute: 'clamp'
-        }
-      };
-    }
-  }, {
-    key: "styles",
-    get: function get() {
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      :host {\n        display: inline-block;\n        box-sizing: border-box;\n      };\n    "])));
-    }
-  }]);
-  return ScPositionSurface;
-}(_ScElement_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
-if (customElements.get('sc-position-surface') === undefined) {
-  customElements.define('sc-position-surface', ScPositionSurface);
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScPositionSurface);
-
-/***/ }),
-
-/***/ "./node_modules/@ircam/simple-components/sc-slider.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@ircam/simple-components/sc-slider.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
-/* harmony import */ var _ScElement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScElement.js */ "./node_modules/@ircam/simple-components/ScElement.js");
-/* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles.js */ "./node_modules/@ircam/simple-components/styles.js");
-/* harmony import */ var _utils_getScale_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/getScale.js */ "./node_modules/@ircam/simple-components/utils/getScale.js");
-/* harmony import */ var _utils_getClipper_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/getClipper.js */ "./node_modules/@ircam/simple-components/utils/getClipper.js");
-/* harmony import */ var _sc_position_surface_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./sc-position-surface.js */ "./node_modules/@ircam/simple-components/sc-position-surface.js");
-/* harmony import */ var _sc_number_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./sc-number.js */ "./node_modules/@ircam/simple-components/sc-number.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get.bind(); } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-
-
-
-var ScSlider = /*#__PURE__*/function (_ScElement) {
-  _inherits(ScSlider, _ScElement);
-  var _super = _createSuper(ScSlider);
-  function ScSlider() {
-    var _this;
-    _classCallCheck(this, ScSlider);
-    _this = _super.call(this);
-    _this.mode = 'jump'; // @todo: relative
-    _this.width = 200;
-    _this.height = 30;
-    _this.min = 0;
-    _this.max = 1;
-    _this.step = 0.001;
-    _this.value = 0.5;
-    _this.orientation = 'horizontal';
-    _this.displayNumber = false;
-    _this.color = _styles_js__WEBPACK_IMPORTED_MODULE_2__.theme['--color-primary-4'];
-    _this._marginSliderNumber = 3;
-    _this._numberWidth = 80;
-    _this._pointerId = null;
-    _this._dirty = true;
-    return _this;
-  }
-  _createClass(ScSlider, [{
-    key: "midiValue",
-    get: function get() {
-      return Math.round((this.value - this.min) / (this.max - this.min) * 127.);
-    },
-    set: function set(value) {
-      var newValue = (this.max - this.min) * value / 127. + this.min;
-      this.value = this.clipper(newValue);
-      var inputEvent = new CustomEvent('input', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: this.value
-        }
-      });
-      this.dispatchEvent(inputEvent);
-      var changeEvent = new CustomEvent('change', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: this.value
-        }
-      });
-      this.dispatchEvent(changeEvent);
-      this.requestUpdate();
-    }
-  }, {
-    key: "connectedCallback",
-    value: function connectedCallback() {
-      this._dirty = true;
-      _get(_getPrototypeOf(ScSlider.prototype), "connectedCallback", this).call(this);
-    }
-  }, {
-    key: "update",
-    value: function update(changedProperties) {
-      this._dirty = true;
-      _get(_getPrototypeOf(ScSlider.prototype), "update", this).call(this, changedProperties);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      if (this._dirty) {
-        if (this.orientation === 'horizontal') {
-          this._sliderWidth = this.displayNumber ? this.width - this._numberWidth - this._marginSliderNumber : this.width;
-        } else {
-          // @todo - clean vertical w/ number box
-          this._sliderWidth = this.width;
-        }
-        this._sliderWidth -= 2; // take borders into account
-        this._sliderHeight = this.height - 2; // take borders into account
-
-        if (this.max < this.min) {
-          var tmp = this.max;
-          this.max = this.min;
-          this.min = tmp;
-        }
-
-        // define transfert functions and scales
-        this.scale = (0,_utils_getScale_js__WEBPACK_IMPORTED_MODULE_3__["default"])([this.min, this.max], [0, this.orientation === 'horizontal' ? this._sliderWidth : this._sliderHeight]);
-        this.clipper = (0,_utils_getClipper_js__WEBPACK_IMPORTED_MODULE_4__["default"])(this.min, this.max, this.step);
-
-        // clean default value
-        this.value = this.clipper(this.value);
-        this._dirty = false;
-      }
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <div\n        @contextmenu=\"", "\"\n        style=\"width: ", "px; height: ", "px\"\n      >\n        <svg\n          style=\"width: ", "px; height: ", "px\"\n          viewport=\"0 0 ", " ", "\"\n        >\n          ", "\n        </svg>\n        <sc-position-surface\n          width=\"", "\"\n          height=\"", "\"\n          clamp\n          x-range=\"", "\"\n          y-range=\"", "\"\n          @input=\"", "\"\n          @pointerend=\"", "\"\n        ></sc-position-surface>\n      </div>\n      ", "\n    "])), this._preventContextMenu, this._sliderWidth, this._sliderHeight, this._sliderWidth, this._sliderHeight, this._sliderWidth, this._sliderHeight, this.orientation === 'horizontal' ? (0,lit__WEBPACK_IMPORTED_MODULE_0__.svg)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n              <rect class=\"background\" width=\"", "\" height=\"", "\"></rect>\n              <rect class=\"foreground\" width=\"", "\" height=\"", "\" fill=\"", "\"></rect>\n            "])), this._sliderWidth, this._sliderHeight, Math.max(0, this.scale(this.value)), this._sliderHeight, this.color) : (0,lit__WEBPACK_IMPORTED_MODULE_0__.svg)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n              <rect class=\"foreground\" width=\"", "\" height=\"", "\" fill=\"", "\"></rect>\n              <rect class=\"background\" width=\"", "\" height=\"", "\"></rect>\n            "])), this._sliderWidth, this._sliderHeight, this.color, this._sliderWidth, Math.max(0, this._sliderHeight - this.scale(this.value))), this._sliderWidth, this._sliderHeight, JSON.stringify([this.min, this.max]), JSON.stringify([this.max, this.min]), this.updateValue, this.changeValue, this.displayNumber ? (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n          <sc-number\n            style=\"margin-left: ", "px\"\n            width=\"", "\"\n            min=\"", "\"\n            max=\"", "\"\n            value=\"", "\"\n            @input=\"", "\"\n          ></sc-number>\n        "])), this._marginSliderNumber, this._numberWidth, this.min, this.max, this.value, this.updateValueFromNumber) : lit__WEBPACK_IMPORTED_MODULE_0__.nothing);
-    }
-  }, {
-    key: "updateValueFromNumber",
-    value: function updateValueFromNumber(e) {
-      e.stopPropagation();
-      this.value = this.clipper(e.detail.value);
-      var inputEvent = new CustomEvent('input', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: this.value
-        }
-      });
-      this.dispatchEvent(inputEvent);
-      var changeEvent = new CustomEvent('change', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: this.value
-        }
-      });
-      this.dispatchEvent(changeEvent);
-      this.requestUpdate();
-    }
-  }, {
-    key: "changeValue",
-    value: function changeValue(e) {
-      if (e.detail.pointerId === this._pointerId) {
-        this._pointerId = null;
-        var event = new CustomEvent('change', {
-          bubbles: true,
-          composed: true,
-          detail: {
-            value: this.value
-          }
-        });
-        this.dispatchEvent(event);
-      }
-    }
-  }, {
-    key: "updateValue",
-    value: function updateValue(e) {
-      e.stopPropagation(); // override event from sc-position-surface
-
-      // consider only first pointer in list, we don't want a multitouch slider...
-      if (e.detail.value[0] && (this._pointerId === null || e.detail.value[0].pointerId === this._pointerId)) {
-        var _e$detail$value$ = e.detail.value[0],
-          x = _e$detail$value$.x,
-          y = _e$detail$value$.y,
-          pointerId = _e$detail$value$.pointerId;
-        var value = this.orientation === 'horizontal' ? x : y;
-        this._pointerId = pointerId;
-        this.value = this.clipper(value);
-        var event = new CustomEvent('input', {
-          bubbles: true,
-          composed: true,
-          detail: {
-            value: this.value
-          }
-        });
-        this.dispatchEvent(event);
-        this.requestUpdate();
-      }
-    }
-  }], [{
-    key: "properties",
-    get: function get() {
-      return {
-        // mode: {
-        //   type: String
-        // },
-        width: {
-          type: Number
-        },
-        height: {
-          type: Number
-        },
-        min: {
-          type: Number
-        },
-        max: {
-          type: Number
-        },
-        step: {
-          type: Number
-        },
-        orientation: {
-          type: String
-        },
-        displayNumber: {
-          type: Boolean,
-          attribute: 'display-number',
-          reflect: true
-        },
-        value: {
-          type: Number
-        },
-        midiValue: {
-          type: Number
-        },
-        color: {
-          type: String
-        }
-      };
-    }
-  }, {
-    key: "styles",
-    get: function get() {
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      :host {\n        vertical-align: top;\n        display: inline-block;\n        box-sizing: border-box;\n        font-size: 0 !important;\n        vertical-align: top;\n        position: relative;\n      }\n\n      :host > div {\n        position: relative;\n        display: inline-block;\n        font-size: 0;\n        border: 1px solid ", ";\n        vertical-align: top;\n      }\n\n      sc-position-surface {\n        position: absolute;\n        top: 0;\n        left: 0;\n        z-index: 1;\n      }\n\n      rect.foreground {}\n\n      rect.background {\n        fill: ", ";\n      }\n\n      sc-number {\n        display: inline-block;\n      }\n    "])), _styles_js__WEBPACK_IMPORTED_MODULE_2__.theme['--color-primary-2'], _styles_js__WEBPACK_IMPORTED_MODULE_2__.theme['--color-primary-1']);
-    }
-  }]);
-  return ScSlider;
-}(_ScElement_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
-if (customElements.get('sc-slider') === undefined) {
-  customElements.define('sc-slider', ScSlider);
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScSlider);
-
-/***/ }),
-
-/***/ "./node_modules/@ircam/simple-components/sc-speed-surface.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@ircam/simple-components/sc-speed-surface.js ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
-/* harmony import */ var _ScElement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScElement.js */ "./node_modules/@ircam/simple-components/ScElement.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-var _templateObject, _templateObject2;
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-function getTime() {
-  if (window.performance) {
-    return window.performance.now();
-  } else {
-    return Date.now();
-  }
-}
-var ScSpeedSurface = /*#__PURE__*/function (_ScElement) {
-  _inherits(ScSpeedSurface, _ScElement);
-  var _super = _createSuper(ScSpeedSurface);
-  function ScSpeedSurface() {
-    var _this;
-    _classCallCheck(this, ScSpeedSurface);
-    _this = _super.call(this);
-    _this.width = 200;
-    _this.height = 200;
-    _this.pointerId = null;
-    _this.lastPointer = null;
-    _this.lastTime = null;
-    _this.mouseMove = _this.mouseMove.bind(_assertThisInitialized(_this));
-    _this.mouseUp = _this.mouseUp.bind(_assertThisInitialized(_this));
-    _this.touchStart = _this.touchStart.bind(_assertThisInitialized(_this));
-    _this.touchMove = _this.touchMove.bind(_assertThisInitialized(_this));
-    _this.touchEnd = _this.touchEnd.bind(_assertThisInitialized(_this));
-    _this.propagateValues = _this.propagateValues.bind(_assertThisInitialized(_this));
-    _this.rafId = null;
-    return _this;
-  }
-  _createClass(ScSpeedSurface, [{
-    key: "render",
-    value: function render() {
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <div\n        style=\"\n          width: ", "px;\n          height: ", "px;\n        \"\n        @mousedown=\"", "\"\n        @touchstart=\"", "\"\n        @contextmenu=\"", "\"\n      ></div>\n    "])), this.width, this.height, this.mouseDown, {
-        handleEvent: this.touchStart,
-        passive: false
-      }, this._preventContextMenu);
-    }
-  }, {
-    key: "mouseDown",
-    value: function mouseDown(e) {
-      window.addEventListener('mousemove', this.mouseMove);
-      window.addEventListener('mouseup', this.mouseUp);
-      this._requestUserSelectNoneOnBody();
-      this.pointerId = 'mouse';
-      this.lastTime = getTime();
-      this.lastPointer = e;
-    }
-  }, {
-    key: "mouseMove",
-    value: function mouseMove(e) {
-      this.requestPropagateValues(e);
-    }
-  }, {
-    key: "mouseUp",
-    value: function mouseUp(e) {
-      var _this2 = this;
-      window.removeEventListener('mousemove', this.mouseMove);
-      window.removeEventListener('mouseup', this.mouseUp);
-      this._cancelUserSelectNoneOnBody();
-      this.requestPropagateValues(e);
-      // we want to have { dx: 0, dy: 0 } on mouse up,
-      // with 20ms, we should be in the next requestAnimationFrame
-      setTimeout(function () {
-        _this2.pointerId = null;
-        _this2.requestPropagateValues(e);
-      }, 20);
-    }
-
-    // @eventOptions({ passive: false })
-  }, {
-    key: "touchStart",
-    value: function touchStart(e) {
-      e.preventDefault(); // prevent scrolling
-
-      if (this.pointerId === null) {
-        var touch = e.changedTouches[0];
-        this.pointerId = touch.identifier;
-        window.addEventListener('touchmove', this.touchMove, {
-          passive: false
-        });
-        window.addEventListener('touchend', this.touchEnd);
-        window.addEventListener('touchcancel', this.touchEnd);
-        this._requestUserSelectNoneOnBody();
-        this.lastTime = getTime();
-        this.lastPointer = touch;
-      }
-    }
-  }, {
-    key: "touchMove",
-    value: function touchMove(e) {
-      e.preventDefault(); // prevent scrolling
-      var _iterator = _createForOfIteratorHelper(e.changedTouches),
-        _step;
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var touch = _step.value;
-          if (touch.identifier === this.pointerId) {
-            this.requestPropagateValues(touch);
-          }
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-    }
-  }, {
-    key: "touchEnd",
-    value: function touchEnd(e) {
-      var _this3 = this;
-      var _iterator2 = _createForOfIteratorHelper(e.changedTouches),
-        _step2;
-      try {
-        var _loop = function _loop() {
-          var touch = _step2.value;
-          if (touch.identifier === _this3.pointerId) {
-            window.removeEventListener('touchmove', _this3.touchMove);
-            window.removeEventListener('touchend', _this3.touchEnd);
-            window.removeEventListener('touchcancel', _this3.touchEnd);
-            _this3._cancelUserSelectNoneOnBody();
-            _this3.requestPropagateValues(touch);
-            // we want to have { dx: 0, dy: 0 } on mouse up,
-            // with 20ms, we should be in the next requestAnimationFrame
-            setTimeout(function () {
-              _this3.pointerId = null;
-              _this3.requestPropagateValues(touch);
-            }, 20);
-          }
-        };
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          _loop();
-        }
-      } catch (err) {
-        _iterator2.e(err);
-      } finally {
-        _iterator2.f();
-      }
-    }
-  }, {
-    key: "requestPropagateValues",
-    value: function requestPropagateValues(e) {
-      var _this4 = this;
-      window.cancelAnimationFrame(this.rafId);
-      this.rafId = window.requestAnimationFrame(function () {
-        return _this4.propagateValues(e);
-      });
-    }
-
-    // return speed in px / ms
-  }, {
-    key: "propagateValues",
-    value: function propagateValues(e) {
-      var lastX = this.lastPointer.screenX;
-      var lastY = this.lastPointer.screenY;
-      var x = e.screenX;
-      var y = e.screenY;
-      var now = getTime();
-      var dt = this.lastTime - now;
-      var dx = (x - lastX) / dt;
-      var dy = (y - lastY) / dt;
-      this.lastTime = now;
-      this.lastPointer = e;
-      // propagate outside the shadow dom boudaries
-      // cf. https://lit-element.polymer-project.org/guide/events#custom-events
-      var event = new CustomEvent('input', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          dx: dx,
-          dy: dy,
-          pointerId: this.pointerId
-        }
-      });
-      this.dispatchEvent(event);
-    }
-  }], [{
-    key: "properties",
-    get: function get() {
-      return {
-        width: {
-          type: Number
-        },
-        height: {
-          type: Number
-        }
-      };
-    }
-  }, {
-    key: "styles",
-    get: function get() {
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      :host {\n        display: inline-block;\n        box-sizing: border-box;\n      };\n    "])));
-    }
-  }]);
-  return ScSpeedSurface;
-}(_ScElement_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
-if (customElements.get('sc-speed-surface') === undefined) {
-  customElements.define('sc-speed-surface', ScSpeedSurface);
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScSpeedSurface);
-
-/***/ }),
-
-/***/ "./node_modules/@ircam/simple-components/sc-text.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/@ircam/simple-components/sc-text.js ***!
-  \**********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
-/* harmony import */ var lit_directives_class_map_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lit/directives/class-map.js */ "./node_modules/lit/directives/class-map.js");
-/* harmony import */ var _ScElement_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ScElement.js */ "./node_modules/@ircam/simple-components/ScElement.js");
-/* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles.js */ "./node_modules/@ircam/simple-components/styles.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-var _templateObject, _templateObject2;
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-var ScText = /*#__PURE__*/function (_ScElement) {
-  _inherits(ScText, _ScElement);
-  var _super = _createSuper(ScText);
-  function ScText() {
-    var _this;
-    _classCallCheck(this, ScText);
-    _this = _super.call(this);
-    _this.width = 200;
-    _this.height = 30;
-    _this.value = '';
-    _this.readonly = false;
-    _this._dirty = false;
-    return _this;
-  }
-  _createClass(ScText, [{
-    key: "render",
-    value: function render() {
-      var classes = {
-        dirty: this._dirty
-      };
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <textarea\n        class=", "\n        style=\"\n          width: ", "px;\n          height: ", "px;\n        \"\n        .value=\"", "\"\n        ?readonly=", "\n        @blur=", "\n        @keydown=", "\n        @keyup=", "\n        @contextmenu=\"", "\"\n      ></textarea>\n    "])), (0,lit_directives_class_map_js__WEBPACK_IMPORTED_MODULE_1__.classMap)(classes), this.width, this.height, this.value, this.readonly, this.updateValue, this.onKeyDown, this.onKeyUp, this._preventContextMenu);
-    }
-  }, {
-    key: "focus",
-    value: function focus() {
-      var $textarea = this.shadowRoot.querySelector('textarea');
-      if ($textarea) {
-        $textarea.focus();
-      }
-    }
-  }, {
-    key: "onKeyDown",
-    value: function onKeyDown(e) {
-      // manually do comment because opens Help menu otherwise...
-      if (e.metaKey && e.key === 's') {
-        e.preventDefault();
-        this.updateValue(e, true);
-      }
-    }
-  }, {
-    key: "onKeyUp",
-    value: function onKeyUp(e) {
-      if (e.target.value !== this.value && this._dirty === false) {
-        this._dirty = true;
-        this.requestUpdate();
-      } else if (e.target.value === this.value && this._dirty === true) {
-        this._dirty = false;
-        this.requestUpdate();
-      }
-    }
-  }, {
-    key: "updateValue",
-    value: function updateValue(e) {
-      var forceUpdate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      e.preventDefault();
-      e.stopPropagation();
-      if (this._dirty || forceUpdate) {
-        this.value = e.target.value;
-        this._dirty = false;
-        var event = new CustomEvent('change', {
-          bubbles: true,
-          composed: true,
-          detail: {
-            value: this.value
-          }
-        });
-        this.dispatchEvent(event);
-        this.requestUpdate();
-      }
-    }
-  }], [{
-    key: "properties",
-    get: function get() {
-      return {
-        width: {
-          type: Number
-        },
-        height: {
-          type: Number
-        },
-        value: {
-          type: String
-        },
-        readonly: {
-          type: Boolean,
-          reflect: true
-        }
-      };
-    }
-  }, {
-    key: "styles",
-    get: function get() {
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      :host {\n        vertical-align: top;\n        display: inline-block;\n        box-sizing: border-box;\n        vertical-align: top;\n        font-size: 0;\n      }\n\n      textarea {\n        vertical-align: top;\n        box-sizing: border-box;\n        background-color: ", ";\n        border: 1px dotted ", ";\n        color: white;\n        font-family: ", ";\n        padding: 6px 2px 6px 6px;\n        border-radius: 2px;\n        font-size: ", ";\n        line-height: ", "px;\n        resize: none;\n      }\n\n      textarea:focus {\n        outline: none;\n        border: 1px solid ", ";\n      }\n\n      textarea.dirty {\n        border: 1px solid ", ";\n      }\n\n      textarea[readonly], textarea[readonly]:focus {\n        background-color: ", ";\n        border: 1px solid ", ";\n      }\n    "])), _styles_js__WEBPACK_IMPORTED_MODULE_3__.theme['--color-primary-2'], _styles_js__WEBPACK_IMPORTED_MODULE_3__.theme['--color-primary-4'], _styles_js__WEBPACK_IMPORTED_MODULE_3__.fontFamily, _styles_js__WEBPACK_IMPORTED_MODULE_3__.fontSize, 16, _styles_js__WEBPACK_IMPORTED_MODULE_3__.theme['--color-primary-4'], _styles_js__WEBPACK_IMPORTED_MODULE_3__.theme['--color-secondary-3'], _styles_js__WEBPACK_IMPORTED_MODULE_3__.theme['--color-primary-3'], _styles_js__WEBPACK_IMPORTED_MODULE_3__.theme['--color-primary-3']);
-    }
-  }]);
-  return ScText;
-}(_ScElement_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
-if (customElements.get('sc-text') === undefined) {
-  customElements.define('sc-text', ScText);
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScText);
-
-/***/ }),
-
-/***/ "./node_modules/@ircam/simple-components/sc-toggle.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@ircam/simple-components/sc-toggle.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
-/* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles.js */ "./node_modules/@ircam/simple-components/styles.js");
-/* harmony import */ var _ScElement_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ScElement.js */ "./node_modules/@ircam/simple-components/ScElement.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-var _templateObject, _templateObject2, _templateObject3, _templateObject4;
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-var ScToggle = /*#__PURE__*/function (_ScElement) {
-  _inherits(ScToggle, _ScElement);
-  var _super = _createSuper(ScToggle);
-  function ScToggle() {
-    var _this;
-    _classCallCheck(this, ScToggle);
-    _this = _super.call(this);
-    _this.width = 30;
-    _this.active = false;
-    _this.disabled = false;
-    _this.updateValue = _this.updateValue.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-  _createClass(ScToggle, [{
-    key: "width",
-    get: function get() {
-      return this._size;
-    },
-    set: function set(value) {
-      this._size = value;
-      this.requestUpdate();
-    }
-  }, {
-    key: "height",
-    get: function get() {
-      return this._size;
-    }
-
-    // alias active for consistency and genericity with other components
-    ,
-    set: function set(value) {
-      this._size = value;
-      this.requestUpdate();
-    }
-  }, {
-    key: "value",
-    get: function get() {
-      return this.active;
-    },
-    set: function set(active) {
-      this.active = active;
-    }
-  }, {
-    key: "midiValue",
-    get: function get() {
-      return this.value ? 127 : 0;
-    },
-    set: function set(value) {
-      this.value = value === 0 ? false : true;
-      this.active = this.value;
-      var changeEvent = new CustomEvent('change', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: this.active
-        }
-      });
-      this.dispatchEvent(changeEvent);
-      this.requestUpdate();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var padding = 25;
-      var strokeWidth = 10;
-      var opacity = this.disabled ? 0.7 : 1;
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <svg\n        style=\"width: ", "px; height: ", "px; opacity: ", "\"\n        viewbox=\"0 0 100 100\"\n        @mousedown=\"", "\"\n        @touchstart=\"", "\"\n        @contextmenu=\"", "\"\n      >\n        <rect\n          x=\"0\"\n          y=\"0\"\n          width=\"100\"\n          height=\"100\"\n          fill=\"", "\"\n        ></rect>\n        ", "\n      </svg>\n    "])), this._size, this._size, opacity, this.updateValue, {
-        handleEvent: this.updateValue,
-        passive: false
-      }, this._preventContextMenu, _styles_js__WEBPACK_IMPORTED_MODULE_1__.theme['--color-primary-1'], this.active ? (0,lit__WEBPACK_IMPORTED_MODULE_0__.svg)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n              <line\n                x1=\"", "\"\n                y1=\"", "\"\n                x2=\"", "\"\n                y2=\"", "\"\n                style=\"stroke-width:", "; stroke:#ffffff;\" />\n              <line\n                x1=\"", "\"\n                y1=\"", "\"\n                x2=\"", "\"\n                y2=\"", "\"\n                style=\"stroke-width:", "; stroke:#ffffff;\" />\n            "])), padding, padding, 100 - padding, 100 - padding, strokeWidth, padding, 100 - padding, 100 - padding, padding, strokeWidth) : (0,lit__WEBPACK_IMPORTED_MODULE_0__.svg)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n              <line\n                x1=\"", "\"\n                y1=\"", "\"\n                x2=\"", "\"\n                y2=\"", "\"\n                style=\"stroke-width:", "; stroke:", ";\" />\n              <line\n                x1=\"", "\"\n                y1=\"", "\"\n                x2=\"", "\"\n                y2=\"", "\"\n                style=\"stroke-width:", "; stroke:", ";\" />\n            "])), padding, padding, 100 - padding, 100 - padding, strokeWidth, _styles_js__WEBPACK_IMPORTED_MODULE_1__.theme['--color-primary-3'], padding, 100 - padding, 100 - padding, padding, strokeWidth, _styles_js__WEBPACK_IMPORTED_MODULE_1__.theme['--color-primary-3']));
-    }
-  }, {
-    key: "updateValue",
-    value: function updateValue(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      if (this.disabled) {
-        return;
-      }
-      this.active = !this.active;
-      var changeEvent = new CustomEvent('change', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: this.active
-        }
-      });
-      this.dispatchEvent(changeEvent);
-      this.requestUpdate();
-    }
-  }], [{
-    key: "properties",
-    get: function get() {
-      return {
-        width: {
-          type: Number
-        },
-        height: {
-          type: Number
-        },
-        active: {
-          type: Boolean,
-          reflect: true
-        },
-        value: {
-          type: Boolean
-        },
-        midiValue: {
-          type: Number
-        },
-        disabled: {
-          type: Boolean
-        }
-      };
-    }
-  }, {
-    key: "styles",
-    get: function get() {
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      :host {\n        vertical-align: top;\n        display: inline-block;\n        box-sizing: border-box;\n        user-select: none;\n        font-size: 0 !important;\n      }\n\n      svg {\n        box-sizing: border-box;\n        border: 1px solid ", ";\n      }\n    "])), _styles_js__WEBPACK_IMPORTED_MODULE_1__.theme['--color-primary-2']);
-    }
-  }]);
-  return ScToggle;
-}(_ScElement_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
-if (customElements.get('sc-toggle') === undefined) {
-  customElements.define('sc-toggle', ScToggle);
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScToggle);
-
-/***/ }),
-
-/***/ "./node_modules/@ircam/simple-components/styles.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/@ircam/simple-components/styles.js ***!
-  \*********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   arrow: () => (/* binding */ arrow),
-/* harmony export */   arrowDown: () => (/* binding */ arrowDown),
-/* harmony export */   arrowRight: () => (/* binding */ arrowRight),
-/* harmony export */   fontFamily: () => (/* binding */ fontFamily),
-/* harmony export */   fontSize: () => (/* binding */ fontSize),
-/* harmony export */   theme: () => (/* binding */ theme)
-/* harmony export */ });
-/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-
-// @todo - review that... not clean
-var fontFamily = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject || (_templateObject = _taggedTemplateLiteral(["Consolas, monaco, monospace"])));
-var fontSize = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["11px"])));
-var theme = {};
-theme['--color-primary-0'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["#121212ff"])));
-theme['--color-primary-1'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["#272822ff"])));
-theme['--color-primary-2'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["#3d3e39ff"])));
-theme['--color-primary-3'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["#6a6a69ff"])));
-theme['--color-primary-4'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["#dededeff"])));
-theme['--color-secondary-1'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["#f0db4fff"]))); // yellow
-theme['--color-secondary-2'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["#1c78c0ff"]))); // blue
-theme['--color-secondary-3'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["#d9534fff"]))); // red
-theme['--color-secondary-4'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["#5ec451ff"]))); // green
-theme['--color-secondary-5'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["#cd7afaff"]))); // lilac
-theme['--color-secondary-6'] = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["#f4b43eff"]))); // orange
-
-// export const userSelectNone = css`
-//   -webkit-touch-callout: none; /* iOS Safari */
-//     -webkit-user-select: none; /* Safari */
-//      -khtml-user-select: none; /* Konqueror HTML */
-//        -moz-user-select: none; /* Old versions of Firefox */
-//         -ms-user-select: none; /* Internet Explorer/Edge */
-//             user-select: none; /* Non-prefixed version, currently
-//                                   supported by Chrome, Edge, Opera and Firefox */
-// `
-
-// export const largeBtn = css`
-//   font-family: ${fontFamily};
-//   color: white;
-//   font-size: 1.6rem;
-//   width: 100%;
-//   border: 1px solid #676767;
-//   border-radius: 2px;
-//   background-color: #121212;
-//   height: 36px;
-//   line-height: 36px;
-// `;
-
-// export const info = css`
-//   font-family: ${fontFamily};
-//   color: white;
-//   font-size: 1.2rem;
-//   width: 100%;
-//   text-align: center;
-//   height: 36px;
-//   line-height: 36px;
-// `;
-
-var arrow = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAHdElNRQfkCAUKBTL+mGjUAAAAeUlEQVRIx+3OMQ6AIBBE0a93sMLEk1h4Y7Ww9mRiRUIM6jJUGob6/QXqfrCGkbbAHw0bE14+v8PAjBffwgDgWCS+4sJXlETElcSF5yYSPCdxw62JB25JvPC3hIE/JYz8LpHBU4lMfk0IPE6IPCRWepUDdHQlvO4jOwFwgu1NCrBo/wAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMC0wOC0wNVQxMDowNTo0OSswMDowMBWQx3oAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjAtMDgtMDVUMTA6MDU6NDkrMDA6MDBkzX/GAAAAIHRFWHRzb2Z0d2FyZQBodHRwczovL2ltYWdlbWFnaWNrLm9yZ7zPHZ0AAAAYdEVYdFRodW1iOjpEb2N1bWVudDo6UGFnZXMAMaf/uy8AAAAYdEVYdFRodW1iOjpJbWFnZTo6SGVpZ2h0ADUxMo+NU4EAAAAXdEVYdFRodW1iOjpJbWFnZTo6V2lkdGgANTEyHHwD3AAAABl0RVh0VGh1bWI6Ok1pbWV0eXBlAGltYWdlL3BuZz+yVk4AAAAXdEVYdFRodW1iOjpNVGltZQAxNTk2NjIxOTQ5QVn8gAAAABJ0RVh0VGh1bWI6OlNpemUAMzI2MEJCw0lk+gAAAFR0RVh0VGh1bWI6OlVSSQBmaWxlOi8vLi91cGxvYWRzLzU2L2V4dHg3bGQvMjQ1Ni9pbmRpY2F0b3JfYXJyb3dfdHJpYW5nbGVfaWNvbl8xNDkwMjAucG5n2GvxiAAAAABJRU5ErkJggg=="])));
-var arrowRight = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAA7DgAAOw4AXEryjgAAAAHdElNRQflAxQLDS8ArDZ8AAACgklEQVRo3u3ZT0gUURzA8e+sstgSlmtg9MeCIoKKIIQCu0TZIbxIBdmhKDxZhw7mQYICQRCsU1B4CA8ReJEg+nMpKQjBTT0UERHlYmQGGUWYmOt0aHm9Ic2ZN7/9LYRvbnvY+fDmz/e9XVgaRR4l837qkSbFdPFYh3nGEGdYUZzTVzCIj88Mt9lNQh9QTRY/f3yglVXFBPjM8oC9uvMQBPj4THCJ1fqAKcaYyxNyPKaOUl3AKAe5wXczD5N0sk4TkKWaJI2MmHmYI0MDSU0AwEau8dXMwzeuskkXAEkaGCRnEM85zjJNAMBauvhsCFP0sE0XACUc4qk1D685zXJNAEAV7UwYwjS97MLTBECCfTxk1iCynJWO1r8BAJW08d4QxKO1OAA89nCHmcJEKwwAoJxzvCtEtMICwGMnvfyQjlZ4AECKJl4ZQo4n8aMVDQCwlR7JaEUHQJlktFwAIBgtV4BYtNwBIBKteACBaMUFQMxoSQB+R+tRIFqNugCANG18MYQM6fmchR0/8aOfS+oS1HLfugRjnNIEVHGBj9ZN2EeN3k1YygH6rcfwDc2aj+Ea2gMvoltsj/oVcV7F9QyYJPm84KTmq3gDlwMx6mazwww6Aso4wrCV42GOauZ4C92BBckV1ruePDogxQleWkuyAer1lmQeO7hpLUo/0aG5KC2nmbfWsryf/XrL8gQ19Fkbk3Euam5MKmkJbM3uUau3Nfs7Mq2slDv5YoBYkYkLiB2ZeACByLgDhCLjChCLjAsgKRmZqIBR6rguGZmogOCP1QKRiQr4cwhFxg0gGBkXgGhkwo40mXxk7spGJvw4xhAjnNf4285b4NMKPCatfd3S+H/HLwusPWkzmFSAAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTAzLTIwVDExOjEzOjQ3KzAwOjAwRxN4GAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0wMy0yMFQxMToxMzo0NyswMDowMDZOwKQAAAAgdEVYdHNvZnR3YXJlAGh0dHBzOi8vaW1hZ2VtYWdpY2sub3JnvM8dnQAAABh0RVh0VGh1bWI6OkRvY3VtZW50OjpQYWdlcwAxp/+7LwAAABh0RVh0VGh1bWI6OkltYWdlOjpIZWlnaHQANTEyj41TgQAAABd0RVh0VGh1bWI6OkltYWdlOjpXaWR0aAA1MTIcfAPcAAAAGXRFWHRUaHVtYjo6TWltZXR5cGUAaW1hZ2UvcG5nP7JWTgAAABd0RVh0VGh1bWI6Ok1UaW1lADE2MTYyMzg4MjfA6B9qAAAAEnRFWHRUaHVtYjo6U2l6ZQA1MTU5QkJP1GlWAAAAUHRFWHRUaHVtYjo6VVJJAGZpbGU6Ly8uL3VwbG9hZHMvNTYvaEpIZnVxcC8yOTAyL2Fycm93X3JpZ2h0X3RyaWFuZ2xlX2ljb25fMTgzMTIxLnBuZ8GglZQAAAAASUVORK5CYII="])));
-var arrowDown = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAQAAAD/5HvMAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAA7DgAAOw4AXEryjgAAAAHdElNRQflAxQLDR8mdQbQAAADoklEQVRo3u2ZXUgUURiGn201VynNG7Ur0dSgH00iSFDsP0GiwCyKCougkAgMiiChrvq7EI2guijox6IfiqILIZKQKAgvKoxIyrK8MCrFzDJ12y46fjtqujszZ3a9mHdvZme/7z3vfN+Zs++cARcuXLhwMbnhGfFtKt4oaPAz8D9BsaxnE0kEIl6SHq5xi8HRP6ygm0CUPt2UDsuYIoKymRHh2gQxg+Kxgt7yPWqCemkaPoyRk03cYKc6HuIFvaMmvF4EmE6ejH6dB2MF/eYEi5kHgIernHb0jvOzhwXquIWT/P5/2FZ+qWn2hrkOyoE5vFEj/WLb+GEJXJSZfxmfY3J8XJJxLpIwUWgubSrwJzscE7SZn2qUNnJDBVfSr4JfM9sROTm0qBH6qQwdPo2bUs6zDrTNx1nhv8m0cFLyaVcJPyjTLqiMH4q9nfxwk/YzpJKaSdcqJ51mxTzEgfDTkrkvZT1lWKvsIoY64b1PspnUIjpV4jdKtAkq4Zti7aTIXKqHg/hV8lNmapEzkyeK0c9B839MKTRKeY9p+BvxcpQ/iu8xqVYolvBFEXxllW1BK/kqbKutXtMxadtDa9ckSOWhtMtGvdN4rGj+UG3DjnioNrQrzc6VraVHEXVQYJmlgA7F0sM6O3IgllqZ2g3mVg5BMg3CUUusPUGQyXNFNmjlZgX2MqAYnpNpVw5AOb2K8BMLTWcv5KPK7mWDDjkQxzkp+R0STeUmcltyzxGnRxBkioMZYLepzN3SrhZm6ZIDUCEer5W8sLNyaRX/uV2nHIg3uO0rE7tgQ84VyblEvF5BMJ93iryPLWFlbKFPZbxjvm45ALsM8yErZHSW5XkXNhK5IS04H8Jt+zgvsXdN3pkmkM97WVPKJ4wMrl0fWOSUHIAqaVszGeNGZYhzHqDKSTmQyD1pRd04btvonO85165hFIvb7gpuM41AKV3inItNsluAh0MTuu00nooVO+Tolo4ghUdi206OapuXIyL3kU2XaQJLDW57+Yhflhuc87JIyQEvx8WSNpJiqF2j1O54ZLeY0wzPWNVyNji7nmh6ljOBNXIvdVAIQKE45y7WRFoOeKkxPKcnkWTYD6iJyhsBMgxuex9VDOp1zlawUQxGlzSwj43RkgNxnBnzmuCCg5ulYSBbXM+/zytyoikHoELaFqCPimjLAR/1Iqhev3O2guFni9bQe86hoWO9+MxLfLRwmGfRrk0QMRq3Rl24cOHCxaTGX01uEpsie0MVAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTAzLTIwVDExOjEzOjMxKzAwOjAwLgZEOwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0wMy0yMFQxMToxMzozMSswMDowMF9b/IcAAAAgdEVYdHNvZnR3YXJlAGh0dHBzOi8vaW1hZ2VtYWdpY2sub3JnvM8dnQAAABh0RVh0VGh1bWI6OkRvY3VtZW50OjpQYWdlcwAxp/+7LwAAABh0RVh0VGh1bWI6OkltYWdlOjpIZWlnaHQANTEyj41TgQAAABd0RVh0VGh1bWI6OkltYWdlOjpXaWR0aAA1MTIcfAPcAAAAGXRFWHRUaHVtYjo6TWltZXR5cGUAaW1hZ2UvcG5nP7JWTgAAABd0RVh0VGh1bWI6Ok1UaW1lADE2MTYyMzg4MTECpumcAAAAEnRFWHRUaHVtYjo6U2l6ZQA4MDQ0QkJ+TqcOAAAAT3RFWHRUaHVtYjo6VVJJAGZpbGU6Ly8uL3VwbG9hZHMvNTYvaEpIZnVxcC8yOTAyL2Fycm93X2Rvd25fdHJpYW5nbGVfaWNvbl8xODMwOTUucG5n/JrixgAAAABJRU5ErkJggg=="])));
-
-/***/ }),
-
-/***/ "./node_modules/@ircam/simple-components/utils/getClipper.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@ircam/simple-components/utils/getClipper.js ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ getClipper)
-/* harmony export */ });
-function getClipper(min, max, step) {
-  return function (val) {
-    var clippedValue = Math.round(val / step) * step;
-    var fixed = Math.max(Math.log10(1 / step), 0);
-    var fixedValue = clippedValue.toFixed(fixed); // fix floating point errors
-    return Math.min(max, Math.max(min, parseFloat(fixedValue)));
-  };
-}
-
-/***/ }),
-
-/***/ "./node_modules/@ircam/simple-components/utils/getScale.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/@ircam/simple-components/utils/getScale.js ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ getScale)
-/* harmony export */ });
-function getScale(domain, range) {
-  var slope = (range[1] - range[0]) / (domain[1] - domain[0]);
-  var intercept = range[0] - slope * domain[0];
-  function scale(val) {
-    return slope * val + intercept;
-  }
-  scale.invert = function (val) {
-    return (val - intercept) / slope;
-  };
-  return scale;
-}
-
-/***/ }),
-
 /***/ "./node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js":
 /*!*****************************************************************************!*\
   !*** ./node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js ***!
@@ -34894,10 +32995,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
 /* harmony import */ var lit_directives_live_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lit/directives/live.js */ "./node_modules/lit/directives/live.js");
 /* harmony import */ var lodash_throttle_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/throttle.js */ "./node_modules/lodash/throttle.js");
-/* harmony import */ var _ircam_simple_components_sc_text_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ircam/simple-components/sc-text.js */ "./node_modules/@ircam/simple-components/sc-text.js");
-/* harmony import */ var _ircam_simple_components_sc_slider_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ircam/simple-components/sc-slider.js */ "./node_modules/@ircam/simple-components/sc-slider.js");
-/* harmony import */ var _ircam_simple_components_sc_toggle_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ircam/simple-components/sc-toggle.js */ "./node_modules/@ircam/simple-components/sc-toggle.js");
-/* harmony import */ var _ircam_simple_components_sc_bang_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ircam/simple-components/sc-bang.js */ "./node_modules/@ircam/simple-components/sc-bang.js");
+/* harmony import */ var _ircam_sc_components_sc_slider_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ircam/sc-components/sc-slider.js */ "./node_modules/@ircam/sc-components/sc-slider.js");
+/* harmony import */ var _ircam_sc_components_sc_select_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ircam/sc-components/sc-select.js */ "./node_modules/@ircam/sc-components/sc-select.js");
 var _templateObject, _templateObject2;
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -34922,8 +33021,6 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 
 // import needed GUI components
-
-
 
 
 var SwPlayer = /*#__PURE__*/function (_LitElement) {
@@ -35002,7 +33099,7 @@ var SwPlayer = /*#__PURE__*/function (_LitElement) {
   }]);
   return SwPlayer;
 }(lit__WEBPACK_IMPORTED_MODULE_0__.LitElement); // register the component into the custom elements registry
-_defineProperty(SwPlayer, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    :host {\n      display: block;\n      min-height: calc(100vh - 70px);\n    }\n\n    header {\n      display: block;\n      height: 70px;\n      line-height: 70px;\n      background-color: var(--sw-medium-background-color);\n      display: flex;\n      flex-direction: row;\n      justify-content: space-between;\n      align-items: stretch;\n      border-bottom: 1px solid var(--sw-lighter-background-color);\n    }\n\n    p {\n      font-size: 30px;\n      margin: 4px;\n      height: 30px;\n      line-height: 30px;\n      text-indent: 0px;\n      background-color: #454545;\n    }\n\n    .filter > p {\n      margin: 15px;\n      line-height: 30px;\n      text-indent: 8px;\n    }\n\n    .volume > p {\n      margin: 15px;\n      line-height: 30px;\n      text-indent: 8px;\n    }\n\n    sc-select {\n      font-size: 30px;\n      height: 62px;\n      margin: 4px;\n      width: 120px;\n      background-color: #454545;\n    }\n\n    :host > div {\n      display: flex;\n      background-color: #121212;\n      justify-content: space-between;\n      flex-direction: row;\n      min-height: calc(100vh - 70px);\n    }\n\n    sc-text {\n      font-size: 30px;\n      margin-top: 10px;\n      width: 100%;\n    }\n\n    sc-number {\n      margin-top: 10px;\n      font-size: 30px;\n      width: 100%;\n      height: 60px;\n    }\n\n    sc-slider {\n      margin-top: 10px;\n      width: 100%;\n      height: calc(100vh - 160px);\n    }\n\n    .filter {\n      width: 49%;\n    }\n\n    .volume {\n      width: 49%;\n    }\n\n  "]))));
+_defineProperty(SwPlayer, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    :host {\n      display: block;\n      // min-height: calc(100vh - 70px);\n      width: inherit;\n      height: inherit;\n    }\n\n    header {\n      display: block;\n      height: 70px;\n      line-height: 70px;\n      background-color: var(--sw-medium-background-color);\n      display: flex;\n      flex-direction: row;\n      justify-content: space-between;\n      align-items: stretch;\n      border-bottom: 1px solid var(--sw-lighter-background-color);\n    }\n\n    p {\n      font-size: 30px;\n      margin: 4px;\n      height: 30px;\n      line-height: 30px;\n      text-indent: 0px;\n      background-color: #454545;\n    }\n\n    .filter > p {\n      margin: 15px;\n      line-height: 30px;\n      text-indent: 8px;\n    }\n\n    .volume > p {\n      margin: 15px;\n      line-height: 30px;\n      text-indent: 8px;\n    }\n\n    sc-select {\n      font-size: 30px;\n      height: 62px;\n      margin: 4px;\n      width: 120px;\n      background-color: #454545;\n    }\n\n    :host > div {\n      display: flex;\n      background-color: #121212;\n      justify-content: space-between;\n      flex-direction: row;\n      height: calc(100% - 71px);\n      // height: inherit;\n    }\n\n    sc-text {\n      font-size: 30px;\n      margin-top: 10px;\n      width: 100%;\n    }\n\n    sc-number {\n      margin-top: 10px;\n      font-size: 30px;\n      width: 100%;\n      height: 60px;\n    }\n\n    sc-slider {\n      margin-top: 10px;\n      width: 100%;\n      height: 100%;\n    }\n\n    .filter {\n      width: 49%;\n      height: inherit;\n    }\n\n    .volume {\n      width: 49%;\n      height: inherit;\n    }\n\n  "]))));
 customElements.define('sw-player', SwPlayer);
 
 /***/ }),
@@ -35100,6 +33197,1690 @@ function createLayout(client, $container) {
   (0,lit__WEBPACK_IMPORTED_MODULE_0__.render)((0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    <controller-layout\n      .client=", "\n      id=\"", "\"\n    ></controller-layout>\n  "])), client, layoutId), $container);
   var $layout = document.querySelector("#".concat(layoutId));
   return $layout;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ircam/sc-components/ScElement.js":
+/*!********************************************************!*\
+  !*** ./node_modules/@ircam/sc-components/ScElement.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
+/* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles.js */ "./node_modules/@ircam/sc-components/styles.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+// dynamically insert global stylesheet w/ sc-components variables
+
+
+// extending lit-element examples :
+// https://github.com/Polymer/lit-element/issues/450
+
+var id = 0;
+var userSelectNoneOnBodyRegister = new Set();
+
+/**
+ * all element should extend this class to handle global things such as
+ * userSelect, ids, etc.
+ */
+var ScElement = /*#__PURE__*/function (_LitElement) {
+  _inherits(ScElement, _LitElement);
+  var _super = _createSuper(ScElement);
+  function ScElement() {
+    var _this;
+    _classCallCheck(this, ScElement);
+    _this = _super.call(this);
+    _this._scId = "".concat(_this.constructor.name.toLowerCase(), "-").concat(id++);
+    return _this;
+  }
+  _createClass(ScElement, [{
+    key: "_preventContextMenu",
+    value: function _preventContextMenu(e) {
+      e.preventDefault();
+    }
+  }, {
+    key: "_requestUserSelectNoneOnBody",
+    value: function _requestUserSelectNoneOnBody() {
+      if (userSelectNoneOnBodyRegister.size === 0) {
+        document.body.style.userSelect = 'none';
+        document.body.style.webkitUserSelect = 'none';
+        document.body.style.webkitTouchCallout = 'none';
+      }
+      userSelectNoneOnBodyRegister.add(this._scId);
+    }
+  }, {
+    key: "_cancelUserSelectNoneOnBody",
+    value: function _cancelUserSelectNoneOnBody() {
+      userSelectNoneOnBodyRegister["delete"](this._scId);
+      if (userSelectNoneOnBodyRegister.size === 0) {
+        document.body.style.userSelect = 'auto';
+        document.body.style.webkitUserSelect = 'auto';
+        document.body.style.webkitTouchCallout = 'auto';
+      }
+    }
+  }]);
+  return ScElement;
+}(lit__WEBPACK_IMPORTED_MODULE_0__.LitElement);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScElement);
+
+/***/ }),
+
+/***/ "./node_modules/@ircam/sc-components/sc-button.js":
+/*!********************************************************!*\
+  !*** ./node_modules/@ircam/sc-components/sc-button.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
+/* harmony import */ var _ScElement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScElement.js */ "./node_modules/@ircam/sc-components/ScElement.js");
+var _templateObject, _templateObject2;
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get.bind(); } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+var ScButton = /*#__PURE__*/function (_ScElement) {
+  _inherits(ScButton, _ScElement);
+  var _super = _createSuper(ScButton);
+  function ScButton() {
+    var _this;
+    _classCallCheck(this, ScButton);
+    _this = _super.call(this);
+    _this.value = null;
+    _this.selected = false;
+    _this.disabled = false;
+    _this._pressed = false;
+    // @note: passive: false in event listener declaration lose the binding
+    _this._onEvent = _this._onEvent.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+  _createClass(ScButton, [{
+    key: "midiValue",
+    set:
+    // sc-midi controller interface
+    function set(value) {
+      if (this.disabled) {
+        return;
+      }
+      var eventName = value === 0 ? 'release' : 'press';
+      this._dispatchEvent(eventName);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <button\n        tabindex=\"-1\"\n        class=\"", "\"\n        @mousedown=\"", "\"\n        @mouseup=\"", "\"\n\n        @touchstart=\"", "\"\n        @touchend=\"", "\"\n        @contextmenu=\"", "\"\n      >\n        <slot>", "</slot>\n      </button>\n    "])), this.selected ? 'selected' : '', this._onEvent, this._onEvent, {
+        handleEvent: this._onEvent,
+        passive: false
+      }, this._onEvent, this._preventContextMenu, this.value);
+    }
+  }, {
+    key: "connectedCallback",
+    value: function connectedCallback() {
+      _get(_getPrototypeOf(ScButton.prototype), "connectedCallback", this).call(this);
+      if (!this.hasAttribute('tabindex')) {
+        this.setAttribute('tabindex', 0);
+      }
+    }
+  }, {
+    key: "_onEvent",
+    value: function _onEvent(e) {
+      e.preventDefault();
+      if (this.disabled) {
+        return;
+      }
+      var eventName = e.type === 'touchend' || e.type === 'mouseup' ? 'release' : 'press';
+
+      // add class for visual feedback
+      if (eventName === 'release') {
+        this.shadowRoot.querySelector('button').classList.remove('active');
+      } else {
+        this.shadowRoot.querySelector('button').classList.add('active');
+      }
+      this._dispatchEvent(eventName);
+    }
+  }, {
+    key: "_dispatchEvent",
+    value: function _dispatchEvent(eventName) {
+      // we don't want to trigger a release if no pressed has been recorded
+      if (eventName === 'release' && this._pressed === false) {
+        return;
+      }
+      this._pressed = eventName === 'press';
+      var event = new CustomEvent(eventName, {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value: this.value
+        }
+      });
+      this.dispatchEvent(event);
+      if (eventName === 'press') {
+        var inputEvent = new CustomEvent('input', {
+          bubbles: true,
+          composed: true,
+          detail: {
+            value: this.value
+          }
+        });
+        this.dispatchEvent(inputEvent);
+      }
+    }
+  }]);
+  return ScButton;
+}(_ScElement_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+_defineProperty(ScButton, "properties", {
+  value: {
+    type: String,
+    reflect: true
+  },
+  midiValue: {
+    type: Number
+  },
+  selected: {
+    type: Boolean,
+    reflect: true
+  },
+  disabled: {
+    type: Boolean,
+    reflect: true
+  }
+});
+_defineProperty(ScButton, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    :host {\n      vertical-align: top;\n      display: inline-block;\n      box-sizing: border-box;\n      overflow: hidden;\n      width: 200px;\n      height: 30px;\n      font-size: var(--sc-font-size);\n      color: #ffffff;\n      border-radius:  1px;\n      border: 1px solid var(--sc-color-primary-3);\n\n      --sc-button-selected: var(--sc-color-secondary-3);\n    }\n\n    :host([disabled]) {\n      opacity: 0.7;\n    }\n\n    :host([hidden]) {\n      display: none\n    }\n\n    :host(:focus), :host(:focus-visible) {\n      outline: none;\n      box-shadow: 0 0 2px var(--sc-color-primary-5);\n    }\n\n    :host([selected]) {\n      border: 1px solid var(--sc-button-selected);\n    }\n\n    button {\n      width: 100%;\n      height: 100%;\n      box-sizing: border-box;\n      font-family: var(--sc-font-family);\n      background-color: var(--sc-color-primary-2);\n      border: none;\n      font-size: inherit;\n      cursor: pointer;\n      color: inherit;\n    }\n\n    /* remove default button focus */\n    button:focus, button:focus-visible {\n      outline: none;\n    }\n\n    button:hover {\n      background-color: var(--sc-color-primary-3);\n    }\n\n    :host([disabled]) button:hover {\n      background-color: var(--sc-color-primary-2);\n      cursor: default;\n    }\n\n    /* use class because :active does not work in Firefox because of e.preventDefault(); */\n    button.active {\n      background-color: var(--sc-color-primary-4);\n    }\n\n    button.selected {\n      background-color: var(--sc-button-selected);\n    }\n\n    :host([disabled]) button.selected:hover {\n      background-color: var(--sc-button-selected);\n      cursor: default;\n    }\n  "]))));
+if (customElements.get('sc-button') === undefined) {
+  customElements.define('sc-button', ScButton);
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScButton);
+
+/***/ }),
+
+/***/ "./node_modules/@ircam/sc-components/sc-number.js":
+/*!********************************************************!*\
+  !*** ./node_modules/@ircam/sc-components/sc-number.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
+/* harmony import */ var lit_directives_class_map_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lit/directives/class-map.js */ "./node_modules/lit/directives/class-map.js");
+/* harmony import */ var number_precision__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! number-precision */ "./node_modules/number-precision/build/index.es.js");
+/* harmony import */ var _ScElement_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ScElement.js */ "./node_modules/@ircam/sc-components/ScElement.js");
+/* harmony import */ var _styles_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styles.js */ "./node_modules/@ircam/sc-components/styles.js");
+/* harmony import */ var _sc_speed_surface_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./sc-speed-surface.js */ "./node_modules/@ircam/sc-components/sc-speed-surface.js");
+var _templateObject, _templateObject2, _templateObject3;
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get.bind(); } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+
+
+
+
+var ScNumber = /*#__PURE__*/function (_ScElement) {
+  _inherits(ScNumber, _ScElement);
+  var _super = _createSuper(ScNumber);
+  function ScNumber() {
+    var _this;
+    _classCallCheck(this, ScNumber);
+    _this = _super.call(this);
+    _this._min = -Infinity;
+    _this._max = +Infinity;
+    _this._value = 0;
+    _this._displayValue = '0';
+    _this.integer = false;
+    _this.disabled = false;
+    _this.readonly = false;
+    _this._valueChanged = false;
+    _this._updateValue1 = _this._updateValueFromPointer(1);
+    _this._updateValue01 = _this._updateValueFromPointer(0.1);
+    _this._updateValue001 = _this._updateValueFromPointer(0.01);
+    _this._updateValue0001 = _this._updateValueFromPointer(0.001);
+    _this._updateValue00001 = _this._updateValueFromPointer(0.0001);
+    _this._updateValue000001 = _this._updateValueFromPointer(0.00001);
+    _this._updateValue0000001 = _this._updateValueFromPointer(0.000001);
+    _this._hasVirtualKeyboard = false;
+    _this._numKeyPressed = 0;
+    _this._onKeyDown = _this._onKeyDown.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+  _createClass(ScNumber, [{
+    key: "min",
+    get: function get() {
+      return this._min;
+    },
+    set: function set(value) {
+      this._min = Math.min(value, this._max);
+      if (this._value < this._min) {
+        this.value = this._min;
+        this._emitChange();
+      }
+    }
+  }, {
+    key: "max",
+    get: function get() {
+      return this._max;
+    },
+    set: function set(value) {
+      this._max = Math.max(value, this._min);
+      if (this._value > this._max) {
+        this.value = this._max;
+        this._emitChange();
+      }
+    }
+  }, {
+    key: "value",
+    get: function get() {
+      return this._value;
+    },
+    set: function set(val) {
+      val = Math.min(this._max, Math.max(this._min, val));
+      if (val !== this._value) {
+        this._value = val;
+        this._displayValue = val.toString();
+        this.requestUpdate();
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var parts = this._displayValue.split('.');
+      if (!parts[1]) {
+        parts[1] = [];
+      }
+      var emptySpace = ' ';
+      var characterWidth = 7; // in pixels
+      var isEdited = {
+        edited: this._numKeyPressed !== 0
+      };
+      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <div\n        tabindex=\"-1\"\n        class=\"container\"\n        @focus=\"", "\"\n        @blur=\"", "\"\n        @touchstart=\"", "\"\n        @touchend=\"", "\"\n        @contextmenu=\"", "\"\n      >\n        <div class=\"info ", "\"></div>\n\n        <div class=\"content\">\n          <span class=\"z\">\n            ", "\n            <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n          </span>\n          ", "\n        </div>\n      </div>\n    "])), this._onFocus, this._onBlur, this._triggerFocus, this._openVirtualKeyboard, this._preventContextMenu, (0,lit_directives_class_map_js__WEBPACK_IMPORTED_MODULE_1__.classMap)(isEdited), parts[0], this._updateValue1, !this.integer ? (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n              <span class=\"z\">\n                .\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>\n              <span class=\"z\">\n                ", "\n                <sc-speed-surface @input=\"", "\"></sc-speed-surface>\n              </span>"])), parts[1][0] || emptySpace, this._updateValue01, parts[1][1] || emptySpace, this._updateValue001, parts[1][2] || emptySpace, this._updateValue0001, parts[1][3] || emptySpace, this._updateValue00001, parts[1][4] || emptySpace, this._updateValue000001, parts[1][5] || emptySpace, this._updateValue0000001) : lit__WEBPACK_IMPORTED_MODULE_0__.nothing);
+    }
+  }, {
+    key: "connectedCallback",
+    value: function connectedCallback() {
+      _get(_getPrototypeOf(ScNumber.prototype), "connectedCallback", this).call(this);
+      if (!this.hasAttribute('tabindex')) {
+        this.setAttribute('tabindex', 0);
+      }
+    }
+
+    // force focus for touchstart (is prevented by speed-surfaces...)
+  }, {
+    key: "_triggerFocus",
+    value: function _triggerFocus(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    // this only works on touchend
+  }, {
+    key: "_openVirtualKeyboard",
+    value: function _openVirtualKeyboard(e) {
+      var _this2 = this;
+      e.preventDefault(); // go to end of page
+      e.stopPropagation();
+      if (this._hasVirtualKeyboard) {
+        return;
+      }
+      if (this.disabled || this.readonly) {
+        return;
+      }
+
+      // lock speed surface events
+      this._hasVirtualKeyboard = true;
+      var $number = document.createElement('input');
+      $number.type = 'number';
+      this.shadowRoot.appendChild($number);
+      $number.focus();
+      $number.click();
+      $number.addEventListener('input', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        // when "." or "," is pressed e.target.value is empty in chrome
+        // @todo - check firefox and safari
+        if (e.target.value) {
+          _this2.value = parseFloat(e.target.value);
+          _this2._emitInput();
+        }
+      });
+      $number.addEventListener('change', function (e) {
+        e.preventDefault(); // go to end of page
+        e.stopPropagation();
+
+        // when "." or "," is pressed e.target.value is empty in chrome
+        // @todo - check firefox and safari
+        if (e.target.value) {
+          _this2.value = parseFloat(e.target.value);
+        }
+
+        // this prevents the focus to go to the next focusable element
+        _this2.focus();
+        // clean the box
+        $number.remove();
+        _this2._hasVirtualKeyboard = false;
+        _this2._emitInput();
+        _this2._emitChange();
+      });
+    }
+
+    // keyboard interactions
+  }, {
+    key: "_onFocus",
+    value: function _onFocus() {
+      this._numKeyPressed = 0;
+      window.addEventListener('keydown', this._onKeyDown);
+    }
+  }, {
+    key: "_onBlur",
+    value: function _onBlur() {
+      this._updateValueFromDisplayValue();
+      window.removeEventListener('keydown', this._onKeyDown);
+    }
+  }, {
+    key: "_onKeyDown",
+    value: function _onKeyDown(e) {
+      if (this.disabled || this.readonly) {
+        return;
+      }
+      var validSymbols = this.integer ? ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'] : ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '.', ','];
+      if (validSymbols.indexOf(e.key) !== -1) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (this._numKeyPressed === 0) {
+          this._displayValue = '';
+        }
+        var symbol = e.key;
+        if (symbol === ',') {
+          symbol = '.';
+        }
+        this._displayValue += symbol;
+        this._numKeyPressed += 1;
+        this.requestUpdate();
+      }
+
+      // handle backspace
+      if (e.key === 'Backspace' || e.which === 8) {
+        e.preventDefault();
+        e.stopPropagation();
+        // if last character is '.' remove it automatically
+        if (this._displayValue[this._displayValue.length - 1] === '.') {
+          this._displayValue = this._displayValue.substring(0, this._displayValue.length - 1);
+        }
+        this._displayValue = this._displayValue.substring(0, this._displayValue.length - 1);
+        this._numKeyPressed += 1;
+        this.requestUpdate();
+      }
+
+      // Tab has the same effect as it triggers blur
+      if (e.key === 'Enter' || e.which === 13) {
+        e.preventDefault();
+        e.stopPropagation();
+        this._updateValueFromDisplayValue();
+      }
+    }
+  }, {
+    key: "_updateValueFromPointer",
+    value: function _updateValueFromPointer(step) {
+      var _this3 = this;
+      return function (e) {
+        e.stopPropagation();
+        if (_this3.disabled || _this3.readonly) {
+          return;
+        }
+
+        // bypass speed surface when virtual keyboard is opened
+        if (_this3._hasVirtualKeyboard) {
+          return;
+        }
+
+        // do all computation if not mouseup or touchend,
+        // else only propagate the `change event`
+        if (e.detail.pointerId !== null) {
+          // ignore very small movements
+          if (Math.abs(e.detail.dy) < 0.02) {
+            return;
+          }
+          var lastValue = _this3._value;
+          var sign = e.detail.dy < 0 ? -1 : 1;
+          // heuristically adjust sensiblity
+          var scale = 8;
+          var exponent = 1.2;
+          // apply scale and exponent factors
+          var dy = Math.pow(Math.abs(e.detail.dy * scale), exponent);
+          // clamp at 1
+          dy = Math.max(1, dy);
+          // reapply sign
+          dy = dy * sign;
+          _this3._value += step * dy;
+          // crop at step (use precision arythmetics)
+          _this3._value = number_precision__WEBPACK_IMPORTED_MODULE_2__["default"].times(Math.round(_this3._value / step), step);
+          _this3._value = Math.max(_this3._min, Math.min(_this3._max, _this3._value));
+
+          // format display value to show trailing zeros...)
+          var displayValue = _this3._value.toString();
+          var valueParts = displayValue.toString().split('.');
+          var stepDecimals = step.toString().split('.')[1];
+          if (stepDecimals) {
+            if (!valueParts[1]) {
+              valueParts[1] = [];
+            }
+            while (valueParts[1].length < stepDecimals.length) {
+              valueParts[1] += '0';
+            }
+          }
+          _this3._displayValue = valueParts.join('.');
+          if (_this3._value !== lastValue) {
+            _this3._valueChanged = true;
+            _this3._emitInput();
+          }
+        } else {
+          // this triggers a change when we select the box without changing the value
+          if (_this3._valueChanged === true) {
+            _this3._valueChanged = false;
+            _this3._emitChange();
+          }
+        }
+        _this3.requestUpdate();
+      };
+    }
+  }, {
+    key: "_updateValueFromDisplayValue",
+    value: function _updateValueFromDisplayValue() {
+      if (this._numKeyPressed > 0) {
+        this._value = this.integer ? parseInt(this._displayValue) : parseFloat(this._displayValue);
+
+        // modify displayValue only if needed
+        if (this._value < this._min || this._value > this._max) {
+          this._value = Math.max(this._min, Math.min(this._max, this._value));
+          this._displayValue = this._value.toString();
+        }
+        this._numKeyPressed = 0;
+        this._emitInput();
+        this._emitChange();
+        this.requestUpdate();
+      }
+    }
+  }, {
+    key: "_emitInput",
+    value: function _emitInput() {
+      var event = new CustomEvent('input', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value: this._value
+        }
+      });
+      this.dispatchEvent(event);
+    }
+  }, {
+    key: "_emitChange",
+    value: function _emitChange() {
+      var event = new CustomEvent('change', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value: this._value
+        }
+      });
+      this.dispatchEvent(event);
+    }
+  }]);
+  return ScNumber;
+}(_ScElement_js__WEBPACK_IMPORTED_MODULE_3__["default"]);
+_defineProperty(ScNumber, "properties", {
+  min: {
+    type: Number,
+    reflect: true
+  },
+  max: {
+    type: Number,
+    reflect: true
+  },
+  value: {
+    type: Number
+  },
+  integer: {
+    type: Boolean,
+    reflect: true
+  },
+  readonly: {
+    type: Boolean,
+    reflect: true
+  },
+  disabled: {
+    type: Boolean,
+    reflect: true
+  }
+});
+_defineProperty(ScNumber, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    :host {\n      vertical-align: top;\n      display: inline-block;\n      width: 100px;\n      height: 30px;\n      box-sizing: border-box;\n      font-family: var(--sc-font-family);\n      font-size: var(--sc-font-size);\n      color: #ffffff;\n      position: relative;\n    }\n\n    :host([disabled]) {\n      opacity: 0.7;\n    }\n\n    :host([hidden]) {\n      display: none\n    }\n\n    :host(:focus), :host(:focus-visible) {\n      outline: none;\n      box-shadow: 0 0 2px var(--sc-color-primary-5);\n    }\n\n    :host([disabled]:focus), :host([disabled]:focus-visible),\n    :host([readonly]:focus), :host([readonly]:focus-visible) {\n      outline: none;\n      box-shadow: none;\n    }\n\n    .container {\n      overflow-y: hidden;\n      position: relative;\n      box-sizing: border-box;\n      width: 100%;\n      height: 100%;\n      background-color: var(--sc-color-primary-2);\n      border: 1px solid var(--sc-color-primary-3);\n      user-select: none;\n    }\n\n    .container:focus {\n      outline: none;\n    }\n\n    .info {\n      width: 15px;\n      height: 100%;\n      display: inline-block;\n      background-color: var(--sc-color-primary-3);\n      box-sizing: border-box;\n    }\n\n    .container:focus .info {\n      outline: 2px solid var(--sc-color-secondary-2);\n    }\n\n    :host([disabled]) .container:focus .info,\n    :host([readonly]) .container:focus .info {\n      outline: none;\n    }\n\n    .info.edited {\n      background-color: var(--sc-color-primary-4);\n    }\n\n    .content {\n      display: flex;\n      flex-wrap: wrap;\n      box-sizing: border-box;\n      position: absolute;\n      top: 0;\n      left: 15px;\n      padding-left: 12px;\n      height: 100%;\n      width: calc(100% - 15px);\n    }\n\n    :host([readonly]) .info {\n      width: 5px;\n      background-color: var(--sc-color-primary-2);\n    }\n\n    :host([readonly]) .content {\n      left: 5px;\n      width: calc(100% - 5px);\n    }\n\n    .z {\n      display: inline-block;\n      vertical-align: top;\n      text-align: center;\n      position: relative;\n/*      width: 7px;*/\n      height: 100%;\n      display: inline-flex;\n      align-items: center;\n    }\n\n    /* contains the integer part which can be larger than one character */\n    .z:first-child {\n      width: auto;\n      min-width: 7px;\n    }\n\n    /* full width if integer */\n    :host([integer]) .z {\n      width: 100%;\n      text-align: left;\n    }\n\n    .z sc-speed-surface {\n      position: absolute;\n      top: 0;\n      left: 0;\n      z-index: 1;\n      width: 100%;\n      height: 100%;\n    }\n\n    input[type=\"number\"] {\n      position: absolute;\n      top: 1px;\n      left: 1px;\n      width: 1px;\n      height: 1px;\n      padding: 0;\n      border: none;\n      background-color: var(--sc-color-primary-3);\n    }\n\n    input[type=\"number\"]:focus {\n      outline: none;\n    }\n  "]))));
+if (customElements.get('sc-number') === undefined) {
+  customElements.define('sc-number', ScNumber);
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScNumber);
+
+/***/ }),
+
+/***/ "./node_modules/@ircam/sc-components/sc-position-surface.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@ircam/sc-components/sc-position-surface.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
+/* harmony import */ var _ScElement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScElement.js */ "./node_modules/@ircam/sc-components/ScElement.js");
+var _templateObject, _templateObject2;
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get.bind(); } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+var ScPositionSurface = /*#__PURE__*/function (_ScElement) {
+  _inherits(ScPositionSurface, _ScElement);
+  var _super = _createSuper(ScPositionSurface);
+  function ScPositionSurface() {
+    var _this;
+    _classCallCheck(this, ScPositionSurface);
+    _this = _super.call(this);
+    _this.xRange = [0, 1];
+    _this.yRange = [0, 1];
+    _this._activePointers = new Map();
+    _this._pointerIds = []; // we want to keep the order of appearance consistant
+
+    // @note: passive: false in event listener declaration lose the binding
+    _this._mouseMove = _this._mouseMove.bind(_assertThisInitialized(_this));
+    _this._mouseUp = _this._mouseUp.bind(_assertThisInitialized(_this));
+    _this._touchStart = _this._touchStart.bind(_assertThisInitialized(_this));
+    _this._touchMove = _this._touchMove.bind(_assertThisInitialized(_this));
+    _this._touchEnd = _this._touchEnd.bind(_assertThisInitialized(_this));
+    _this._propagateValues = _this._propagateValues.bind(_assertThisInitialized(_this));
+    _this._resizeObserver = null;
+    _this._rafId = null;
+    return _this;
+  }
+  _createClass(ScPositionSurface, [{
+    key: "render",
+    value: function render() {
+      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <div\n        @mousedown=\"", "\"\n        @touchstart=\"", "\"\n        @contextmenu=\"", "\"\n      ></div>\n    "])), this._mouseDown, {
+        handleEvent: this._touchStart,
+        passive: false
+      }, this._preventContextMenu);
+    }
+  }, {
+    key: "connectedCallback",
+    value: function connectedCallback() {
+      var _this2 = this;
+      _get(_getPrototypeOf(ScPositionSurface.prototype), "connectedCallback", this).call(this);
+      this._resizeObserver = new ResizeObserver(function (entries) {
+        var entry = entries[0];
+        var _entry$contentRect = entry.contentRect,
+          width = _entry$contentRect.width,
+          height = _entry$contentRect.height;
+        var xDelta = _this2.xRange[1] - _this2.xRange[0];
+        var yDelta = _this2.yRange[1] - _this2.yRange[0];
+        _this2._px2x = function (px) {
+          return px / width * xDelta + _this2.xRange[0];
+        };
+        _this2._px2y = function (px) {
+          return px / height * yDelta + _this2.yRange[0];
+        };
+      });
+      this._resizeObserver.observe(this);
+    }
+  }, {
+    key: "disconnectedCallback",
+    value: function disconnectedCallback() {
+      this._resizeObserver.disconnect();
+      _get(_getPrototypeOf(ScPositionSurface.prototype), "disconnectedCallback", this).call(this);
+    }
+  }, {
+    key: "_mouseDown",
+    value: function _mouseDown(e) {
+      window.addEventListener('mousemove', this._mouseMove, {
+        passive: false
+      });
+      window.addEventListener('mouseup', this._mouseUp);
+      this._pointerIds.push('mouse');
+      this._activePointers.set('mouse', e);
+      this._requestUserSelectNoneOnBody();
+      this._requestPropagateValues(e);
+    }
+  }, {
+    key: "_mouseMove",
+    value: function _mouseMove(e) {
+      this._activePointers.set('mouse', e);
+      this._requestPropagateValues(e);
+    }
+  }, {
+    key: "_mouseUp",
+    value: function _mouseUp(e) {
+      window.removeEventListener('mousemove', this._mouseMove);
+      window.removeEventListener('mouseup', this._mouseUp);
+      this._pointerIds.splice(this._pointerIds.indexOf('mouse'));
+      this._activePointers["delete"]('mouse');
+      this._cancelUserSelectNoneOnBody();
+
+      // propagate outside the shadow dom boudaries
+      // cf. https://lit-element.polymer-project.org/guide/events#custom-events
+      var event = new CustomEvent('pointerend', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          pointerId: 'mouse'
+        }
+      });
+      this.dispatchEvent(event);
+      this._requestPropagateValues(e);
+    }
+  }, {
+    key: "_touchStart",
+    value: function _touchStart(e) {
+      e.preventDefault(); // iOS needs that to prevent scrolling
+
+      if (this._pointerIds.length === 0) {
+        window.addEventListener('touchmove', this._touchMove, {
+          passive: false
+        });
+        window.addEventListener('touchend', this._touchEnd);
+        window.addEventListener('touchcancel', this._touchEnd);
+        this._requestUserSelectNoneOnBody();
+      }
+      var _iterator = _createForOfIteratorHelper(e.changedTouches),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var touch = _step.value;
+          var id = touch.identifier;
+          this._pointerIds.push(id);
+          this._activePointers.set(id, touch);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      this._requestPropagateValues(e);
+    }
+  }, {
+    key: "_touchMove",
+    value: function _touchMove(e) {
+      e.preventDefault(); // prevent scrolling
+      var _iterator2 = _createForOfIteratorHelper(e.changedTouches),
+        _step2;
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var touch = _step2.value;
+          var id = touch.identifier;
+          // only consider touches that started in the area
+          if (this._pointerIds.indexOf(id) !== -1) {
+            this._activePointers.set(id, touch);
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+      this._requestPropagateValues(e);
+    }
+  }, {
+    key: "_touchEnd",
+    value: function _touchEnd(e) {
+      var _iterator3 = _createForOfIteratorHelper(e.changedTouches),
+        _step3;
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var touch = _step3.value;
+          var pointerId = touch.identifier;
+          var index = this._pointerIds.indexOf(pointerId);
+          // only consider tracked touches
+          if (index !== -1) {
+            this._pointerIds.splice(index, 1);
+            this._activePointers["delete"](pointerId);
+
+            // propagate outside the shadow dom boudaries
+            // cf. https://lit-element.polymer-project.org/guide/events#custom-events
+            var event = new CustomEvent('pointerend', {
+              bubbles: true,
+              composed: true,
+              detail: {
+                pointerId: pointerId
+              }
+            });
+            this.dispatchEvent(event);
+          }
+        }
+
+        // if that's the last tracked event remove listeners
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+      if (this._pointerIds.length === 0) {
+        window.removeEventListener('touchmove', this._touchMove);
+        window.removeEventListener('touchend', this._touchEnd);
+        window.removeEventListener('touchcancel', this._touchEnd);
+        this._cancelUserSelectNoneOnBody(e);
+      }
+      this._requestPropagateValues(e);
+    }
+  }, {
+    key: "_requestPropagateValues",
+    value: function _requestPropagateValues(e) {
+      var _this3 = this;
+      window.cancelAnimationFrame(this._rafId);
+      this._rafId = window.requestAnimationFrame(function () {
+        return _this3._propagateValues(e);
+      });
+    }
+  }, {
+    key: "_propagateValues",
+    value: function _propagateValues(e) {
+      var _this4 = this;
+      var rect = this.getBoundingClientRect();
+      var values = this._pointerIds.map(function (pointerId) {
+        var event = _this4._activePointers.get(pointerId);
+        // this seems quite robust
+        // https://stackoverflow.com/questions/55677/how-do-i-get-the-coordinates-of-a-mouse-click-on-a-canvas-element/18053642#18053642
+        var x = event.clientX - rect.left;
+        var scaledX = _this4._px2x(x);
+        var y = event.clientY - rect.top;
+        var scaledY = _this4._px2y(y);
+        return {
+          x: scaledX,
+          y: scaledY,
+          pointerId: pointerId
+        };
+      });
+
+      // propagate outside the shadow DOM boundaries
+      // cf. https://lit-element.polymer-project.org/guide/events#custom-events
+      var event = new CustomEvent('input', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value: values
+        }
+      });
+      this.dispatchEvent(event);
+    }
+  }]);
+  return ScPositionSurface;
+}(_ScElement_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+_defineProperty(ScPositionSurface, "properties", {
+  xRange: {
+    type: Array,
+    attribute: 'x-range'
+  },
+  yRange: {
+    type: Array,
+    attribute: 'y-range'
+  }
+});
+_defineProperty(ScPositionSurface, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    :host {\n      display: inline-block;\n      box-sizing: border-box;\n      width: 100%;\n      height: 100%;\n    }\n\n    div {\n      width: 100%;\n      height: 100%;\n    }\n  "]))));
+if (customElements.get('sc-position-surface') === undefined) {
+  customElements.define('sc-position-surface', ScPositionSurface);
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScPositionSurface);
+
+/***/ }),
+
+/***/ "./node_modules/@ircam/sc-components/sc-select.js":
+/*!********************************************************!*\
+  !*** ./node_modules/@ircam/sc-components/sc-select.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
+/* harmony import */ var lit_directives_repeat_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lit/directives/repeat.js */ "./node_modules/lit/directives/repeat.js");
+/* harmony import */ var _ScElement_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ScElement.js */ "./node_modules/@ircam/sc-components/ScElement.js");
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+
+var itemId = 0;
+var ScSelect = /*#__PURE__*/function (_ScElement) {
+  _inherits(ScSelect, _ScElement);
+  var _super = _createSuper(ScSelect);
+  function ScSelect() {
+    var _this;
+    _classCallCheck(this, ScSelect);
+    _this = _super.call(this);
+    _this.options = [];
+    _this.value = null;
+    _this.disabled = false;
+    _this.placeholder = '';
+    return _this;
+  }
+  _createClass(ScSelect, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <select\n        ?disabled=", "\n        @change=", "\n      >\n        ", "\n        ", "\n      </select>\n    "])), this.disabled, this._dispatchEvent, this.placeholder ? (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["<option value=\"\">", "</option"])), this.placeholder) : lit__WEBPACK_IMPORTED_MODULE_0__.nothing, (0,lit_directives_repeat_js__WEBPACK_IMPORTED_MODULE_1__.repeat)(this.options, function () {
+        return "sc-select-".concat(itemId++);
+      }, function (value) {
+        return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n            <option\n              value=", "\n              ?selected=", "\n            >", "</option>\n          "])), value, value === _this2.value, value);
+      }));
+    }
+  }, {
+    key: "_dispatchEvent",
+    value: function _dispatchEvent(e) {
+      if (this.disabled) {
+        return;
+      }
+      var index = this.placeholder ? e.target.selectedIndex - 1 : e.target.selectedIndex;
+      this.value = this.options[index];
+      var changeEvent = new CustomEvent('change', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value: this.value
+        }
+      });
+      this.dispatchEvent(changeEvent);
+    }
+  }]);
+  return ScSelect;
+}(_ScElement_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
+_defineProperty(ScSelect, "properties", {
+  options: {
+    type: Object
+  },
+  value: {
+    type: String,
+    reflect: true
+  },
+  placeholder: {
+    type: String,
+    reflect: true
+  },
+  disabled: {
+    type: Boolean,
+    reflect: true
+  }
+});
+_defineProperty(ScSelect, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    :host {\n      display: inline-block;\n      box-sizing: border-box;\n      vertical-align: top;\n      height: 30px;\n      width: 200px;\n      font-family: var(--sc-font-family);\n      font-size: var(--sc-font-size);\n      color: #fff;\n      border-radius: 2px;\n      overflow: auto;\n    }\n\n    :host([hidden]) {\n      display: none\n    }\n\n    :host(:focus), :host(:focus-visible) {\n      outline: none;\n      box-shadow: 0 0 2px var(--sc-color-primary-5);\n    }\n\n    select {\n      display: block;\n      font-family: inherit;\n      font-size: inherit;\n      width: 100%;\n      height: 100%;\n      text-indent: 4px;\n    }\n\n    select:focus {\n      outline: none;\n    }\n\n    option {\n      text-indent: 4px;\n    }\n  "]))));
+if (customElements.get('sc-select') === undefined) {
+  customElements.define('sc-select', ScSelect);
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScSelect);
+
+/***/ }),
+
+/***/ "./node_modules/@ircam/sc-components/sc-slider.js":
+/*!********************************************************!*\
+  !*** ./node_modules/@ircam/sc-components/sc-slider.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
+/* harmony import */ var _ScElement_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScElement.js */ "./node_modules/@ircam/sc-components/ScElement.js");
+/* harmony import */ var _utils_getScale_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/getScale.js */ "./node_modules/@ircam/sc-components/utils/getScale.js");
+/* harmony import */ var _utils_getClipper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/getClipper.js */ "./node_modules/@ircam/sc-components/utils/getClipper.js");
+/* harmony import */ var _sc_position_surface_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./sc-position-surface.js */ "./node_modules/@ircam/sc-components/sc-position-surface.js");
+/* harmony import */ var _sc_number_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./sc-number.js */ "./node_modules/@ircam/sc-components/sc-number.js");
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get.bind(); } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+
+
+
+
+var ScSlider = /*#__PURE__*/function (_ScElement) {
+  _inherits(ScSlider, _ScElement);
+  var _super = _createSuper(ScSlider);
+  function ScSlider() {
+    var _this;
+    _classCallCheck(this, ScSlider);
+    _this = _super.call(this);
+    _this._scale = null;
+    _this._clipper = null;
+    _this._min = 0;
+    _this._max = 1;
+    _this._step = 1e-3;
+
+    // this.mode = 'jump'; // @todo: relative
+    _this.min = 0;
+    _this.max = 1;
+    _this.step = 1e-3;
+    _this.value = 0.5;
+    _this.orientation = 'horizontal';
+    _this.relative = false;
+    _this.numberBox = false;
+    _this._pointerId = null;
+    // for relative interaction
+    _this._startPointerValue = null;
+    _this._startSliderValue = null;
+    return _this;
+  }
+  _createClass(ScSlider, [{
+    key: "min",
+    get: function get() {
+      return this._min;
+    },
+    set: function set(value) {
+      this._min = value;
+      this._updateScales();
+    }
+  }, {
+    key: "max",
+    get: function get() {
+      return this._max;
+    },
+    set: function set(value) {
+      this._max = value;
+      this._updateScales();
+    }
+  }, {
+    key: "step",
+    get: function get() {
+      return this._step;
+    },
+    set: function set(value) {
+      this._step = value;
+      this._updateScales();
+    }
+  }, {
+    key: "midiValue",
+    get: function get() {
+      return Math.round((this.value - this.min) / (this.max - this.min) * 127.);
+    },
+    set: function set(value) {
+      var newValue = (this.max - this.min) * value / 127. + this.min;
+      this.value = this._clipper(newValue);
+      var inputEvent = new CustomEvent('input', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value: this.value
+        }
+      });
+      this.dispatchEvent(inputEvent);
+      var changeEvent = new CustomEvent('change', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value: this.value
+        }
+      });
+      this.dispatchEvent(changeEvent);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var size = Math.max(0, this._scale(this.value));
+      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <div @contextmenu=", ">\n        <svg viewbox=\"0 0 1000 1000\" preserveAspectRatio=\"none\">\n          ", "\n        </svg>\n        <sc-position-surface\n          x-range=", "\n          y-range=", "\n          clamp\n          @input=", "\n          @pointerend=", "\n        ></sc-position-surface>\n      </div>\n      ", "\n    "])), this._preventContextMenu, this.orientation === 'horizontal' ? (0,lit__WEBPACK_IMPORTED_MODULE_0__.svg)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n                <rect class=\"background\" width=\"1000\" height=\"1000\"></rect>\n                <rect class=\"foreground\" width=\"", "\" height=\"1000\"></rect>\n              "])), size) : (0,lit__WEBPACK_IMPORTED_MODULE_0__.svg)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n                <rect class=\"foreground\" width=\"1000\" height=\"1000\"></rect>\n                <rect class=\"background\" width=\"1000\" height=\"", "\"></rect>\n              "])), 1000 - size), JSON.stringify([this.min, this.max]), JSON.stringify([this.max, this.min]), this._onInput, this._onChange, this.numberBox ? (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n          <sc-number\n            min=", "\n            max=", "\n            value=", "\n            @input=", "\n          ></sc-number>\n        "])), this.min, this.max, this.value, this._onNumberBoxChange) : lit__WEBPACK_IMPORTED_MODULE_0__.nothing);
+    }
+  }, {
+    key: "connectedCallback",
+    value: function connectedCallback() {
+      _get(_getPrototypeOf(ScSlider.prototype), "connectedCallback", this).call(this);
+      if (!this.hasAttribute('tabindex')) {
+        this.setAttribute('tabindex', 0);
+      }
+    }
+  }, {
+    key: "_updateScales",
+    value: function _updateScales() {
+      if (this._max < this._min) {
+        var tmp = this._max;
+        this._max = this._min;
+        this._min = tmp;
+      }
+
+      // define transfert functions and scales
+      this._scale = (0,_utils_getScale_js__WEBPACK_IMPORTED_MODULE_2__["default"])([this._min, this._max], [0, 1000]); // 0 1000 is the svg viewport
+      this._clipper = (0,_utils_getClipper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(this._min, this._max, this._step);
+      // clean current value
+      this.value = this._clipper(this.value);
+    }
+  }, {
+    key: "_onNumberBoxChange",
+    value: function _onNumberBoxChange(e) {
+      e.stopPropagation();
+      if (this.disabled) {
+        return;
+      }
+      this.value = this._clipper(e.detail.value);
+      var inputEvent = new CustomEvent('input', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value: this.value
+        }
+      });
+      this.dispatchEvent(inputEvent);
+      var changeEvent = new CustomEvent('change', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value: this.value
+        }
+      });
+      this.dispatchEvent(changeEvent);
+    }
+  }, {
+    key: "_onChange",
+    value: function _onChange(e) {
+      if (this.disabled) {
+        return;
+      }
+      if (e.detail.pointerId === this._pointerId) {
+        this._pointerId = null;
+        var event = new CustomEvent('change', {
+          bubbles: true,
+          composed: true,
+          detail: {
+            value: this.value
+          }
+        });
+        this.dispatchEvent(event);
+      }
+    }
+  }, {
+    key: "_onInput",
+    value: function _onInput(e) {
+      // stop propagation of event from sc-position-surface
+      e.stopPropagation();
+      if (this.disabled) {
+        return;
+      }
+      if (this.relative) {
+        // consider only first pointer in list, we don't want a multitouch slider...
+        if (e.detail.value[0] && (this._pointerId === null || e.detail.value[0].pointerId === this._pointerId)) {
+          var _e$detail$value$ = e.detail.value[0],
+            x = _e$detail$value$.x,
+            y = _e$detail$value$.y,
+            pointerId = _e$detail$value$.pointerId;
+          var value = this.orientation === 'horizontal' ? x : y;
+          if (this._pointerId === null) {
+            this._startPointerValue = value;
+            this._startSliderValue = this.value;
+          }
+          this._pointerId = pointerId;
+          var diff = value - this._startPointerValue;
+          this.value = this._clipper(this._startSliderValue + diff);
+          var event = new CustomEvent('input', {
+            bubbles: true,
+            composed: true,
+            detail: {
+              value: this.value
+            }
+          });
+          this.dispatchEvent(event);
+        }
+      } else {
+        // consider only first pointer in list, we don't want a multitouch slider...
+        if (e.detail.value[0] && (this._pointerId === null || e.detail.value[0].pointerId === this._pointerId)) {
+          var _e$detail$value$2 = e.detail.value[0],
+            _x = _e$detail$value$2.x,
+            _y = _e$detail$value$2.y,
+            _pointerId = _e$detail$value$2.pointerId;
+          var _value = this.orientation === 'horizontal' ? _x : _y;
+          this._pointerId = _pointerId;
+          this.value = this._clipper(_value);
+          var _event = new CustomEvent('input', {
+            bubbles: true,
+            composed: true,
+            detail: {
+              value: this.value
+            }
+          });
+          this.dispatchEvent(_event);
+        }
+      }
+    }
+  }]);
+  return ScSlider;
+}(_ScElement_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+_defineProperty(ScSlider, "properties", {
+  min: {
+    type: Number,
+    reflect: true
+  },
+  max: {
+    type: Number,
+    reflect: true
+  },
+  step: {
+    type: Number,
+    reflect: true
+  },
+  value: {
+    type: Number
+  },
+  orientation: {
+    type: String,
+    reflect: true
+  },
+  relative: {
+    type: Boolean,
+    reflect: true
+  },
+  numberBox: {
+    type: Boolean,
+    reflect: true,
+    attribute: 'number-box'
+  },
+  disabled: {
+    type: Boolean,
+    reflect: true
+  }
+});
+_defineProperty(ScSlider, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    :host {\n      display: inline-block;\n      box-sizing: border-box;\n      width: 200px;\n      height: 30px;\n      vertical-align: top;\n      border: 1px solid var(--sc-color-primary-3);\n\n      --sc-slider-background-color: var(--sc-color-primary-2);\n      --sc-slider-foreground-color: var(--sc-color-primary-5);\n    }\n\n    :host([disabled]) {\n      opacity: 0.7;\n    }\n\n    :host([hidden]) {\n      display: none\n    }\n\n    :host(:focus), :host(:focus-visible) {\n      outline: none;\n      box-shadow: 0 0 2px var(--sc-color-primary-5);\n    }\n\n    div {\n      box-sizing: border-box;\n      width: 100%;\n      height: 100%;\n      position: relative;\n      display: inline-block;\n    }\n\n    :host([number-box][orientation=\"horizontal\"]) div {\n      width: calc(100% - 86px);\n    }\n\n    :host([number-box][orientation=\"vertical\"]) div {\n      height: calc(100% - 36px);\n    }\n\n    svg {\n      box-sizing: border-box;\n      width: 100%;\n      height: 100%;\n    }\n\n    rect.background {\n      fill: var(--sc-slider-background-color);\n    }\n\n    rect.foreground {\n      fill: var(--sc-slider-foreground-color);\n    }\n\n    sc-position-surface {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      z-index: 1;\n    }\n\n    sc-number {\n      display: inline-block;\n      width: 80px;\n    }\n\n    :host([number-box][orientation=\"vertical\"]) sc-number {\n      display: block;\n    }\n  "]))));
+if (customElements.get('sc-slider') === undefined) {
+  customElements.define('sc-slider', ScSlider);
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScSlider);
+
+/***/ }),
+
+/***/ "./node_modules/@ircam/sc-components/sc-speed-surface.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@ircam/sc-components/sc-speed-surface.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
+/* harmony import */ var _ircam_sc_gettime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ircam/sc-gettime */ "./node_modules/@ircam/sc-gettime/src/browser.js");
+/* harmony import */ var _ScElement_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ScElement.js */ "./node_modules/@ircam/sc-components/ScElement.js");
+var _templateObject, _templateObject2;
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+
+
+/**
+ * Propagate mouse speed in px / ms
+ */
+var ScSpeedSurface = /*#__PURE__*/function (_ScElement) {
+  _inherits(ScSpeedSurface, _ScElement);
+  var _super = _createSuper(ScSpeedSurface);
+  function ScSpeedSurface() {
+    var _this;
+    _classCallCheck(this, ScSpeedSurface);
+    _this = _super.call(this);
+    _this._pointerId = null;
+    _this._lastPointer = null;
+    _this._lastTime = null;
+
+    // @note: passive: false in event listener declaration lose the binding
+    _this._mouseMove = _this._mouseMove.bind(_assertThisInitialized(_this));
+    _this._mouseUp = _this._mouseUp.bind(_assertThisInitialized(_this));
+    _this._touchStart = _this._touchStart.bind(_assertThisInitialized(_this));
+    _this._touchMove = _this._touchMove.bind(_assertThisInitialized(_this));
+    _this._touchEnd = _this._touchEnd.bind(_assertThisInitialized(_this));
+    _this._propagateValues = _this._propagateValues.bind(_assertThisInitialized(_this));
+    _this._rafId = null;
+    return _this;
+  }
+  _createClass(ScSpeedSurface, [{
+    key: "render",
+    value: function render() {
+      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <div\n        @mousedown=\"", "\"\n        @touchstart=\"", "\"\n        @contextmenu=\"", "\"\n      ></div>\n    "])), this._mouseDown, {
+        handleEvent: this._touchStart,
+        passive: false
+      }, this._preventContextMenu);
+    }
+  }, {
+    key: "_mouseDown",
+    value: function _mouseDown(e) {
+      window.addEventListener('mousemove', this._mouseMove);
+      window.addEventListener('mouseup', this._mouseUp);
+      this._requestUserSelectNoneOnBody();
+      this._pointerId = 'mouse';
+      this._lastTime = (0,_ircam_sc_gettime__WEBPACK_IMPORTED_MODULE_1__.getTime)();
+      this._lastPointer = e;
+    }
+  }, {
+    key: "_mouseMove",
+    value: function _mouseMove(e) {
+      this._requestPropagateValues(e);
+    }
+  }, {
+    key: "_mouseUp",
+    value: function _mouseUp(e) {
+      var _this2 = this;
+      window.removeEventListener('mousemove', this._mouseMove);
+      window.removeEventListener('mouseup', this._mouseUp);
+      this._cancelUserSelectNoneOnBody();
+      this._requestPropagateValues(e);
+      // we want to have { dx: 0, dy: 0 } on mouse up,
+      // with 20ms, we should be in the next requestAnimationFrame
+      setTimeout(function () {
+        _this2._pointerId = null;
+        _this2._requestPropagateValues(e);
+      }, 20);
+    }
+  }, {
+    key: "_touchStart",
+    value: function _touchStart(e) {
+      e.preventDefault(); // prevent scrolling
+
+      if (this._pointerId === null) {
+        var touch = e.changedTouches[0];
+        this._pointerId = touch.identifier;
+        window.addEventListener('touchmove', this._touchMove, {
+          passive: false
+        });
+        window.addEventListener('touchend', this._touchEnd);
+        window.addEventListener('touchcancel', this._touchEnd);
+        this._requestUserSelectNoneOnBody();
+        this._lastTime = (0,_ircam_sc_gettime__WEBPACK_IMPORTED_MODULE_1__.getTime)();
+        this._lastPointer = touch;
+      }
+    }
+  }, {
+    key: "_touchMove",
+    value: function _touchMove(e) {
+      e.preventDefault(); // prevent scrolling
+      var _iterator = _createForOfIteratorHelper(e.changedTouches),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var touch = _step.value;
+          if (touch.identifier === this._pointerId) {
+            this._requestPropagateValues(touch);
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    }
+  }, {
+    key: "_touchEnd",
+    value: function _touchEnd(e) {
+      var _this3 = this;
+      var _iterator2 = _createForOfIteratorHelper(e.changedTouches),
+        _step2;
+      try {
+        var _loop = function _loop() {
+          var touch = _step2.value;
+          if (touch.identifier === _this3._pointerId) {
+            window.removeEventListener('touchmove', _this3._touchMove);
+            window.removeEventListener('touchend', _this3._touchEnd);
+            window.removeEventListener('touchcancel', _this3._touchEnd);
+            _this3._cancelUserSelectNoneOnBody();
+            _this3._requestPropagateValues(touch);
+            // we want to have { dx: 0, dy: 0 } on mouse up,
+            // with 20ms, we should be in the next requestAnimationFrame
+            setTimeout(function () {
+              _this3._pointerId = null;
+              _this3._requestPropagateValues(touch);
+            }, 20);
+          }
+        };
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          _loop();
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+    }
+  }, {
+    key: "_requestPropagateValues",
+    value: function _requestPropagateValues(e) {
+      var _this4 = this;
+      window.cancelAnimationFrame(this._rafId);
+      this._rafId = window.requestAnimationFrame(function () {
+        return _this4._propagateValues(e);
+      });
+    }
+  }, {
+    key: "_propagateValues",
+    value: function _propagateValues(e) {
+      var lastX = this._lastPointer.screenX;
+      var lastY = this._lastPointer.screenY;
+      var x = e.screenX;
+      var y = e.screenY;
+      var now = (0,_ircam_sc_gettime__WEBPACK_IMPORTED_MODULE_1__.getTime)();
+      var dt = (this._lastTime - now) * 1000; // ms
+
+      var dx = (x - lastX) / dt;
+      var dy = (y - lastY) / dt;
+      this._lastTime = now;
+      this._lastPointer = e;
+      // propagate outside the shadow DOM boundaries
+      // cf. https://lit-element.polymer-project.org/guide/events#custom-events
+      var event = new CustomEvent('input', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          dx: dx,
+          dy: dy,
+          pointerId: this._pointerId
+        }
+      });
+      this.dispatchEvent(event);
+    }
+  }]);
+  return ScSpeedSurface;
+}(_ScElement_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
+_defineProperty(ScSpeedSurface, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    :host {\n      display: inline-block;\n      width: 100%;\n      height: 100%;\n    }\n\n    div {\n      width: 100%;\n      height: 100%;\n    }\n  "]))));
+if (customElements.get('sc-speed-surface') === undefined) {
+  customElements.define('sc-speed-surface', ScSpeedSurface);
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScSpeedSurface);
+
+/***/ }),
+
+/***/ "./node_modules/@ircam/sc-components/styles.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/@ircam/sc-components/styles.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   arrow: () => (/* binding */ arrow),
+/* harmony export */   arrowDown: () => (/* binding */ arrowDown),
+/* harmony export */   arrowRight: () => (/* binding */ arrowRight)
+/* harmony export */ });
+/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
+var _templateObject, _templateObject2, _templateObject3;
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
+// @todo - review that... not clean
+// export const fontFamily = css`Consolas, monaco, monospace`;
+// export const fontSize = css`11px`;
+
+// export const theme = {};
+// theme['--color-primary-0'] = css`#121212ff`;
+// theme['--color-primary-1'] = css`#272822ff`;
+// theme['--color-primary-2'] = css`#3d3e39ff`;
+// theme['--color-primary-3'] = css`#6a6a69ff`;
+// theme['--color-primary-4'] = css`#dededeff`;
+// theme['--color-secondary-1'] = css`#f0db4fff`;
+// theme['--color-secondary-2'] = css`#1c78c0ff`;
+// theme['--color-secondary-3'] = css`#d9534fff`;
+// theme['--color-secondary-4'] = css`#5ec451ff`;
+// theme['--color-secondary-5'] = css`#cd7afaff`;
+// theme['--color-secondary-6'] = css`#f4b43eff`;
+
+var cssVars = "\n:root {\n  --sc-font-family: Consolas, monaco, monospace;\n  --sc-font-size: 11px;\n  --sc-color-primary-1: #121212ff;\n  --sc-color-primary-2: #272822ff;\n  --sc-color-primary-3: #3d3e39ff;\n  --sc-color-primary-4: #6a6a69ff;\n  --sc-color-primary-5: #dededeff;\n  --sc-color-secondary-1: #f4b43eff; /* orange / yellow */\n  --sc-color-secondary-2: #1c78c0ff; /* blue */\n  --sc-color-secondary-3: #d9534fff; /* red */\n  --sc-color-secondary-4: #5ec451ff; /* green */\n  --sc-color-secondary-5: #cd7afaff; /* lila */\n}\n";
+
+// adapted from https://davidwalsh.name/add-rules-stylesheets
+var $style = document.createElement('style');
+$style.type = 'text/css';
+$style.appendChild(document.createTextNode(''));
+var $firstStylesheet = document.querySelector('style');
+// insert before first stylesheet, so that values can be overriden by user
+if ($firstStylesheet) {
+  $firstStylesheet.parentNode.insertBefore($style, $firstStylesheet);
+} else {
+  document.head.appendChild($style);
+}
+
+// insert rule seem to be available when element is in the DOM
+$style.sheet.insertRule(cssVars);
+
+// const $head = document.head || document.getElementsByTagName('head')[0];
+// const $style = document.createElement('style');
+// $style.type = 'text/css';
+
+// $style.appendChild(document.createTextNode(cssVars));
+// $head.appendChild($style);
+
+// export const userSelectNone = css`
+//   -webkit-touch-callout: none; /* iOS Safari */
+//     -webkit-user-select: none; /* Safari */
+//      -khtml-user-select: none; /* Konqueror HTML */
+//        -moz-user-select: none; /* Old versions of Firefox */
+//         -ms-user-select: none; /* Internet Explorer/Edge */
+//             user-select: none; /* Non-prefixed version, currently
+//                                   supported by Chrome, Edge, Opera and Firefox */
+// `
+
+// export const largeBtn = css`
+//   font-family: ${fontFamily};
+//   color: white;
+//   font-size: 1.6rem;
+//   width: 100%;
+//   border: 1px solid #676767;
+//   border-radius: 2px;
+//   background-color: #121212;
+//   height: 36px;
+//   line-height: 36px;
+// `;
+
+// export const info = css`
+//   font-family: ${fontFamily};
+//   color: white;
+//   font-size: 1.2rem;
+//   width: 100%;
+//   text-align: center;
+//   height: 36px;
+//   line-height: 36px;
+// `;
+
+var arrow = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject || (_templateObject = _taggedTemplateLiteral(["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAHdElNRQfkCAUKBTL+mGjUAAAAeUlEQVRIx+3OMQ6AIBBE0a93sMLEk1h4Y7Ww9mRiRUIM6jJUGob6/QXqfrCGkbbAHw0bE14+v8PAjBffwgDgWCS+4sJXlETElcSF5yYSPCdxw62JB25JvPC3hIE/JYz8LpHBU4lMfk0IPE6IPCRWepUDdHQlvO4jOwFwgu1NCrBo/wAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMC0wOC0wNVQxMDowNTo0OSswMDowMBWQx3oAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjAtMDgtMDVUMTA6MDU6NDkrMDA6MDBkzX/GAAAAIHRFWHRzb2Z0d2FyZQBodHRwczovL2ltYWdlbWFnaWNrLm9yZ7zPHZ0AAAAYdEVYdFRodW1iOjpEb2N1bWVudDo6UGFnZXMAMaf/uy8AAAAYdEVYdFRodW1iOjpJbWFnZTo6SGVpZ2h0ADUxMo+NU4EAAAAXdEVYdFRodW1iOjpJbWFnZTo6V2lkdGgANTEyHHwD3AAAABl0RVh0VGh1bWI6Ok1pbWV0eXBlAGltYWdlL3BuZz+yVk4AAAAXdEVYdFRodW1iOjpNVGltZQAxNTk2NjIxOTQ5QVn8gAAAABJ0RVh0VGh1bWI6OlNpemUAMzI2MEJCw0lk+gAAAFR0RVh0VGh1bWI6OlVSSQBmaWxlOi8vLi91cGxvYWRzLzU2L2V4dHg3bGQvMjQ1Ni9pbmRpY2F0b3JfYXJyb3dfdHJpYW5nbGVfaWNvbl8xNDkwMjAucG5n2GvxiAAAAABJRU5ErkJggg=="])));
+var arrowRight = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAA7DgAAOw4AXEryjgAAAAHdElNRQflAxQLDS8ArDZ8AAACgklEQVRo3u3ZT0gUURzA8e+sstgSlmtg9MeCIoKKIIQCu0TZIbxIBdmhKDxZhw7mQYICQRCsU1B4CA8ReJEg+nMpKQjBTT0UERHlYmQGGUWYmOt0aHm9Ic2ZN7/9LYRvbnvY+fDmz/e9XVgaRR4l837qkSbFdPFYh3nGEGdYUZzTVzCIj88Mt9lNQh9QTRY/f3yglVXFBPjM8oC9uvMQBPj4THCJ1fqAKcaYyxNyPKaOUl3AKAe5wXczD5N0sk4TkKWaJI2MmHmYI0MDSU0AwEau8dXMwzeuskkXAEkaGCRnEM85zjJNAMBauvhsCFP0sE0XACUc4qk1D685zXJNAEAV7UwYwjS97MLTBECCfTxk1iCynJWO1r8BAJW08d4QxKO1OAA89nCHmcJEKwwAoJxzvCtEtMICwGMnvfyQjlZ4AECKJl4ZQo4n8aMVDQCwlR7JaEUHQJlktFwAIBgtV4BYtNwBIBKteACBaMUFQMxoSQB+R+tRIFqNugCANG18MYQM6fmchR0/8aOfS+oS1HLfugRjnNIEVHGBj9ZN2EeN3k1YygH6rcfwDc2aj+Ea2gMvoltsj/oVcV7F9QyYJPm84KTmq3gDlwMx6mazwww6Aso4wrCV42GOauZ4C92BBckV1ruePDogxQleWkuyAer1lmQeO7hpLUo/0aG5KC2nmbfWsryf/XrL8gQ19Fkbk3Euam5MKmkJbM3uUau3Nfs7Mq2slDv5YoBYkYkLiB2ZeACByLgDhCLjChCLjAsgKRmZqIBR6rguGZmogOCP1QKRiQr4cwhFxg0gGBkXgGhkwo40mXxk7spGJvw4xhAjnNf4285b4NMKPCatfd3S+H/HLwusPWkzmFSAAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTAzLTIwVDExOjEzOjQ3KzAwOjAwRxN4GAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0wMy0yMFQxMToxMzo0NyswMDowMDZOwKQAAAAgdEVYdHNvZnR3YXJlAGh0dHBzOi8vaW1hZ2VtYWdpY2sub3JnvM8dnQAAABh0RVh0VGh1bWI6OkRvY3VtZW50OjpQYWdlcwAxp/+7LwAAABh0RVh0VGh1bWI6OkltYWdlOjpIZWlnaHQANTEyj41TgQAAABd0RVh0VGh1bWI6OkltYWdlOjpXaWR0aAA1MTIcfAPcAAAAGXRFWHRUaHVtYjo6TWltZXR5cGUAaW1hZ2UvcG5nP7JWTgAAABd0RVh0VGh1bWI6Ok1UaW1lADE2MTYyMzg4MjfA6B9qAAAAEnRFWHRUaHVtYjo6U2l6ZQA1MTU5QkJP1GlWAAAAUHRFWHRUaHVtYjo6VVJJAGZpbGU6Ly8uL3VwbG9hZHMvNTYvaEpIZnVxcC8yOTAyL2Fycm93X3JpZ2h0X3RyaWFuZ2xlX2ljb25fMTgzMTIxLnBuZ8GglZQAAAAASUVORK5CYII="])));
+var arrowDown = (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAQAAAD/5HvMAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAA7DgAAOw4AXEryjgAAAAHdElNRQflAxQLDR8mdQbQAAADoklEQVRo3u2ZXUgUURiGn201VynNG7Ur0dSgH00iSFDsP0GiwCyKCougkAgMiiChrvq7EI2guijox6IfiqILIZKQKAgvKoxIyrK8MCrFzDJ12y46fjtqujszZ3a9mHdvZme/7z3vfN+Zs++cARcuXLhwMbnhGfFtKt4oaPAz8D9BsaxnE0kEIl6SHq5xi8HRP6ygm0CUPt2UDsuYIoKymRHh2gQxg+Kxgt7yPWqCemkaPoyRk03cYKc6HuIFvaMmvF4EmE6ejH6dB2MF/eYEi5kHgIernHb0jvOzhwXquIWT/P5/2FZ+qWn2hrkOyoE5vFEj/WLb+GEJXJSZfxmfY3J8XJJxLpIwUWgubSrwJzscE7SZn2qUNnJDBVfSr4JfM9sROTm0qBH6qQwdPo2bUs6zDrTNx1nhv8m0cFLyaVcJPyjTLqiMH4q9nfxwk/YzpJKaSdcqJ51mxTzEgfDTkrkvZT1lWKvsIoY64b1PspnUIjpV4jdKtAkq4Zti7aTIXKqHg/hV8lNmapEzkyeK0c9B839MKTRKeY9p+BvxcpQ/iu8xqVYolvBFEXxllW1BK/kqbKutXtMxadtDa9ckSOWhtMtGvdN4rGj+UG3DjnioNrQrzc6VraVHEXVQYJmlgA7F0sM6O3IgllqZ2g3mVg5BMg3CUUusPUGQyXNFNmjlZgX2MqAYnpNpVw5AOb2K8BMLTWcv5KPK7mWDDjkQxzkp+R0STeUmcltyzxGnRxBkioMZYLepzN3SrhZm6ZIDUCEer5W8sLNyaRX/uV2nHIg3uO0rE7tgQ84VyblEvF5BMJ93iryPLWFlbKFPZbxjvm45ALsM8yErZHSW5XkXNhK5IS04H8Jt+zgvsXdN3pkmkM97WVPKJ4wMrl0fWOSUHIAqaVszGeNGZYhzHqDKSTmQyD1pRd04btvonO85165hFIvb7gpuM41AKV3inItNsluAh0MTuu00nooVO+Tolo4ghUdi206OapuXIyL3kU2XaQJLDW57+Yhflhuc87JIyQEvx8WSNpJiqF2j1O54ZLeY0wzPWNVyNji7nmh6ljOBNXIvdVAIQKE45y7WRFoOeKkxPKcnkWTYD6iJyhsBMgxuex9VDOp1zlawUQxGlzSwj43RkgNxnBnzmuCCg5ulYSBbXM+/zytyoikHoELaFqCPimjLAR/1Iqhev3O2guFni9bQe86hoWO9+MxLfLRwmGfRrk0QMRq3Rl24cOHCxaTGX01uEpsie0MVAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTAzLTIwVDExOjEzOjMxKzAwOjAwLgZEOwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0wMy0yMFQxMToxMzozMSswMDowMF9b/IcAAAAgdEVYdHNvZnR3YXJlAGh0dHBzOi8vaW1hZ2VtYWdpY2sub3JnvM8dnQAAABh0RVh0VGh1bWI6OkRvY3VtZW50OjpQYWdlcwAxp/+7LwAAABh0RVh0VGh1bWI6OkltYWdlOjpIZWlnaHQANTEyj41TgQAAABd0RVh0VGh1bWI6OkltYWdlOjpXaWR0aAA1MTIcfAPcAAAAGXRFWHRUaHVtYjo6TWltZXR5cGUAaW1hZ2UvcG5nP7JWTgAAABd0RVh0VGh1bWI6Ok1UaW1lADE2MTYyMzg4MTECpumcAAAAEnRFWHRUaHVtYjo6U2l6ZQA4MDQ0QkJ+TqcOAAAAT3RFWHRUaHVtYjo6VVJJAGZpbGU6Ly8uL3VwbG9hZHMvNTYvaEpIZnVxcC8yOTAyL2Fycm93X2Rvd25fdHJpYW5nbGVfaWNvbl8xODMwOTUucG5n/JrixgAAAABJRU5ErkJggg=="])));
+
+/***/ }),
+
+/***/ "./node_modules/@ircam/sc-components/utils/getClipper.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@ircam/sc-components/utils/getClipper.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getClipper)
+/* harmony export */ });
+function getClipper(min, max, step) {
+  return function (val) {
+    var clippedValue = Math.round(val / step) * step;
+    var fixed = Math.max(Math.log10(1 / step), 0);
+    var fixedValue = clippedValue.toFixed(fixed); // fix floating point errors
+    return Math.min(max, Math.max(min, parseFloat(fixedValue)));
+  };
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ircam/sc-components/utils/getScale.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@ircam/sc-components/utils/getScale.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getScale)
+/* harmony export */ });
+function getScale(domain, range) {
+  var slope = (range[1] - range[0]) / (domain[1] - domain[0]);
+  var intercept = range[0] - slope * domain[0];
+  function scale(val) {
+    return slope * val + intercept;
+  }
+  scale.invert = function (val) {
+    return (val - intercept) / slope;
+  };
+  return scale;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@ircam/sc-gettime/src/browser.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/@ircam/sc-gettime/src/browser.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getTime: () => (/* binding */ getTime)
+/* harmony export */ });
+// see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
+// see: https://developer.mozilla.org/en-US/docs/Web/API/Performance/now
+var usePerf = globalThis.performance && globalThis.performance.now;
+var start = usePerf ? performance.now() : Date.now();
+if (!globalThis.crossOriginIsolated) {
+  // console.info('> self.crossOriginIsolated', globalThis.crossOriginIsolated || false);
+  console.warn("[@ircam/sc-gettime] Your page is not Cross Origin Isolated. The accuracy of the clock may be reduced by the User-Agent to prevent finger-printing\n(see: https://web.dev/coop-coep/ for more informations)");
+}
+function getTime() {
+  if (usePerf) {
+    var now = performance.now();
+    var delta = now - start;
+    return delta * 1e-3;
+  } else {
+    var _now = Date.now();
+    var _delta = _now - start;
+    return _delta * 1e-3;
+  }
 }
 
 /***/ }),
@@ -44303,6 +44084,474 @@ var live = (0,_directive_js__WEBPACK_IMPORTED_MODULE_1__.directive)(LiveDirectiv
 
 /***/ }),
 
+/***/ "./node_modules/lit-html/development/directives/repeat.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/lit-html/development/directives/repeat.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   repeat: () => (/* binding */ repeat)
+/* harmony export */ });
+/* harmony import */ var _lit_html_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lit-html.js */ "./node_modules/lit-html/development/lit-html.js");
+/* harmony import */ var _directive_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../directive.js */ "./node_modules/lit-html/development/directive.js");
+/* harmony import */ var _directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../directive-helpers.js */ "./node_modules/lit-html/development/directive-helpers.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+
+
+
+// Helper for generating a map of array item to its index over a subset
+// of an array (used to lazily generate `newKeyToIndexMap` and
+// `oldKeyToIndexMap`)
+var generateMap = function generateMap(list, start, end) {
+  var map = new Map();
+  for (var i = start; i <= end; i++) {
+    map.set(list[i], i);
+  }
+  return map;
+};
+var RepeatDirective = /*#__PURE__*/function (_Directive) {
+  _inherits(RepeatDirective, _Directive);
+  var _super = _createSuper(RepeatDirective);
+  function RepeatDirective(partInfo) {
+    var _this;
+    _classCallCheck(this, RepeatDirective);
+    _this = _super.call(this, partInfo);
+    if (partInfo.type !== _directive_js__WEBPACK_IMPORTED_MODULE_1__.PartType.CHILD) {
+      throw new Error('repeat() can only be used in text expressions');
+    }
+    return _this;
+  }
+  _createClass(RepeatDirective, [{
+    key: "_getValuesAndKeys",
+    value: function _getValuesAndKeys(items, keyFnOrTemplate, template) {
+      var keyFn;
+      if (template === undefined) {
+        template = keyFnOrTemplate;
+      } else if (keyFnOrTemplate !== undefined) {
+        keyFn = keyFnOrTemplate;
+      }
+      var keys = [];
+      var values = [];
+      var index = 0;
+      var _iterator = _createForOfIteratorHelper(items),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var item = _step.value;
+          keys[index] = keyFn ? keyFn(item, index) : index;
+          values[index] = template(item, index);
+          index++;
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      return {
+        values: values,
+        keys: keys
+      };
+    }
+  }, {
+    key: "render",
+    value: function render(items, keyFnOrTemplate, template) {
+      return this._getValuesAndKeys(items, keyFnOrTemplate, template).values;
+    }
+  }, {
+    key: "update",
+    value: function update(containerPart, _ref) {
+      var _ref2 = _slicedToArray(_ref, 3),
+        items = _ref2[0],
+        keyFnOrTemplate = _ref2[1],
+        template = _ref2[2];
+      var _a;
+      // Old part & key lists are retrieved from the last update (which may
+      // be primed by hydration)
+      var oldParts = (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.getCommittedValue)(containerPart);
+      var _this$_getValuesAndKe = this._getValuesAndKeys(items, keyFnOrTemplate, template),
+        newValues = _this$_getValuesAndKe.values,
+        newKeys = _this$_getValuesAndKe.keys;
+      // We check that oldParts, the committed value, is an Array as an
+      // indicator that the previous value came from a repeat() call. If
+      // oldParts is not an Array then this is the first render and we return
+      // an array for lit-html's array handling to render, and remember the
+      // keys.
+      if (!Array.isArray(oldParts)) {
+        this._itemKeys = newKeys;
+        return newValues;
+      }
+      // In SSR hydration it's possible for oldParts to be an array but for us
+      // to not have item keys because the update() hasn't run yet. We set the
+      // keys to an empty array. This will cause all oldKey/newKey comparisons
+      // to fail and execution to fall to the last nested brach below which
+      // reuses the oldPart.
+      var oldKeys = (_a = this._itemKeys) !== null && _a !== void 0 ? _a : this._itemKeys = [];
+      // New part list will be built up as we go (either reused from
+      // old parts or created for new keys in this update). This is
+      // saved in the above cache at the end of the update.
+      var newParts = [];
+      // Maps from key to index for current and previous update; these
+      // are generated lazily only when needed as a performance
+      // optimization, since they are only required for multiple
+      // non-contiguous changes in the list, which are less common.
+      var newKeyToIndexMap;
+      var oldKeyToIndexMap;
+      // Head and tail pointers to old parts and new values
+      var oldHead = 0;
+      var oldTail = oldParts.length - 1;
+      var newHead = 0;
+      var newTail = newValues.length - 1;
+      // Overview of O(n) reconciliation algorithm (general approach
+      // based on ideas found in ivi, vue, snabbdom, etc.):
+      //
+      // * We start with the list of old parts and new values (and
+      //   arrays of their respective keys), head/tail pointers into
+      //   each, and we build up the new list of parts by updating
+      //   (and when needed, moving) old parts or creating new ones.
+      //   The initial scenario might look like this (for brevity of
+      //   the diagrams, the numbers in the array reflect keys
+      //   associated with the old parts or new values, although keys
+      //   and parts/values are actually stored in parallel arrays
+      //   indexed using the same head/tail pointers):
+      //
+      //      oldHead v                 v oldTail
+      //   oldKeys:  [0, 1, 2, 3, 4, 5, 6]
+      //   newParts: [ ,  ,  ,  ,  ,  ,  ]
+      //   newKeys:  [0, 2, 1, 4, 3, 7, 6] <- reflects the user's new
+      //                                      item order
+      //      newHead ^                 ^ newTail
+      //
+      // * Iterate old & new lists from both sides, updating,
+      //   swapping, or removing parts at the head/tail locations
+      //   until neither head nor tail can move.
+      //
+      // * Example below: keys at head pointers match, so update old
+      //   part 0 in-place (no need to move it) and record part 0 in
+      //   the `newParts` list. The last thing we do is advance the
+      //   `oldHead` and `newHead` pointers (will be reflected in the
+      //   next diagram).
+      //
+      //      oldHead v                 v oldTail
+      //   oldKeys:  [0, 1, 2, 3, 4, 5, 6]
+      //   newParts: [0,  ,  ,  ,  ,  ,  ] <- heads matched: update 0
+      //   newKeys:  [0, 2, 1, 4, 3, 7, 6]    and advance both oldHead
+      //                                      & newHead
+      //      newHead ^                 ^ newTail
+      //
+      // * Example below: head pointers don't match, but tail
+      //   pointers do, so update part 6 in place (no need to move
+      //   it), and record part 6 in the `newParts` list. Last,
+      //   advance the `oldTail` and `oldHead` pointers.
+      //
+      //         oldHead v              v oldTail
+      //   oldKeys:  [0, 1, 2, 3, 4, 5, 6]
+      //   newParts: [0,  ,  ,  ,  ,  , 6] <- tails matched: update 6
+      //   newKeys:  [0, 2, 1, 4, 3, 7, 6]    and advance both oldTail
+      //                                      & newTail
+      //         newHead ^              ^ newTail
+      //
+      // * If neither head nor tail match; next check if one of the
+      //   old head/tail items was removed. We first need to generate
+      //   the reverse map of new keys to index (`newKeyToIndexMap`),
+      //   which is done once lazily as a performance optimization,
+      //   since we only hit this case if multiple non-contiguous
+      //   changes were made. Note that for contiguous removal
+      //   anywhere in the list, the head and tails would advance
+      //   from either end and pass each other before we get to this
+      //   case and removals would be handled in the final while loop
+      //   without needing to generate the map.
+      //
+      // * Example below: The key at `oldTail` was removed (no longer
+      //   in the `newKeyToIndexMap`), so remove that part from the
+      //   DOM and advance just the `oldTail` pointer.
+      //
+      //         oldHead v           v oldTail
+      //   oldKeys:  [0, 1, 2, 3, 4, 5, 6]
+      //   newParts: [0,  ,  ,  ,  ,  , 6] <- 5 not in new map: remove
+      //   newKeys:  [0, 2, 1, 4, 3, 7, 6]    5 and advance oldTail
+      //         newHead ^           ^ newTail
+      //
+      // * Once head and tail cannot move, any mismatches are due to
+      //   either new or moved items; if a new key is in the previous
+      //   "old key to old index" map, move the old part to the new
+      //   location, otherwise create and insert a new part. Note
+      //   that when moving an old part we null its position in the
+      //   oldParts array if it lies between the head and tail so we
+      //   know to skip it when the pointers get there.
+      //
+      // * Example below: neither head nor tail match, and neither
+      //   were removed; so find the `newHead` key in the
+      //   `oldKeyToIndexMap`, and move that old part's DOM into the
+      //   next head position (before `oldParts[oldHead]`). Last,
+      //   null the part in the `oldPart` array since it was
+      //   somewhere in the remaining oldParts still to be scanned
+      //   (between the head and tail pointers) so that we know to
+      //   skip that old part on future iterations.
+      //
+      //         oldHead v        v oldTail
+      //   oldKeys:  [0, 1, -, 3, 4, 5, 6]
+      //   newParts: [0, 2,  ,  ,  ,  , 6] <- stuck: update & move 2
+      //   newKeys:  [0, 2, 1, 4, 3, 7, 6]    into place and advance
+      //                                      newHead
+      //         newHead ^           ^ newTail
+      //
+      // * Note that for moves/insertions like the one above, a part
+      //   inserted at the head pointer is inserted before the
+      //   current `oldParts[oldHead]`, and a part inserted at the
+      //   tail pointer is inserted before `newParts[newTail+1]`. The
+      //   seeming asymmetry lies in the fact that new parts are
+      //   moved into place outside in, so to the right of the head
+      //   pointer are old parts, and to the right of the tail
+      //   pointer are new parts.
+      //
+      // * We always restart back from the top of the algorithm,
+      //   allowing matching and simple updates in place to
+      //   continue...
+      //
+      // * Example below: the head pointers once again match, so
+      //   simply update part 1 and record it in the `newParts`
+      //   array.  Last, advance both head pointers.
+      //
+      //         oldHead v        v oldTail
+      //   oldKeys:  [0, 1, -, 3, 4, 5, 6]
+      //   newParts: [0, 2, 1,  ,  ,  , 6] <- heads matched: update 1
+      //   newKeys:  [0, 2, 1, 4, 3, 7, 6]    and advance both oldHead
+      //                                      & newHead
+      //            newHead ^        ^ newTail
+      //
+      // * As mentioned above, items that were moved as a result of
+      //   being stuck (the final else clause in the code below) are
+      //   marked with null, so we always advance old pointers over
+      //   these so we're comparing the next actual old value on
+      //   either end.
+      //
+      // * Example below: `oldHead` is null (already placed in
+      //   newParts), so advance `oldHead`.
+      //
+      //            oldHead v     v oldTail
+      //   oldKeys:  [0, 1, -, 3, 4, 5, 6] <- old head already used:
+      //   newParts: [0, 2, 1,  ,  ,  , 6]    advance oldHead
+      //   newKeys:  [0, 2, 1, 4, 3, 7, 6]
+      //               newHead ^     ^ newTail
+      //
+      // * Note it's not critical to mark old parts as null when they
+      //   are moved from head to tail or tail to head, since they
+      //   will be outside the pointer range and never visited again.
+      //
+      // * Example below: Here the old tail key matches the new head
+      //   key, so the part at the `oldTail` position and move its
+      //   DOM to the new head position (before `oldParts[oldHead]`).
+      //   Last, advance `oldTail` and `newHead` pointers.
+      //
+      //               oldHead v  v oldTail
+      //   oldKeys:  [0, 1, -, 3, 4, 5, 6]
+      //   newParts: [0, 2, 1, 4,  ,  , 6] <- old tail matches new
+      //   newKeys:  [0, 2, 1, 4, 3, 7, 6]   head: update & move 4,
+      //                                     advance oldTail & newHead
+      //               newHead ^     ^ newTail
+      //
+      // * Example below: Old and new head keys match, so update the
+      //   old head part in place, and advance the `oldHead` and
+      //   `newHead` pointers.
+      //
+      //               oldHead v oldTail
+      //   oldKeys:  [0, 1, -, 3, 4, 5, 6]
+      //   newParts: [0, 2, 1, 4, 3,   ,6] <- heads match: update 3
+      //   newKeys:  [0, 2, 1, 4, 3, 7, 6]    and advance oldHead &
+      //                                      newHead
+      //                  newHead ^  ^ newTail
+      //
+      // * Once the new or old pointers move past each other then all
+      //   we have left is additions (if old list exhausted) or
+      //   removals (if new list exhausted). Those are handled in the
+      //   final while loops at the end.
+      //
+      // * Example below: `oldHead` exceeded `oldTail`, so we're done
+      //   with the main loop.  Create the remaining part and insert
+      //   it at the new head position, and the update is complete.
+      //
+      //                   (oldHead > oldTail)
+      //   oldKeys:  [0, 1, -, 3, 4, 5, 6]
+      //   newParts: [0, 2, 1, 4, 3, 7 ,6] <- create and insert 7
+      //   newKeys:  [0, 2, 1, 4, 3, 7, 6]
+      //                     newHead ^ newTail
+      //
+      // * Note that the order of the if/else clauses is not
+      //   important to the algorithm, as long as the null checks
+      //   come first (to ensure we're always working on valid old
+      //   parts) and that the final else clause comes last (since
+      //   that's where the expensive moves occur). The order of
+      //   remaining clauses is is just a simple guess at which cases
+      //   will be most common.
+      //
+      // * Note, we could calculate the longest
+      //   increasing subsequence (LIS) of old items in new position,
+      //   and only move those not in the LIS set. However that costs
+      //   O(nlogn) time and adds a bit more code, and only helps
+      //   make rare types of mutations require fewer moves. The
+      //   above handles removes, adds, reversal, swaps, and single
+      //   moves of contiguous items in linear time, in the minimum
+      //   number of moves. As the number of multiple moves where LIS
+      //   might help approaches a random shuffle, the LIS
+      //   optimization becomes less helpful, so it seems not worth
+      //   the code at this point. Could reconsider if a compelling
+      //   case arises.
+      while (oldHead <= oldTail && newHead <= newTail) {
+        if (oldParts[oldHead] === null) {
+          // `null` means old part at head has already been used
+          // below; skip
+          oldHead++;
+        } else if (oldParts[oldTail] === null) {
+          // `null` means old part at tail has already been used
+          // below; skip
+          oldTail--;
+        } else if (oldKeys[oldHead] === newKeys[newHead]) {
+          // Old head matches new head; update in place
+          newParts[newHead] = (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.setChildPartValue)(oldParts[oldHead], newValues[newHead]);
+          oldHead++;
+          newHead++;
+        } else if (oldKeys[oldTail] === newKeys[newTail]) {
+          // Old tail matches new tail; update in place
+          newParts[newTail] = (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.setChildPartValue)(oldParts[oldTail], newValues[newTail]);
+          oldTail--;
+          newTail--;
+        } else if (oldKeys[oldHead] === newKeys[newTail]) {
+          // Old head matches new tail; update and move to new tail
+          newParts[newTail] = (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.setChildPartValue)(oldParts[oldHead], newValues[newTail]);
+          (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.insertPart)(containerPart, newParts[newTail + 1], oldParts[oldHead]);
+          oldHead++;
+          newTail--;
+        } else if (oldKeys[oldTail] === newKeys[newHead]) {
+          // Old tail matches new head; update and move to new head
+          newParts[newHead] = (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.setChildPartValue)(oldParts[oldTail], newValues[newHead]);
+          (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.insertPart)(containerPart, oldParts[oldHead], oldParts[oldTail]);
+          oldTail--;
+          newHead++;
+        } else {
+          if (newKeyToIndexMap === undefined) {
+            // Lazily generate key-to-index maps, used for removals &
+            // moves below
+            newKeyToIndexMap = generateMap(newKeys, newHead, newTail);
+            oldKeyToIndexMap = generateMap(oldKeys, oldHead, oldTail);
+          }
+          if (!newKeyToIndexMap.has(oldKeys[oldHead])) {
+            // Old head is no longer in new list; remove
+            (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.removePart)(oldParts[oldHead]);
+            oldHead++;
+          } else if (!newKeyToIndexMap.has(oldKeys[oldTail])) {
+            // Old tail is no longer in new list; remove
+            (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.removePart)(oldParts[oldTail]);
+            oldTail--;
+          } else {
+            // Any mismatches at this point are due to additions or
+            // moves; see if we have an old part we can reuse and move
+            // into place
+            var oldIndex = oldKeyToIndexMap.get(newKeys[newHead]);
+            var oldPart = oldIndex !== undefined ? oldParts[oldIndex] : null;
+            if (oldPart === null) {
+              // No old part for this value; create a new one and
+              // insert it
+              var newPart = (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.insertPart)(containerPart, oldParts[oldHead]);
+              (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.setChildPartValue)(newPart, newValues[newHead]);
+              newParts[newHead] = newPart;
+            } else {
+              // Reuse old part
+              newParts[newHead] = (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.setChildPartValue)(oldPart, newValues[newHead]);
+              (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.insertPart)(containerPart, oldParts[oldHead], oldPart);
+              // This marks the old part as having been used, so that
+              // it will be skipped in the first two checks above
+              oldParts[oldIndex] = null;
+            }
+            newHead++;
+          }
+        }
+      }
+      // Add parts for any remaining new values
+      while (newHead <= newTail) {
+        // For all remaining additions, we insert before last new
+        // tail, since old pointers are no longer valid
+        var _newPart = (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.insertPart)(containerPart, newParts[newTail + 1]);
+        (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.setChildPartValue)(_newPart, newValues[newHead]);
+        newParts[newHead++] = _newPart;
+      }
+      // Remove any remaining unused old parts
+      while (oldHead <= oldTail) {
+        var _oldPart = oldParts[oldHead++];
+        if (_oldPart !== null) {
+          (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.removePart)(_oldPart);
+        }
+      }
+      // Save order of new parts for next round
+      this._itemKeys = newKeys;
+      // Directly set part value, bypassing it's dirty-checking
+      (0,_directive_helpers_js__WEBPACK_IMPORTED_MODULE_2__.setCommittedValue)(containerPart, newParts);
+      return _lit_html_js__WEBPACK_IMPORTED_MODULE_0__.noChange;
+    }
+  }]);
+  return RepeatDirective;
+}(_directive_js__WEBPACK_IMPORTED_MODULE_1__.Directive);
+/**
+ * A directive that repeats a series of values (usually `TemplateResults`)
+ * generated from an iterable, and updates those items efficiently when the
+ * iterable changes based on user-provided `keys` associated with each item.
+ *
+ * Note that if a `keyFn` is provided, strict key-to-DOM mapping is maintained,
+ * meaning previous DOM for a given key is moved into the new position if
+ * needed, and DOM will never be reused with values for different keys (new DOM
+ * will always be created for new keys). This is generally the most efficient
+ * way to use `repeat` since it performs minimum unnecessary work for insertions
+ * and removals.
+ *
+ * The `keyFn` takes two parameters, the item and its index, and returns a unique key value.
+ *
+ * ```js
+ * html`
+ *   <ol>
+ *     ${repeat(this.items, (item) => item.id, (item, index) => {
+ *       return html`<li>${index}: ${item.name}</li>`;
+ *     })}
+ *   </ol>
+ * `
+ * ```
+ *
+ * **Important**: If providing a `keyFn`, keys *must* be unique for all items in a
+ * given call to `repeat`. The behavior when two or more items have the same key
+ * is undefined.
+ *
+ * If no `keyFn` is provided, this directive will perform similar to mapping
+ * items to values, and DOM will be reused against potentially different items.
+ */
+var repeat = (0,_directive_js__WEBPACK_IMPORTED_MODULE_1__.directive)(RepeatDirective);
+
+/***/ }),
+
 /***/ "./node_modules/lit-html/development/directives/unsafe-html.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/lit-html/development/directives/unsafe-html.js ***!
@@ -46024,6 +46273,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/lit/directives/repeat.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lit/directives/repeat.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   repeat: () => (/* reexport safe */ lit_html_directives_repeat_js__WEBPACK_IMPORTED_MODULE_0__.repeat)
+/* harmony export */ });
+/* harmony import */ var lit_html_directives_repeat_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit-html/directives/repeat.js */ "./node_modules/lit-html/development/directives/repeat.js");
+
+
+/***/ }),
+
 /***/ "./node_modules/lit/directives/unsafe-html.js":
 /*!****************************************************!*\
   !*** ./node_modules/lit/directives/unsafe-html.js ***!
@@ -46326,8 +46591,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layout_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layout.js */ "./.build/clients/controller/layout.js");
 /* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
 /* harmony import */ var lit_directives_keyed_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lit/directives/keyed.js */ "./node_modules/lit/directives/keyed.js");
-/* harmony import */ var _ircam_simple_components_sc_button_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ircam/simple-components/sc-button.js */ "./node_modules/@ircam/simple-components/sc-button.js");
-/* harmony import */ var _components_sw_player_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/sw-player.js */ "./.build/clients/components/sw-player.js");
+/* harmony import */ var _components_sw_player_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/sw-player.js */ "./.build/clients/components/sw-player.js");
+/* harmony import */ var _ircam_sc_components_sc_button_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ircam/sc-components/sc-button.js */ "./node_modules/@ircam/sc-components/sc-button.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 var _templateObject, _templateObject2, _templateObject3;
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
@@ -46377,7 +46642,7 @@ function _main() {
           remoteControlledPlayer = null; // collection
           $layout.addComponent({
             render: function render() {
-              return (0,lit__WEBPACK_IMPORTED_MODULE_4__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n        <h2>Connected players</h2>\n        ", "\n        <h2>Remote controlled player</h2>\n        ", "\n      "])), players.map(function (player) {
+              return (0,lit__WEBPACK_IMPORTED_MODULE_4__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n        <h2>Connected players</h2>\n        ", "\n        <h2>Remote controlled player</h2>\n        <div style=\"width:260px; height:420px;\">\n        ", "\n      </div>"])), players.map(function (player) {
                 return (0,lit__WEBPACK_IMPORTED_MODULE_4__.html)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n            <sc-button\n              value=", "\n              @input=", "\n            ></sc-button>\n          "])), player.get('id'), function (e) {
                   remoteControlledPlayer = player;
                   $layout.requestUpdate();
