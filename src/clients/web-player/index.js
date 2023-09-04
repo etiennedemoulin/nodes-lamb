@@ -46,17 +46,21 @@ async function main($container) {
 
   const $layout = createLayout(client, $container);
 
-  // const globals = await client.stateManager.attach('globals');
+  const globals = await client.stateManager.attach('globals');
   const player = await client.stateManager.create('player', {
     id: client.id,
   });
 
-  const engine = new Engine(audioContext, player, true);
+  const engine = new Engine(audioContext, player, globals, true);
   engine.connect(audioContext.destination);
 
   player.onUpdate(() => {
     $layout.requestUpdate();
     engine.render();
+  });
+
+  globals.onUpdate((update) => {
+    engine.updateVolume(update.volume);
   });
 
   $layout.addComponent(html`<sw-player .player=${player}></sc-player>`);

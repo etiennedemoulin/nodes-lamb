@@ -59,6 +59,12 @@ controller-layout {
 }
 controller-layout > div {
   padding: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+controller-layout sc-slider {
+  width: 50%;
+  height: 70%;
 }
 controller-layout header {
   display: block;

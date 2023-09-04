@@ -14,8 +14,17 @@ import Engine from '../components/engine.js';
 // - Issue Tracker:         https://github.com/collective-soundworks/soundworks/issues
 // - Wizard & Tools:        `npx soundworks`
 
+const env = 'prod';
+
 async function bootstrap() {
-  const config = loadConfig('remote', import.meta.url);
+  // for dev
+  let config;
+  if (env === 'dev') {
+    config = loadConfig('default', import.meta.url);
+  } else {
+    config = loadConfig('remote', import.meta.url);
+  }
+  // for prod
   const client = new Client(config);
 
   launcher.register(client);
@@ -26,6 +35,7 @@ async function bootstrap() {
   await client.start();
 
   const players = await client.stateManager.getCollection('player');
+  const globals = await client.stateManager.attach('globals');
 
   const audioContext = new AudioContext();
   const numChannels = 16;
@@ -41,13 +51,15 @@ async function bootstrap() {
   merger.connect(audioContext.destination);
 
   const engines = Array(numChannels).fill(null);
+  const logger = Array(numChannels).fill(null);
 
   players.onAttach((player) => {
     // push engine in first free slot
     for (let i = 0; i < engines.length; i++) {
       if (engines[i] === null) {
-        const engine = new Engine(audioContext, player, false);
+        const engine = new Engine(audioContext, player, globals, false);
         engines[i] = engine;
+        logger[i] = player;
         engine.connect(merger, 0, i);
         player.onUpdate(() => {
           engine.render();
@@ -55,6 +67,7 @@ async function bootstrap() {
         break;
       }
     }
+    render(logger);
   });
 
   players.onDetach((player) => {
@@ -65,8 +78,14 @@ async function bootstrap() {
         // console.log(`removing engine ${player.get('id')}`)
         engines[i].disconnect();
         engines[i] = null;
+        logger[i] = null;
       }
     }
+    render(logger);
+  });
+
+  players.onUpdate((player, newValues) => {
+    render(logger);
   })
 }
 
@@ -77,3 +96,22 @@ launcher.execute(bootstrap, {
   numClients: process.env.EMULATE ? parseInt(process.env.EMULATE) : 1,
   moduleURL: import.meta.url,
 });
+
+
+function render(logger) {
+  const table = [];
+  logger.forEach(player => {
+    if (player) {
+      table.push({freq: player.get('sawFreq'), id: player.get('id'), filter: player.get('filterFreq')});
+    } else {
+      table.push({freq: null, id: null, filter: null});
+    }
+  })
+  console.clear();
+  if (env === 'dev') {
+    console.log('playing in dev environment');
+  } else {
+    console.log('playing in prod environment');
+  }
+  console.table(table);
+}

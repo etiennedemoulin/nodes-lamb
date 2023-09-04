@@ -1,5 +1,5 @@
 {
-  type: 'production',
+  type: 'development',
   port: 8000,
   subpath: '',
   serverAddress: '0.0.0.0',

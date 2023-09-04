@@ -9,6 +9,8 @@ import { html, nothing } from 'lit';
 import { keyed } from 'lit/directives/keyed.js';
 import '../components/sw-player.js';
 import '@ircam/sc-components/sc-button.js';
+import '@ircam/sc-components/sc-slider.js';
+import throttle from 'lodash/throttle.js'
 
 // import { html } from 'lit';
 
@@ -33,6 +35,11 @@ async function main($container) {
 
   // const globals = await client.stateManager.attach('globals');
   const players = await client.stateManager.getCollection('player');
+  const globals = await client.stateManager.attach('globals');
+
+  const updateVolume = throttle(function (volume) {
+    globals.set({ volume: volume}, { source: 'web' });
+  }, 50, { 'trailing' : true});
 
   // placeholder of the remote controlled player state instance
   let remoteControlledPlayer = null;
@@ -40,6 +47,19 @@ async function main($container) {
   $layout.addComponent({
     render: () => {
       return html`
+        <div>
+        <h2>Global phones volume</h2>
+        <sc-slider
+          relative
+          orientation="vertical"
+          number-box="true"
+          min="${globals.getSchema().volume.min}"
+          max="${globals.getSchema().volume.max}"
+          value=${globals.get('volume')}
+          @input=${e => updateVolume(e.target.value)}
+        ></sc-slider>
+        </div>
+        <div>
         <h2>Connected players</h2>
         ${players.map(player => {
           return html`
@@ -61,6 +81,7 @@ async function main($container) {
             )
           : nothing
         }
+      </div>
       </div>`;
     }
   });
