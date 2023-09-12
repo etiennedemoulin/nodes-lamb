@@ -81,16 +81,17 @@ launcher.execute(bootstrap, {
 });
 function render(logger) {
   const table = [];
-  logger.forEach(player => {
+  logger.forEach((player, index) => {
     if (player) {
-      const id = player.get('id') + 1;
       table.push({
+        index: index + 1,
         freq: player.get('sawFreq'),
-        id: id,
+        id: player.get('id'),
         filter: player.get('filterFreq')
       });
     } else {
       table.push({
+        index: index + 1,
         freq: null,
         id: null,
         filter: null
