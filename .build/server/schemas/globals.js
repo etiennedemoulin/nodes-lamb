@@ -1,9 +1,9 @@
 export const globalsSchema = {
   master: {
     type: 'float',
-    default: 0.251189,
+    default: 1,
     min: 0,
-    max: 0.251189
+    max: 0
   }
 };
 //# sourceMappingURL=./globals.js.map
