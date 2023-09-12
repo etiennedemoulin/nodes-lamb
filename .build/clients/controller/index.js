@@ -31,7 +31,7 @@ async function main($container) {
   const globals = await client.stateManager.attach('globals');
   const updateVolume = throttle(function (volume) {
     globals.set({
-      volume: volume
+      master: volume
     }, {
       source: 'web'
     });
@@ -51,9 +51,9 @@ async function main($container) {
           relative
           orientation="vertical"
           number-box="true"
-          min="${globals.getSchema().volume.min}"
-          max="${globals.getSchema().volume.max}"
-          value=${globals.get('volume')}
+          min="${globals.getSchema().master.min}"
+          max="${globals.getSchema().master.max}"
+          value=${globals.get('master')}
           @input=${e => updateVolume(e.target.value)}
         ></sc-slider>
         </div>

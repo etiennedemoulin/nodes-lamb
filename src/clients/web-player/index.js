@@ -51,7 +51,7 @@ async function main($container) {
     id: client.id,
   });
 
-  const engine = new Engine(audioContext, player, globals, true);
+  const engine = new Engine(audioContext, player, globals);
   engine.connect(audioContext.destination);
 
   player.onUpdate(() => {
@@ -60,7 +60,7 @@ async function main($container) {
   });
 
   globals.onUpdate((update) => {
-    engine.updateVolume(update.volume);
+    engine.updateVolume(update.master);
   });
 
   $layout.addComponent(html`<sw-player .player=${player}></sc-player>`);

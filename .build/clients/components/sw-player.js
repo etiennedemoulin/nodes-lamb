@@ -60,7 +60,7 @@ class SwPlayer extends LitElement {
     :host > div {
       display: flex;
       background-color: #121212;
-      justify-content: center;
+      justify-content: space-between;
       flex-direction: row;
       height: calc(100% - 71px);
     }
@@ -157,6 +157,19 @@ class SwPlayer extends LitElement {
         ></sc-select>
       </header>
       <div>
+        <div class="volume">
+          <sc-slider
+            relative
+            orientation="vertical"
+            min="${this.player.getSchema().volume.min}"
+            max="${this.player.getSchema().volume.max}"
+            value=${this.player.get('volume')}
+            @input=${e => this.player.set({
+      volume: e.detail.value
+    })}
+          ></sc-slider>
+          <p>Volume</p>
+        </div>
         <div class="filter">
           <sc-slider
             relative

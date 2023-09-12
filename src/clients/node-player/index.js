@@ -57,7 +57,7 @@ async function bootstrap() {
     // push engine in first free slot
     for (let i = 0; i < engines.length; i++) {
       if (engines[i] === null) {
-        const engine = new Engine(audioContext, player, globals, false);
+        const engine = new Engine(audioContext, player, globals);
         engines[i] = engine;
         logger[i] = player;
         engine.connect(merger, 0, i);
@@ -102,7 +102,8 @@ function render(logger) {
   const table = [];
   logger.forEach(player => {
     if (player) {
-      table.push({freq: player.get('sawFreq'), id: player.get('id'), filter: player.get('filterFreq')});
+      const id = player.get('id') + 1;
+      table.push({freq: player.get('sawFreq'), id: id, filter: player.get('filterFreq')});
     } else {
       table.push({freq: null, id: null, filter: null});
     }

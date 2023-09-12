@@ -1,5 +1,5 @@
 export const globalsSchema = {
-  volume: {
+  master: {
     type: 'float',
     default: 0.251189,
     min: 0,

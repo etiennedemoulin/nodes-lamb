@@ -35041,15 +35041,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 var Engine = /*#__PURE__*/function () {
-  function Engine(audioContext, player, globals, volumeFlag) {
+  function Engine(audioContext, player, globals) {
     _classCallCheck(this, Engine);
     this.audioContext = audioContext;
     this.player = player;
     this.globals = globals;
-    this.volumeFlag = volumeFlag;
     var now = this.audioContext.currentTime;
+    this.master = this.audioContext.createGain();
+    this.master.gain.setValueAtTime(this.globals.getSchema().master.max, now);
     this.env = this.audioContext.createGain();
     this.env.gain.setValueAtTime(0, now);
+    this.env.connect(this.master);
     this.filter = this.audioContext.createBiquadFilter();
     this.filter.Q.value = 11;
     this.filter.type = "lowpass";
@@ -35065,14 +35067,7 @@ var Engine = /*#__PURE__*/function () {
     value: function render() {
       // sonify
       var now = this.audioContext.currentTime;
-      if (this.volumeFlag) {
-        // we want gain control
-        this.env.gain.linearRampToValueAtTime(this.globals.get('volume'), now + 0.1);
-      } else {
-        // we dont want gain control
-        var maxVolume = this.globals.getSchema().volume.max;
-        this.env.gain.linearRampToValueAtTime(maxVolume, now + 0.1);
-      }
+      this.env.gain.linearRampToValueAtTime(this.player.get('volume'), now + 0.1);
       this.saw.frequency.value = Number(this.player.get('sawFreq'));
       this.filter.frequency.linearRampToValueAtTime(this.player.get('filterFreq'), now + 0.1);
     }
@@ -35080,7 +35075,7 @@ var Engine = /*#__PURE__*/function () {
     key: "updateVolume",
     value: function updateVolume(gain) {
       var now = this.audioContext.currentTime;
-      this.env.gain.linearRampToValueAtTime(gain, now + 0.1);
+      this.master.gain.linearRampToValueAtTime(gain, now + 0.1);
     }
   }, {
     key: "getEngineId",
@@ -35090,12 +35085,12 @@ var Engine = /*#__PURE__*/function () {
   }, {
     key: "connect",
     value: function connect(destination, outlet, inlet) {
-      this.env.connect(destination, outlet, inlet);
+      this.master.connect(destination, outlet, inlet);
     }
   }, {
     key: "disconnect",
     value: function disconnect() {
-      this.env.disconnect();
+      this.master.disconnect();
     }
   }]);
   return Engine;
@@ -35302,11 +35297,15 @@ var SwPlayer = /*#__PURE__*/function (_LitElement) {
     value: function render() {
       var _this3 = this;
       // create controls for the player state
-      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <header>\n        <div>\n          <p>", "</p>\n          <p>", "Hz|", "'</p>\n        </div>\n        <sc-select\n          value=\"", "\"\n          .options=", "\n          @change=", "\n        ></sc-select>\n      </header>\n      <div>\n        <div class=\"filter\">\n          <sc-slider\n            relative\n            orientation=\"vertical\"\n            min=\"", "\"\n            max=\"", "\"\n            value=", "\n            @input=", "\n          ></sc-slider>\n          <p>Filter</p>\n        </div>\n      </div>\n    "])), this.player.get('id'), this.player.get('filterFreq'), this.player.get('numHarm'), this.player.get('sawFreq'), this.player.get('selectFreq'), function (e) {
+      return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <header>\n        <div>\n          <p>", "</p>\n          <p>", "Hz|", "'</p>\n        </div>\n        <sc-select\n          value=\"", "\"\n          .options=", "\n          @change=", "\n        ></sc-select>\n      </header>\n      <div>\n        <div class=\"volume\">\n          <sc-slider\n            relative\n            orientation=\"vertical\"\n            min=\"", "\"\n            max=\"", "\"\n            value=", "\n            @input=", "\n          ></sc-slider>\n          <p>Volume</p>\n        </div>\n        <div class=\"filter\">\n          <sc-slider\n            relative\n            orientation=\"vertical\"\n            min=\"", "\"\n            max=\"", "\"\n            value=", "\n            @input=", "\n          ></sc-slider>\n          <p>Filter</p>\n        </div>\n      </div>\n    "])), this.player.get('id'), this.player.get('filterFreq'), this.player.get('numHarm'), this.player.get('sawFreq'), this.player.get('selectFreq'), function (e) {
         return _this3.player.set({
           sawFreq: Number(e.target.value)
         }, {
           source: 'web'
+        });
+      }, this.player.getSchema().volume.min, this.player.getSchema().volume.max, this.player.get('volume'), function (e) {
+        return _this3.player.set({
+          volume: e.detail.value
         });
       }, this.player.getSchema().filterSlider.min, this.player.getSchema().filterSlider.max, this.player.get('filterSlider'), function (e) {
         return _this3.updateFilterSlider(e.target.value);
@@ -35315,7 +35314,7 @@ var SwPlayer = /*#__PURE__*/function (_LitElement) {
   }]);
   return SwPlayer;
 }(lit__WEBPACK_IMPORTED_MODULE_0__.LitElement); // register the component into the custom elements registry
-_defineProperty(SwPlayer, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    :host {\n      display: block;\n      // min-height: calc(100vh - 70px);\n      width: inherit;\n      height: inherit;\n    }\n\n    header {\n      display: block;\n      height: 70px;\n      line-height: 70px;\n      background-color: var(--sw-medium-background-color);\n      display: flex;\n      flex-direction: row;\n      justify-content: space-between;\n      align-items: stretch;\n      border-bottom: 1px solid var(--sw-lighter-background-color);\n    }\n\n    p {\n      font-size: 30px;\n      margin: 4px;\n      height: 30px;\n      line-height: 30px;\n      text-indent: 0px;\n      background-color: #454545;\n    }\n\n    .filter > p {\n      margin: 15px;\n      line-height: 30px;\n      text-indent: 8px;\n    }\n\n    .volume > p {\n      padding: 15px;\n      marging: 0px;\n      line-height: 30px;\n      text-indent: 8px;\n    }\n\n    sc-select {\n      font-size: 30px;\n      height: 62px;\n      margin: 4px;\n      width: 120px;\n      background-color: #454545;\n    }\n\n    :host > div {\n      display: flex;\n      background-color: #121212;\n      justify-content: center;\n      flex-direction: row;\n      height: calc(100% - 71px);\n    }\n\n    sc-text {\n      font-size: 30px;\n      margin-top: 10px;\n      width: 100%;\n    }\n\n    sc-number {\n      margin-top: 10px;\n      font-size: 30px;\n      width: 100%;\n      height: 60px;\n    }\n\n    sc-slider {\n      margin-top: 10px;\n      width: 100%;\n      height: 100%;\n    }\n\n    .filter {\n      width: 49%;\n      height: inherit;\n    }\n\n    .volume {\n      width: 49%;\n      height: inherit;\n    }\n\n  "]))));
+_defineProperty(SwPlayer, "styles", (0,lit__WEBPACK_IMPORTED_MODULE_0__.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    :host {\n      display: block;\n      // min-height: calc(100vh - 70px);\n      width: inherit;\n      height: inherit;\n    }\n\n    header {\n      display: block;\n      height: 70px;\n      line-height: 70px;\n      background-color: var(--sw-medium-background-color);\n      display: flex;\n      flex-direction: row;\n      justify-content: space-between;\n      align-items: stretch;\n      border-bottom: 1px solid var(--sw-lighter-background-color);\n    }\n\n    p {\n      font-size: 30px;\n      margin: 4px;\n      height: 30px;\n      line-height: 30px;\n      text-indent: 0px;\n      background-color: #454545;\n    }\n\n    .filter > p {\n      margin: 15px;\n      line-height: 30px;\n      text-indent: 8px;\n    }\n\n    .volume > p {\n      padding: 15px;\n      marging: 0px;\n      line-height: 30px;\n      text-indent: 8px;\n    }\n\n    sc-select {\n      font-size: 30px;\n      height: 62px;\n      margin: 4px;\n      width: 120px;\n      background-color: #454545;\n    }\n\n    :host > div {\n      display: flex;\n      background-color: #121212;\n      justify-content: space-between;\n      flex-direction: row;\n      height: calc(100% - 71px);\n    }\n\n    sc-text {\n      font-size: 30px;\n      margin-top: 10px;\n      width: 100%;\n    }\n\n    sc-number {\n      margin-top: 10px;\n      font-size: 30px;\n      width: 100%;\n      height: 60px;\n    }\n\n    sc-slider {\n      margin-top: 10px;\n      width: 100%;\n      height: 100%;\n    }\n\n    .filter {\n      width: 49%;\n      height: inherit;\n    }\n\n    .volume {\n      width: 49%;\n      height: inherit;\n    }\n\n  "]))));
 customElements.define('sw-player', SwPlayer);
 
 /***/ }),
@@ -50019,14 +50018,14 @@ function _main() {
           });
         case 11:
           player = _context.sent;
-          engine = new _components_engine_js__WEBPACK_IMPORTED_MODULE_7__["default"](audioContext, player, globals, true);
+          engine = new _components_engine_js__WEBPACK_IMPORTED_MODULE_7__["default"](audioContext, player, globals);
           engine.connect(audioContext.destination);
           player.onUpdate(function () {
             $layout.requestUpdate();
             engine.render();
           });
           globals.onUpdate(function (update) {
-            engine.updateVolume(update.volume);
+            engine.updateVolume(update.master);
           });
           $layout.addComponent((0,lit__WEBPACK_IMPORTED_MODULE_4__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["<sw-player .player=", "></sc-player>"])), player));
         case 17:
