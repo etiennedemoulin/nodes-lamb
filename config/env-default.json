@@ -1,8 +1,8 @@
 {
   type: 'development',
-  port: 8000,
+  port: 80,
   subpath: '',
-  serverAddress: '0.0.0.0',
+  serverAddress: '192.168.1.110',
   useHttps: false,
   httpsInfos: {
     cert: null,
