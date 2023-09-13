@@ -110,10 +110,7 @@ class SwPlayer extends LitElement {
     }, 100, { 'trailing' : true});
 
     const updateFilterSlider = throttle(function (filterSlider) {
-      const sawFreq = this.player.get('sawFreq');
-      const filterFreq = Math.floor(Math.max((filterSlider * sawFreq) * 7, 10));
-      const numHarm = Math.floor(filterFreq / sawFreq);
-      this.player.set({ filterFreq: filterFreq, numHarm: numHarm, filterSlider: filterSlider }, { source: 'web' });
+      this.player.set({ filterSlider: filterSlider}, { source: 'web'});
     }, 100, { 'trailing' : true});
 
     this.updateVolume = updateVolume;

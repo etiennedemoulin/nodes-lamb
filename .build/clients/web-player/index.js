@@ -54,7 +54,7 @@ async function main($container) {
     engine.render();
   });
   globals.onUpdate(update => {
-    engine.updateVolume(update.master);
+    engine.render();
   });
   $layout.addComponent(html`<sw-player .player=${player}></sc-player>`);
 }

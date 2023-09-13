@@ -22,13 +22,25 @@ export default class Engine {
   render() {
     // sonify
     const now = this.audioContext.currentTime;
-    this.env.gain.linearRampToValueAtTime(this.player.get('volume'), now + 0.1);
+    const filterFreq = this.updateFilterSlider();
     this.saw.frequency.value = Number(this.player.get('sawFreq'));
-    this.filter.frequency.linearRampToValueAtTime(this.player.get('filterFreq'), now + 0.1);
+    this.filter.frequency.linearRampToValueAtTime(filterFreq, now + 0.1);
+    this.env.gain.linearRampToValueAtTime(this.player.get('volume'), now + 0.1);
+    this.master.gain.linearRampToValueAtTime(this.globals.get('master'), now + 0.1);
   }
-  updateVolume(gain) {
-    const now = this.audioContext.currentTime;
-    this.master.gain.linearRampToValueAtTime(gain, now + 0.1);
+  updateFilterSlider() {
+    const filterSlider = this.player.get('filterSlider');
+    const sawFreq = this.player.get('sawFreq');
+    const filterFreq = Math.floor(Math.max(filterSlider * sawFreq * 7, 10));
+    const numHarm = Math.floor(filterFreq / sawFreq);
+    this.player.set({
+      filterFreq: filterFreq,
+      numHarm: numHarm,
+      filterSlider: filterSlider
+    }, {
+      source: 'web'
+    });
+    return filterFreq;
   }
   getEngineId() {
     return this.player.get('id');

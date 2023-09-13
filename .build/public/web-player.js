@@ -35067,15 +35067,27 @@ var Engine = /*#__PURE__*/function () {
     value: function render() {
       // sonify
       var now = this.audioContext.currentTime;
-      this.env.gain.linearRampToValueAtTime(this.player.get('volume'), now + 0.1);
+      var filterFreq = this.updateFilterSlider();
       this.saw.frequency.value = Number(this.player.get('sawFreq'));
-      this.filter.frequency.linearRampToValueAtTime(this.player.get('filterFreq'), now + 0.1);
+      this.filter.frequency.linearRampToValueAtTime(filterFreq, now + 0.1);
+      this.env.gain.linearRampToValueAtTime(this.player.get('volume'), now + 0.1);
+      this.master.gain.linearRampToValueAtTime(this.globals.get('master'), now + 0.1);
     }
   }, {
-    key: "updateVolume",
-    value: function updateVolume(gain) {
-      var now = this.audioContext.currentTime;
-      this.master.gain.linearRampToValueAtTime(gain, now + 0.1);
+    key: "updateFilterSlider",
+    value: function updateFilterSlider() {
+      var filterSlider = this.player.get('filterSlider');
+      var sawFreq = this.player.get('sawFreq');
+      var filterFreq = Math.floor(Math.max(filterSlider * sawFreq * 7, 10));
+      var numHarm = Math.floor(filterFreq / sawFreq);
+      this.player.set({
+        filterFreq: filterFreq,
+        numHarm: numHarm,
+        filterSlider: filterSlider
+      }, {
+        source: 'web'
+      });
+      return filterFreq;
     }
   }, {
     key: "getEngineId",
@@ -35258,12 +35270,7 @@ var SwPlayer = /*#__PURE__*/function (_LitElement) {
       'trailing': true
     });
     var updateFilterSlider = lodash_throttle_js__WEBPACK_IMPORTED_MODULE_2__(function (filterSlider) {
-      var sawFreq = this.player.get('sawFreq');
-      var filterFreq = Math.floor(Math.max(filterSlider * sawFreq * 7, 10));
-      var numHarm = Math.floor(filterFreq / sawFreq);
       this.player.set({
-        filterFreq: filterFreq,
-        numHarm: numHarm,
         filterSlider: filterSlider
       }, {
         source: 'web'
@@ -50025,7 +50032,7 @@ function _main() {
             engine.render();
           });
           globals.onUpdate(function (update) {
-            engine.updateVolume(update.master);
+            engine.render();
           });
           $layout.addComponent((0,lit__WEBPACK_IMPORTED_MODULE_4__.html)(_templateObject || (_templateObject = _taggedTemplateLiteral(["<sw-player .player=", "></sc-player>"])), player));
         case 17:

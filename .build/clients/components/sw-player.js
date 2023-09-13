@@ -112,12 +112,7 @@ class SwPlayer extends LitElement {
       'trailing': true
     });
     const updateFilterSlider = throttle(function (filterSlider) {
-      const sawFreq = this.player.get('sawFreq');
-      const filterFreq = Math.floor(Math.max(filterSlider * sawFreq * 7, 10));
-      const numHarm = Math.floor(filterFreq / sawFreq);
       this.player.set({
-        filterFreq: filterFreq,
-        numHarm: numHarm,
         filterSlider: filterSlider
       }, {
         source: 'web'

@@ -34145,12 +34145,7 @@ var SwPlayer = /*#__PURE__*/function (_LitElement) {
       'trailing': true
     });
     var updateFilterSlider = lodash_throttle_js__WEBPACK_IMPORTED_MODULE_2__(function (filterSlider) {
-      var sawFreq = this.player.get('sawFreq');
-      var filterFreq = Math.floor(Math.max(filterSlider * sawFreq * 7, 10));
-      var numHarm = Math.floor(filterFreq / sawFreq);
       this.player.set({
-        filterFreq: filterFreq,
-        numHarm: numHarm,
         filterSlider: filterSlider
       }, {
         source: 'web'
