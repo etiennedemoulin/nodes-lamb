@@ -51,12 +51,14 @@ async function main($container) {
     id: client.id,
   });
 
-  const engine = new Engine(audioContext, player, globals);
+  const engine = new Engine(audioContext, player, globals, true);
   engine.connect(audioContext.destination);
 
-  player.onUpdate(() => {
+  player.onUpdate((update, context) => {
     $layout.requestUpdate();
-    engine.render();
+    if (context.source !== 'engine') {
+      engine.render();
+    }
   });
 
   globals.onUpdate((update) => {

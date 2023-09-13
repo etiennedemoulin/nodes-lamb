@@ -1,9 +1,10 @@
 export default class Engine {
-  constructor(audioContext, player, globals) {
+  constructor(audioContext, player, globals, volumeFlag) {
     this.audioContext = audioContext;
     this.player = player;
     this.globals = globals;
     const now = this.audioContext.currentTime;
+    this.volumeFlag = volumeFlag;
     this.master = this.audioContext.createGain();
     this.master.gain.setValueAtTime(this.globals.getSchema().master.max, now);
     this.env = this.audioContext.createGain();
@@ -26,7 +27,13 @@ export default class Engine {
     this.saw.frequency.value = Number(this.player.get('sawFreq'));
     this.filter.frequency.linearRampToValueAtTime(filterFreq, now + 0.1);
     this.env.gain.linearRampToValueAtTime(this.player.get('volume'), now + 0.1);
-    this.master.gain.linearRampToValueAtTime(this.globals.get('master'), now + 0.1);
+    if (this.volumeFlag === true) {
+      // phones
+      this.master.gain.linearRampToValueAtTime(this.globals.get('master'), now + 0.1);
+    } else {
+      // node
+      this.master.gain.setValueAtTime(1, now + 0.1);
+    }
   }
   updateFilterSlider() {
     const filterSlider = this.player.get('filterSlider');
@@ -38,7 +45,7 @@ export default class Engine {
       numHarm: numHarm,
       filterSlider: filterSlider
     }, {
-      source: 'web'
+      source: 'engine'
     });
     return filterFreq;
   }

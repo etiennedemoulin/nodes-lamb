@@ -11,7 +11,7 @@ import Engine from '../components/engine.js';
 // - Issue Tracker:         https://github.com/collective-soundworks/soundworks/issues
 // - Wizard & Tools:        `npx soundworks`
 
-const env = 'prod';
+const env = 'dev';
 async function bootstrap() {
   // for dev
   let config;
@@ -44,7 +44,7 @@ async function bootstrap() {
     // push engine in first free slot
     for (let i = 0; i < engines.length; i++) {
       if (engines[i] === null) {
-        const engine = new Engine(audioContext, player, globals);
+        const engine = new Engine(audioContext, player, globals, false);
         engines[i] = engine;
         logger[i] = player;
         engine.connect(merger, 0, i);

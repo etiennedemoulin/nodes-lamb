@@ -35041,12 +35041,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 var Engine = /*#__PURE__*/function () {
-  function Engine(audioContext, player, globals) {
+  function Engine(audioContext, player, globals, volumeFlag) {
     _classCallCheck(this, Engine);
     this.audioContext = audioContext;
     this.player = player;
     this.globals = globals;
     var now = this.audioContext.currentTime;
+    this.volumeFlag = volumeFlag;
     this.master = this.audioContext.createGain();
     this.master.gain.setValueAtTime(this.globals.getSchema().master.max, now);
     this.env = this.audioContext.createGain();
@@ -35071,7 +35072,13 @@ var Engine = /*#__PURE__*/function () {
       this.saw.frequency.value = Number(this.player.get('sawFreq'));
       this.filter.frequency.linearRampToValueAtTime(filterFreq, now + 0.1);
       this.env.gain.linearRampToValueAtTime(this.player.get('volume'), now + 0.1);
-      this.master.gain.linearRampToValueAtTime(this.globals.get('master'), now + 0.1);
+      if (this.volumeFlag === true) {
+        // phones
+        this.master.gain.linearRampToValueAtTime(this.globals.get('master'), now + 0.1);
+      } else {
+        // node
+        this.master.gain.setValueAtTime(1, now + 0.1);
+      }
     }
   }, {
     key: "updateFilterSlider",
@@ -35085,7 +35092,7 @@ var Engine = /*#__PURE__*/function () {
         numHarm: numHarm,
         filterSlider: filterSlider
       }, {
-        source: 'web'
+        source: 'engine'
       });
       return filterFreq;
     }
@@ -50025,11 +50032,13 @@ function _main() {
           });
         case 11:
           player = _context.sent;
-          engine = new _components_engine_js__WEBPACK_IMPORTED_MODULE_7__["default"](audioContext, player, globals);
+          engine = new _components_engine_js__WEBPACK_IMPORTED_MODULE_7__["default"](audioContext, player, globals, true);
           engine.connect(audioContext.destination);
-          player.onUpdate(function () {
+          player.onUpdate(function (update, context) {
             $layout.requestUpdate();
-            engine.render();
+            if (context.source !== 'engine') {
+              engine.render();
+            }
           });
           globals.onUpdate(function (update) {
             engine.render();
