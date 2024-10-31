@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:22
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -9,6 +9,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install
+RUN npm build
 # If you are building your code for production
 # RUN npm ci --omit=dev
 

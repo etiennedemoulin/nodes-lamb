@@ -1,0 +1,10 @@
+name: Nodes, various
+author: Catherine Lamb
+clients:
+  web-player:
+    target: browser
+    default: true
+  controller:
+    target: browser
+  node-player:
+    target: node
