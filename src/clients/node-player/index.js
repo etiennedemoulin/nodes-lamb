@@ -3,9 +3,8 @@ import { Client } from '@soundworks/core/client.js';
 import launcher from '@soundworks/helpers/launcher.js';
 
 import { loadConfig } from '../../utils/load-config.js';
-import createLayout from './layout.js';
 
-import { AudioContext, GainNode, OscillatorNode, mediaDevices, MediaStreamAudioSourceNode, AnalyserNode } from 'node-web-audio-api';
+import { AudioContext } from 'node-web-audio-api';
 
 import Engine from '../components/engine.js';
 
@@ -39,6 +38,7 @@ async function bootstrap() {
 
   const audioContext = new AudioContext();
   const numChannels = 16;
+  console.log('> Num Channels:', numChannels);
 
   audioContext.destination.channelCount = numChannels;
   audioContext.destination.channelInterpretation = 'discrete';
